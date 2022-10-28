@@ -1,0 +1,180 @@
+/* HEADER */
+.main-header {
+    background-color: rgb(26, 148, 255);
+    padding: 0;
+  }
+  
+  .edlkEo {
+    display: flex;
+    padding: 20px 0;
+    height: auto;
+    position: relative;
+    /* z-index: 2; */
+    /* -webkit-box-align: center; */
+    align-items: center;
+  }
+  
+  .left-container {
+    display: flex;
+    align-items: center;
+    flex: 1 1 0%;
+  }
+  
+  .logo-menu {
+    display: flex;
+    align-items: flex-start;
+    flex-basis: 202px;
+    flex-shrink: 0;
+    margin-right: 16px;
+  }
+  
+  .style-LogoMenu {
+    display: flex;
+    justify-content: space-between;
+    flex: 1 1 0%;
+  }
+  
+  .tiki-logo {
+    width: 60px;
+    height: 40px;
+    display: block;
+  
+    text-decoration: none;
+  }
+  
+  .tiki-logo img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .form-search {
+    flex: 1 1 0%;
+  }
+  
+  .FormSearch-Root {
+    width: 100%;
+    display: flex;
+    position: relative;
+    box-shadow: rgb(98 98 98 / 50%) 0px 1px 2px 0px;
+  }
+  
+  .FormSearh-Input {
+    border: 0;
+    padding: 0 12px;
+    font-size: 13px;
+    border-radius: 2px 0 0 2px;
+    flex: 1 1 0%;
+    outline: none;
+  }
+  
+  .FormSearch-Button {
+    cursor: pointer;
+    border: 0;
+    width: 120px;
+    background-color: rgb(13, 92, 182);
+    height: 40px;
+    border-radius: 0px 2px 2px 0px;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px 6px;
+  }
+  
+  .icon-search {
+    width: 20px;
+    height: 20px;
+    margin: 0 8px 0px 0px;
+  }
+  
+  .user-style {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .UserStyle-LoginItem {
+    cursor: pointer;
+    margin: 0 0 0 16px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    width: 162px;
+  }
+  
+  .profile-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    border-radius: 2px;
+  }
+  
+  .UserStyle-LoginItem-ItemText {
+    color: white;
+    line-height: 400;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-text {
+    white-space: nowrap;
+    text-transform: capitalize;
+    font-size: 11px;
+    line-height: 16px;
+    display: inline-block;
+  }
+  
+  .account-label {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    line-height: 20px;
+    min-width: 120px;
+  }
+  
+  .account-label span {
+    max-width: 104px;
+    white-space: nowrap;
+  }
+  
+  .UserStyle-CartItem a {
+    color: rgb(11, 116, 229);
+    text-decoration: none;
+  }
+  
+  .UserStyle-CartItemInner {
+    cursor: pointer;
+    margin: 0 0 0 16px;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    align-items: flex-end;
+    width: 94px;
+  }
+  
+  .cart-wrapper {
+    position: relative;
+    margin-right: 8px;
+    display: flex;
+  }
+  
+  .UserStyle-CartItemCount {
+    color: rgb(36, 36, 36);
+    background: rgb(253, 216, 53);
+    height: 20px;
+    border-radius: 40px;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0 7px;
+  
+    position: absolute;
+    top: -2px;
+    left: 20px;
+  }
