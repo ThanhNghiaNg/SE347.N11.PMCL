@@ -16,14 +16,14 @@ const Header = (props) => {
                 </a>
               </div>
             </div>
-            <div className={"form-search"}>
+            <div className={classes["form-search"]}>
               <div className={classes["FormSearch-Root"]}>
                 <input
                   type="text"
                   placeholder="Tìm sách theo tên"
                   className={classes["FormSearh-Input"]}
                 ></input>
-                <button className={"FormSearch-Button"}>
+                <button className={classes["FormSearch-Button"]}>
                   <img
                     src="https://salt.tikicdn.com/ts/upload/ed/5e/b8/8538366274240326978318348ea8af7c.png"
                     alt="search-icon"

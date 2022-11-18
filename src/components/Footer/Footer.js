@@ -8,6 +8,7 @@ const Footer = props=>{
         <div>1</div>
         <div>1</div>
     </Container>
+    
 }
 
 export default Footer
