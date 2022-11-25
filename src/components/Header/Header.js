@@ -1,6 +1,27 @@
 import classes from "./Header.module.css";
 import Container from "../UI/Container";
+import { useRef } from "react";
+import { productActions } from "../../store/products";
+import { errorsActions } from "../../store/errors";
+import { useDispatch, useSelector } from "react-redux";
 const Header = (props) => {
+  const dispatch = useDispatch();
+  const allProducts = useSelector((state) => state.products.allProducts);
+  const searchInput = useRef();
+  const searchHandler = (event) => {
+    event.preventDefault();
+    const searchEntered = searchInput.current.value;
+    const result = allProducts.filter((book) =>
+      book.name.toLowerCase().includes(searchEntered.toLowerCase())
+    );
+    console.log(result);
+    dispatch(productActions.setCurrentProducts(result));
+    if (result.length > 0) {
+      dispatch(errorsActions.setSuccessFound());
+    } else {
+      dispatch(errorsActions.setNotFound());
+    }
+  };
   return (
     <Container className={classes["main-header"]}>
       <div className={classes["header-container"]}>
@@ -22,8 +43,12 @@ const Header = (props) => {
                   type="text"
                   placeholder="Tìm sách theo tên"
                   className={classes["FormSearh-Input"]}
+                  ref={searchInput}
                 ></input>
-                <button className={classes["FormSearch-Button"]}>
+                <button
+                  className={classes["FormSearch-Button"]}
+                  onClick={searchHandler}
+                >
                   <img
                     src="https://salt.tikicdn.com/ts/upload/ed/5e/b8/8538366274240326978318348ea8af7c.png"
                     alt="search-icon"
