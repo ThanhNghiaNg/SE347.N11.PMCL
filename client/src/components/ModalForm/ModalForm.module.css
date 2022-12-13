@@ -1,0 +1,92 @@
+.modal-form {
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  width: 100%;
+  border-radius: 20px;
+  position: relative;
+  margin: 80px auto;
+}
+
+/* Close Button */
+.modal-form .modal-form__btn-close,
+.modal-form .close-img {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  right: -10px;
+  top: -10px;
+}
+
+/* Modal Form Left */
+.modal-form__left {
+  width: 500px;
+  padding: 40px 45px 24px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px 0px 0px 20px;
+}
+
+/* Back Button */
+.modal-form__btn-back {
+  text-align: start;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 0 10px;
+  background: transparent;
+  border: none;
+}
+.modal-form__btn-back img {
+  width: 21px;
+}
+
+/* Modal Form Regis */
+.modal-form__regis {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.modal-form__regis p {
+  color: rgba(0, 0, 0, 0.26);
+}
+.modal-form__regis span {
+  font-size: 500;
+  color: rgb(255, 66, 78);
+  cursor: pointer;
+}
+
+/* Modal Form Right */
+.modal-form__right {
+  background: linear-gradient(
+    136deg,
+    rgb(240, 248, 255) -1%,
+    rgb(219, 238, 255) 85%
+  );
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 0px 20px 20px 0px;
+}
+.modal-form__right img {
+  width: 203px;
+}
+.modal-form__right .content {
+  margin: 30px 0;
+  text-align: center;
+}
+.modal-form__right .content h4 {
+  margin: 0 0 5px;
+  color: rgb(11, 116, 229);
+  font-size: 17px;
+  font-weight: 500;
+}
+.modal-form__right .content p {
+  font-size: 13px;
+  color: rgb(11, 116, 229);
+  font-weight: 500;
+}
