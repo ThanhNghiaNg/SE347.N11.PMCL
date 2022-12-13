@@ -12,7 +12,7 @@ const Header = (props) => {
     event.preventDefault();
     const searchEntered = searchInput.current.value;
     const result = allProducts.filter((book) =>
-      book.name.toLowerCase().includes(searchEntered.toLowerCase())
+      book.title.toLowerCase().includes(searchEntered.toLowerCase())
     );
     console.log(result);
     dispatch(productActions.setCurrentProducts(result));

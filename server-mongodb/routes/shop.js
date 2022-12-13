@@ -2,10 +2,12 @@ const express = require("express");
 const Book = require("../models/book");
 const route = express.Router();
 
+// Get all book from database
 route.get("/", (req, res, next) => {
-  Book.fetchAll().then((allBooks) => {
-    res.send(JSON.stringify(allBooks));
-  });
+  Book.find()
+    .then((books) => {
+      res.send({ data: books });
+    });
 });
 
 module.exports = route;
