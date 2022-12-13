@@ -30,19 +30,25 @@ exports.postChangePassword = (req, res, next) => {
 };
 
 exports.postUpdate = (req, res, next) => {
-  const {
-    updatedAddress,
-    updatedEmail,
-    updatedPhone,
-    updatedBirthday,
-    updatedSex,
-    updatedCountry,
-  } = req.body;
-  // req.session.user.address
-  // req.session.user.us
-  // req.session.user.
-  // req.session.user.
-  // req.session.user.
-  // req.session.user.
-  // req.session.user.
+  
+  updatedAddress = req.body.address;
+  updatedName = req.body.name;
+  updatedEmail = req.body.email;
+  updatedPhone = req.body.phone;
+  updatedBirthday = req.body.birthday;
+  updatedSex = req.body.sex;
+  updatedCountry = req.body.country;
+
+  req.session.user.address = updatedAddress;
+  req.session.user.name = updatedName;
+  req.session.user.email = updatedEmail;
+  req.session.user.phone = updatedPhone;
+  req.session.user.birthday = updatedBirthday;
+  req.session.user.sex = updatedSex;
+  req.session.user.country = updatedCountry;
+
+  req.session.user.save((err) => {
+    console.log(err);
+    return res.send({ message: "Updated!" });
+  });
 };
