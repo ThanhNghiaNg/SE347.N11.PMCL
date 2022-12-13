@@ -4,6 +4,16 @@ const bcrypt = require("bcryptjs");
 exports.postRegister = (req, res, next) => {
   const { username, password, address, email, phone, birthday, sex, country } =
     req.body;
+  console.log(
+    username,
+    password,
+    address,
+    email,
+    phone,
+    birthday,
+    sex,
+    country
+  );
   User.findOne({ username: username }).then((user) => {
     // Nếu chưa có user name tồn tại
     if (!user) {
@@ -19,12 +29,7 @@ exports.postRegister = (req, res, next) => {
           country,
         });
         return newUser.save().then((err) => {
-          if (err) {
-            console.log(err);
-            return;
-          } else {
-            return res.status(200).send({ message: "Register Successfully!" });
-          }
+          return res.status(200).send({ message: "Register Successfully!" });
         });
       });
     }
@@ -37,6 +42,7 @@ exports.postRegister = (req, res, next) => {
 
 exports.postLogin = (req, res, next) => {
   const { username, password } = req.body;
+  console.log(username, password);
   User.findOne({ username: username }).then((user) => {
     if (!user) {
       return res
@@ -48,8 +54,11 @@ exports.postLogin = (req, res, next) => {
           // create new session
           req.session.isLoggedIn = true;
           req.session.user = user._id;
-          return req.session.save().then(() => {
-            return res.status(200).send({ message: "Login successfully!" });
+          return req.session.save((err) => {
+            console.log(err);
+            return res
+              .status(200)
+              .send({ message: "Login successfully!", token: user._id });
           });
         } else {
           return res.status(401).send({ message: "Password is incorrect!" });
@@ -60,13 +69,13 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.postLogout = (req, res, next) => {
-    console.log(req);
-    req.session.destroy((err) => {
-      if (!err) {
-        return res.status(200).send({ message: "Successfully Logout!" });
-      } else {
-        console.log(err);
-        return res.status(403).send({ message: "Logout Error" });
-      }
-    });
-  };
+  console.log(req);
+  req.session.destroy((err) => {
+    if (!err) {
+      return res.status(200).send({ message: "Successfully Logout!" });
+    } else {
+      console.log(err);
+      return res.status(403).send({ message: "Logout Error" });
+    }
+  });
+};
