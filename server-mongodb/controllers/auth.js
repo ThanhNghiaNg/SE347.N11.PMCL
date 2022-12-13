@@ -4,16 +4,6 @@ const bcrypt = require("bcryptjs");
 exports.postRegister = (req, res, next) => {
   const { email, password, address, name, phone, birthday, sex, country } =
     req.body;
-  console.log(
-    email,
-    password,
-    address,
-    email,
-    phone,
-    birthday,
-    sex,
-    country
-  );
   User.findOne({ email: email }).then((user) => {
     // Nếu chưa có user name tồn tại
     if (!user) {
@@ -27,6 +17,7 @@ exports.postRegister = (req, res, next) => {
           birthday,
           sex,
           country,
+          cart: { items: []},
         });
         return newUser.save().then((err) => {
           return res.status(200).send({ message: "Register Successfully!" });
@@ -42,7 +33,6 @@ exports.postRegister = (req, res, next) => {
 
 exports.postLogin = (req, res, next) => {
   const { email, password } = req.body;
-  console.log(email, password);
   User.findOne({ email: email }).then((user) => {
     if (!user) {
       return res
