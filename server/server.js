@@ -1,6 +1,5 @@
 const express = require("express");
-const fetchData = require("./utils/fetchData");
-
+const server = express();
 // MODEL
 const sequelize = require("./utils/database");
 const User = require("./models/user");
@@ -18,14 +17,14 @@ Book.belongsToMany(Cart, { through: Order });
 Order.hasOne(Review);
 Review.belongsTo(Order);
 
-const server = express();
+
 const adminRoute = require("./routes/admin");
-// const shopRoute = require('./routes/shop')
+const shopRoute = require('./routes/shop')
 // const userRoute = require('./routes/user')
 
 server.use("/admin", adminRoute);
 // server.use('/user', userRoute)
-// server.use(shopRoute)
+server.use(shopRoute)
 
 // server.listen(5000)
 Book.findAll().then((result) => {
