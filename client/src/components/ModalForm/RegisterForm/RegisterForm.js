@@ -19,12 +19,12 @@ const RegisterForm = (props) => {
       const respone = await fetch(`${hostURL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: email, password: password }),
+        body: JSON.stringify({ email, password }),
         credentials: "include",
       });
       // console.log(respone);
-      if (respone.status === 200){
-        props.onBackLogin()
+      if (respone.status === 200) {
+        props.onBackLogin();
       }
       const data = await respone.json();
       console.log(data);

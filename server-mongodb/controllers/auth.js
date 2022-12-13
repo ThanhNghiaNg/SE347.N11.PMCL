@@ -2,10 +2,10 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
 exports.postRegister = (req, res, next) => {
-  const { username, password, address, email, phone, birthday, sex, country } =
+  const { email, password, address, name, phone, birthday, sex, country } =
     req.body;
   console.log(
-    username,
+    email,
     password,
     address,
     email,
@@ -14,15 +14,15 @@ exports.postRegister = (req, res, next) => {
     sex,
     country
   );
-  User.findOne({ username: username }).then((user) => {
+  User.findOne({ email: email }).then((user) => {
     // Nếu chưa có user name tồn tại
     if (!user) {
       return bcrypt.hash(password, 12).then((hasPassword) => {
         const newUser = new User({
-          username,
+          email,
           password: hasPassword,
           address,
-          email,
+          name,
           phone,
           birthday,
           sex,
@@ -36,14 +36,14 @@ exports.postRegister = (req, res, next) => {
     // Nếu đã có xuất ra thông báo lỗi
     return res
       .status(401)
-      .send({ message: "Register Fail! Username Already Exists!" });
+      .send({ message: "Register Fail! Email Already Exists!" });
   });
 };
 
 exports.postLogin = (req, res, next) => {
-  const { username, password } = req.body;
-  console.log(username, password);
-  User.findOne({ username: username }).then((user) => {
+  const { email, password } = req.body;
+  console.log(email, password);
+  User.findOne({ email: email }).then((user) => {
     if (!user) {
       return res
         .status(401)

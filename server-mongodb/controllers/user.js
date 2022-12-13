@@ -38,4 +38,11 @@ exports.postUpdate = (req, res, next) => {
     updatedSex,
     updatedCountry,
   } = req.body;
+  // req.session.user.address
+  // req.session.user.us
+  // req.session.user.
+  // req.session.user.
+  // req.session.user.
+  // req.session.user.
+  // req.session.user.
 };
