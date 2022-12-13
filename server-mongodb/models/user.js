@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = Schema({
-  username: {
+  email: {
     type: String,
     require: true,
   },
@@ -14,7 +14,7 @@ const userSchema = Schema({
     type: String,
     require: true,
   },
-  email: {
+  name: {
     type: String,
     require: true,
   },
@@ -34,7 +34,37 @@ const userSchema = Schema({
     type: String,
     require: true,
   },
+  cart: {
+    items: [
+      {
+        bookId: {
+          type: Schema.Types.ObjectId,
+          require: true,
+          ref: "Book",
+        },
+        quantity: {
+          type: Number,
+          require: true,
+        },
+      },
+    ]
+  },
 });
+
+userSchema.methods.addToCart = function (bookId, quantity) {
+  const bookIdx = this.cart.items.findIndex(
+    (book) => book.bookId.toString() === bookId
+  );
+  if (bookIdx >= 0) {
+    this.cart.items[bookIdx].quantity += quantity;
+  } else {
+    this.cart.items.push({
+      bookId: new Schema.Types.ObjectId(bookId),
+      quantity: quantity,
+    });
+  }
+  return this.save();
+};
 
 module.exports = mongoose.model("User", userSchema);
 

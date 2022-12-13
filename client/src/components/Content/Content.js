@@ -15,9 +15,9 @@ const Content = (props) => {
   useEffect(() => {
     const fecthBooks = async (url) => {
       const respone = await fetch(url);
-      console.log(respone)
+      // console.log(respone)
       const data = await respone.json();
-      console.log(data)
+      // console.log(data)
       dispatch(productActions.setAllProducts(data.data));
     };
     fecthBooks(url);
