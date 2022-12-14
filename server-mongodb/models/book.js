@@ -20,7 +20,8 @@ const bookSchema = Schema({
     },
   ],
   category: {
-    name: { type: String, require: true },
+    type: String,
+    require: true,
   },
   publisher: {
     type: String,

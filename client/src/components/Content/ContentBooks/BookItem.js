@@ -1,12 +1,19 @@
+import { useNavigate } from "react-router";
 import classes from "./BookItem.module.css";
 export const addDotStyle = (str) => {
   return str.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
 const BookItem = (props) => {
+  const navigate = useNavigate();
   const { book: bookInfo } = props;
-  // console.log(bookInfo);
+
+  console.log(bookInfo);
+  const goToDetailHandler = (event) => {
+    event.preventDefault();
+    navigate(`/detail/${bookInfo._id}`);
+  };
   return (
-    <div className={classes.book}>
+    <div className={classes.book} onClick={goToDetailHandler}>
       <img src={bookInfo.images[0].url}></img>
       <div className={classes.name}>{bookInfo.title}</div>
       {bookInfo.rate > 0 ? (
