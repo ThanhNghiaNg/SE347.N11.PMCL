@@ -7,6 +7,15 @@ exports.fetchAllBooks = (req, res, next) => {
   });
 };
 
+exports.fetchBookById = (req, res, next) => {
+  const id = req.params.id;
+  console.log(id);
+  return Book.find({ _id: id }).then((books) => {
+    console.log(books[0]);
+    return res.send(books[0]);
+  });
+};
+
 exports.postAddToCart = (req, res, next) => {
   const bookId = req.body.bookId;
   const quantity = req.body.quantity;
