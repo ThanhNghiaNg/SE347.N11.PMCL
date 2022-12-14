@@ -47,7 +47,7 @@ const userSchema = Schema({
           require: true,
         },
       },
-    ]
+    ],
   },
 });
 
@@ -63,6 +63,11 @@ userSchema.methods.addToCart = function (bookId, quantity) {
       quantity: quantity,
     });
   }
+  return this.save();
+};
+
+userSchema.methods.resetCart = function () {
+  this.cart.items = [];
   return this.save();
 };
 

@@ -1,5 +1,5 @@
 const Book = require("../models/book");
-const User = require("../models/user");
+const Order = require("../models/order");
 
 exports.fetchAllBooks = (req, res, next) => {
   Book.find().then((books) => {
@@ -22,6 +22,29 @@ exports.getCart = (req, res, next) => {
   });
 };
 
-exports.postOrder = (req, res, next) => {};
+exports.postOrder = (req, res, next) => {
+  if (req.session.user.cart.items.length > 0) {
+    const price = req.session.user.cart.items.reducer(
+      (book, acc) => acc + book.price
+    );
+
+    const order = new Order({
+      books: [...req.session.user.cart.items],
+      status: { status: "Accepted", detail: "", date: new Date() },
+      user: req.session.user._id,
+      price: price,
+    });
+
+    order.save((err) => {
+      console.log(err);
+      req.session.user.resetCart();
+      return res.send({ message: "Order Successfully!" });
+    });
+  } else {
+    res.status(405).send({ message: "Cart is empty!" });
+  }
+};
 
 exports.getOrder = (req, res, next) => {};
+
+exports.postUpdateOrder = (req, res, next) => {};

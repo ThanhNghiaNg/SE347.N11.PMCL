@@ -5,7 +5,7 @@ const shopControllers = require("../controllers/shop");
 const isAuth = require("../middleware/is_auth");
 
 // Get all book from database
-route.get("/", isAuth, shopControllers.fetchAllBooks);
+route.get("/", shopControllers.fetchAllBooks);
 
 // Post Add item to  cart
 route.post("/add-to-cart", isAuth, shopControllers.postAddToCart);
@@ -18,5 +18,6 @@ route.post("/order", isAuth, shopControllers.postOrder);
 
 // Get order items
 route.get("/order", isAuth, shopControllers.getOrder);
+
 
 module.exports = route;
