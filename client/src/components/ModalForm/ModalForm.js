@@ -13,8 +13,6 @@ const ModalForm = () => {
     setShowRegisForm(!showRegisForm);
   };
 
-  console.log(showRegisForm);
-
   return (
     <div
       style={{

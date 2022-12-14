@@ -1,0 +1,44 @@
+.filter-container__heading {
+  margin: 0;
+  line-height: 20px;
+  display: block;
+  color: rgb(56, 56, 61);
+  font-size: 14px;
+  padding: 12px 0;
+  font-weight: 500;
+}
+
+.filter-container__list-item .item {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(56, 56, 61);
+  padding: 0 0 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  /* flex-direction: column; */
+}
+
+.filter-container__list-item .item .topic {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+}
+
+.filter-container__list-item .item .topic input {
+  margin: 0 12px 0 0;
+}
+
+.filter-container__toggle {
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  line-height: 16px;
+  color: rgb(11, 116, 229);
+  cursor: pointer;
+}
+
+.filter-container__toggle svg {
+  margin-left: 6px;
+}

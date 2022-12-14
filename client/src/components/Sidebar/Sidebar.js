@@ -1,12 +1,10 @@
 import classes from "./Sidebar.module.css";
 import SidebarHome from "./SidebarHome/SidebarHome";
-import c from "./SidebarHome/SidebarHome";
+import React from "react";
 
 const Sidebar = (props) => {
   const usingHome = true;
-  return <div className={classes.sidebar}>
-    {usingHome && <SidebarHome/>}
-  </div>;
+  return <React.Fragment>{usingHome && <SidebarHome />}</React.Fragment>;
 };
 
 export default Sidebar;

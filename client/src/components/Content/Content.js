@@ -11,22 +11,22 @@ const Content = (props) => {
   const allProducts = useSelector((state) => state.products.allProducts);
   const dispatch = useDispatch();
 
-  const url = `${hostURL}/`
+  const url = `${hostURL}/`;
   useEffect(() => {
     const fecthBooks = async (url) => {
       const respone = await fetch(url);
-      console.log(respone)
+      // console.log(respone)
       const data = await respone.json();
-      console.log(data)
+      // console.log(data)
       dispatch(productActions.setAllProducts(data.data));
     };
     fecthBooks(url);
   }, [url]);
- 
+
   return (
     <Container className={classes.content}>
       <Sidebar />
-      <ContentBooks/>
+      <ContentBooks />
     </Container>
   );
 };

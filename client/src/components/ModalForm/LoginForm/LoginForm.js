@@ -5,7 +5,7 @@ const LoginForm = () => {
     <div>
       <div className={classes["login-form__heading"]}>
         <h4>Đăng nhập bằng email</h4>
-        <p>Nhập email và mật khẩu tài khoản tiki</p>
+        <p>Nhập email và mật khẩu tài khoản Owwi</p>
       </div>
       <form className={classes["login-form"]}>
         <div className={classes["login-form__email"]}>
