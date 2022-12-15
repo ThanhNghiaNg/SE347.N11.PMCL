@@ -7,7 +7,7 @@ const isAuth = require("../middleware/is_auth");
 // Get all book from database
 route.get("/", shopControllers.fetchAllBooks);
 
-// Get all book from database
+// Get book from database by Id
 route.get("/book/:id", shopControllers.fetchBookById);
 
 // Post Add item to  cart
