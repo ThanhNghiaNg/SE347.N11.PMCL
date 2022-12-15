@@ -44,7 +44,7 @@ const BookForm = (props) => {
           body: JSON.stringify({
             title: titleRef.current.value,
             price: priceRef.current.value,
-            authors: book.authors, // need to fix
+            authors: edit ? book.authors : authorsRef.current.value, // need to fix
             category: categoryRef.current.value,
             publisher: publisherRef.current.value,
             short_description: shortDescriptionRef.current.value,
