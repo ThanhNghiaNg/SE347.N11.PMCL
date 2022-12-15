@@ -31,7 +31,7 @@ const fetchItems = async () => {
       title: bookinfo.name,
       amount: 50,
       authors: [],
-      categories: bookinfo.categories,
+      category: bookinfo.categories.name,
       description: bookinfo.description,
       images: bookinfo.images.map((i) => {
         return {

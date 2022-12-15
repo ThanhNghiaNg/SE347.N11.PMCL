@@ -46,7 +46,7 @@ const ModalForm = () => {
               </button>
             )}
 
-            {showRegisForm === false ? <LoginForm /> : <RegisterForm />}
+            {showRegisForm === false ? <LoginForm /> : <RegisterForm onBackLogin={showRegisFormHandler}/>}
 
             <AlternativeForm />
 

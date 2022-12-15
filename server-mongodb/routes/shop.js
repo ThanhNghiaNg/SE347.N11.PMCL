@@ -1,13 +1,29 @@
 const express = require("express");
-const Book = require("../models/book");
+
 const route = express.Router();
+const shopControllers = require("../controllers/shop");
+const isAuth = require("../middleware/is_auth");
 
 // Get all book from database
-route.get("/", (req, res, next) => {
-  Book.find()
-    .then((books) => {
-      res.send({ data: books });
-    });
-});
+route.get("/", shopControllers.fetchAllBooks);
+
+// Get all book from database
+route.get("/book/:id", shopControllers.fetchBookById);
+
+// Post Add item to  cart
+route.post("/add-to-cart", isAuth, shopControllers.postAddToCart);
+
+// Get items cart
+route.get("/cart", isAuth, shopControllers.getCart);
+
+// user update quantity of product in cart
+route.get("/cart-update-quantity", isAuth, shopControllers.postUpdateCartAmount)
+
+// Post order
+route.post("/order", isAuth, shopControllers.postOrder);
+
+// Get order items
+route.get("/order", isAuth, shopControllers.getOrder);
+
 
 module.exports = route;
