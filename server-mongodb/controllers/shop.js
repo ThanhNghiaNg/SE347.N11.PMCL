@@ -52,7 +52,7 @@ exports.postUpdateCartAmount = (req, res, next) => {
 
 exports.postOrder = (req, res, next) => {
   if (req.session.user.cart.items.length > 0) {
-    const price = req.session.user.cart.items.reducer(
+    const price = req.session.user.cart.items.reduce(
       (book, acc) => acc + book.price
     );
 
