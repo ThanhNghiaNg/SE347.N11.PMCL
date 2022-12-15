@@ -11,7 +11,7 @@ const Content = (props) => {
   const allProducts = useSelector((state) => state.products.allProducts);
   const dispatch = useDispatch();
 
-  const url = `${hostURL}/`
+  const url = `${hostURL}/`;
   useEffect(() => {
     const fecthBooks = async (url) => {
       const respone = await fetch(url);
@@ -22,11 +22,11 @@ const Content = (props) => {
     };
     fecthBooks(url);
   }, [url]);
- 
+
   return (
     <Container className={classes.content}>
       <Sidebar />
-      <ContentBooks/>
+      <ContentBooks />
     </Container>
   );
 };

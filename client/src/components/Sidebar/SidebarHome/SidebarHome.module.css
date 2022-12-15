@@ -1,0 +1,6 @@
+.sidebar {
+  background-color: #fff;
+  width: 200px;
+  border-radius: 4px 0 0 4px;
+  overflow: hidden;
+}

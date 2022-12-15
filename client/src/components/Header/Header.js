@@ -15,6 +15,7 @@ const Header = (props) => {
   const searchHandler = (event) => {
     event.preventDefault();
     const searchEntered = searchInput.current.value;
+    console.log(searchEntered);
     const result = allProducts.filter((book) =>
       book.title.toLowerCase().includes(searchEntered.toLowerCase())
     );

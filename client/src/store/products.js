@@ -16,7 +16,7 @@ const productSlice = createSlice({
       state.currentProducts = [...state.allProducts];
     },
     setCurrentProducts: (state, actions) => {
-      console.log(actions.payload);
+      // console.log(actions.payload);
       state.currentProducts = [...actions.payload];
     },
   },

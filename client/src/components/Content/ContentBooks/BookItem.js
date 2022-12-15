@@ -12,6 +12,7 @@ const BookItem = (props) => {
     event.preventDefault();
     navigate(`/detail/${bookInfo._id}`);
   };
+
   return (
     <div className={classes.book} onClick={goToDetailHandler}>
       <img src={bookInfo.images[0].url}></img>
