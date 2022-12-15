@@ -1,0 +1,33 @@
+.book {
+  background-color: white;
+  padding: 0.5em;
+  border-radius: 6px;
+}
+.book:hover{
+  box-shadow: 0px 0px 16px rgb(185, 185, 185);
+}
+
+.book img {
+  width: 100%;
+}
+.book p {
+  margin: 3px;
+}
+.name {
+  font-size: 12px;
+  height: 3em;
+  overflow-y: hidden;
+}
+.rate {
+  display: flex;
+  align-items: center;
+}
+.rate i {
+  font-size:12px;
+  stroke: gold;
+  color: gold;
+}
+.price{
+  color:orangered;
+  font-weight: bold;
+}
