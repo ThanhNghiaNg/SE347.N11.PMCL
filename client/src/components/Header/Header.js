@@ -4,10 +4,14 @@ import { useRef } from "react";
 import { productActions } from "../../store/products";
 import { errorsActions } from "../../store/errors";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 const Header = (props) => {
+
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products.allProducts);
   const searchInput = useRef();
+
   const searchHandler = (event) => {
     event.preventDefault();
     const searchEntered = searchInput.current.value;
@@ -22,6 +26,7 @@ const Header = (props) => {
       dispatch(errorsActions.setNotFound());
     }
   };
+
   return (
     <Container className={classes["main-header"]}>
       <div className={classes["header-container"]}>
@@ -29,12 +34,12 @@ const Header = (props) => {
           <div className={classes["left-container"]}>
             <div className={classes["logo-menu"]}>
               <div className={classes["style-LogoMenu"]}>
-                <a href="/" className={classes["tiki-logo"]}>
+                <Link to="/" className={classes["tiki-logo"]}>
                   <img
                     src="https://salt.tikicdn.com/ts/upload/ae/f5/15/2228f38cf84d1b8451bb49e2c4537081.png"
                     alt="owwi watcher book store logo"
                   />
-                </a>
+                </Link>
               </div>
             </div>
             <div className={classes["form-search"]}>
@@ -83,7 +88,7 @@ const Header = (props) => {
               </span>
             </div>
             <div className={classes["UserStyle-CartItem"]}>
-              <a href="#">
+              <Link to="/cart">
                 <div className={classes["UserStyle-CartItemInner"]}>
                   <div className={classes["cart-wrapper"]}>
                     <img
@@ -99,7 +104,7 @@ const Header = (props) => {
                   </div>
                   <span className={classes["cart-text"]}>Giỏ Hàng</span>
                 </div>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
