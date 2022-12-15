@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { hostURL } from "../../utils/global";
+import { Link } from "react-router-dom";
 const Cart = (props) => {
   const [items, setItems] = useState();
   useEffect(() => {
@@ -14,15 +15,10 @@ const Cart = (props) => {
     getCart();
   }, []);
 
-  const orderHandler = (event)=>{
-    event.preventDefault();
-    
-  }
-
   return (
     <div>
       <p>Cart</p>
-      <button onClick={orderHandler}>Đặt hàng</button>
+      <Link to='/checkout'>Đặt hàng</Link>
     </div>
   );
 };
