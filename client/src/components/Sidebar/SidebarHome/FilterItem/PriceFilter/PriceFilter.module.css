@@ -36,6 +36,13 @@
   vertical-align: middle;
 }
 
+.filter-container__clear {
+  color: rgb(11, 116, 229);
+  font-size: 12px;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
 .filter-container__actions {
   background: #fff;
   font-size: 12px;

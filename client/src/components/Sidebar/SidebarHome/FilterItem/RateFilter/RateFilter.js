@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filter from "../../../../UI/Filter";
 import StarRate from "./StarRate";
 import classes from "./RateFilter.module.css";
@@ -9,8 +9,13 @@ const RateFilter = (props) => {
   const [checked, setChecked] = useState(null);
 
   const checkHandler = (value) => {
-    setChecked((prev) => (prev !== value ? value : ""));
+    setChecked((prev) => (prev !== value ? value : null));
   };
+
+  useEffect(() => {
+    props.onSaveAllFilters({ rate: checked });
+    // props.onFilterBook();
+  }, [checked]);
 
   return (
     <Filter id="rate-filter">

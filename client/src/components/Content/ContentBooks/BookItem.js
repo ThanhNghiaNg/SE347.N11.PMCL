@@ -4,7 +4,7 @@ export const addDotStyle = (str) => {
 };
 const BookItem = (props) => {
   const { book: bookInfo } = props;
-  console.log(bookInfo);
+  // console.log(bookInfo);
   return (
     <div className={classes.book}>
       <img src={bookInfo.images[0].url}></img>
