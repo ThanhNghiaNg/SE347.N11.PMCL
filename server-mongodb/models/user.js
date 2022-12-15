@@ -56,10 +56,10 @@ userSchema.methods.addToCart = function (bookId, quantity) {
     (book) => book.bookId.toString() === bookId
   );
   if (bookIdx >= 0) {
-    this.cart.items[bookIdx].quantity += quantity;
+    this.cart.items[bookIdx].quantity += Number(quantity);
   } else {
     this.cart.items.push({
-      bookId: new Schema.Types.ObjectId(bookId),
+      bookId: new mongoose.Types.ObjectId(bookId),
       quantity: quantity,
     });
   }

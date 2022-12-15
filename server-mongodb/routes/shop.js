@@ -16,6 +16,9 @@ route.post("/add-to-cart", isAuth, shopControllers.postAddToCart);
 // Get items cart
 route.get("/cart", isAuth, shopControllers.getCart);
 
+// user update quantity of product in cart
+route.get("/cart-update-quantity", isAuth, shopControllers.postUpdateCartAmount)
+
 // Post order
 route.post("/order", isAuth, shopControllers.postOrder);
 

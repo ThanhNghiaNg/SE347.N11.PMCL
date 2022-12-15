@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import { hostURL } from "../../utils/global";
 
 const BookDetail = (props) => {
@@ -29,7 +28,7 @@ const BookDetail = (props) => {
           quantity: quantityRef.current.value,
         }),
       });
-      const data = respone.json();
+      const data = await respone.json();
       console.log(data);
     };
     postAddBook();
@@ -37,7 +36,7 @@ const BookDetail = (props) => {
   return (
     <div>
       <h1>{book.title}</h1>
-      <input type={"number"} ref={quantityRef}></input>
+      <input type={"number"} ref={quantityRef} min={1} defaultValue={1}></input>
       <button onClick={addBookToCartHandler}>Add to Cart</button>
     </div>
   );
