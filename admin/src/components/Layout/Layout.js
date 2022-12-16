@@ -2,10 +2,10 @@ import Header from "../Header/Header";
 import Container from "../UI/Container";
 const Layout = (props) => {
   return (
-    <Container>
+    <div>
       <Header />
-      {props.children}
-    </Container>
+      <Container>{props.children}</Container>
+    </div>
   );
 };
 

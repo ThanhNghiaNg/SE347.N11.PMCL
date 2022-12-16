@@ -11,9 +11,9 @@ const Order = (props) => {
   const books = order.books.map((book) => {
     return (
       <div className={classes.item}>
-        <p>Tên sản phẩm: {book.bookId.title}</p>
-        <p>Giá: {book.bookId.price}</p>
-        <p>Số lượng: {book.quantity}</p>
+        <p>{book.bookId.title}</p>
+        <p>{book.bookId.price}</p>
+        <p>{book.quantity}</p>
       </div>
     );
   });
@@ -58,9 +58,15 @@ const Order = (props) => {
     };
     postDeleteOrder();
   };
+
   return (
     <div className={classes.order}>
       <h4>ID: #{order._id}</h4>
+      <div className={classes['items-header']}>
+        <p>Tên sản phẩm</p>
+        <p>Đơn giá</p>
+        <p>Số lượng</p>
+      </div>
       {books}
 
       <div className={classes.detail}>

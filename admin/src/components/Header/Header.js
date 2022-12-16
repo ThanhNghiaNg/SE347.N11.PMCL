@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import Container from "../UI/Container";
 import classes from "./Header.module.css";
 
 const Header = (props) => {
   return (
-    <header>
-      <nav className={classes.nav}>
+    <Container className={classes.header}>
+      <nav class={classes.nav}>
         <ul className={classes["nav-items"]}>
           <li>
             <Link to="/">Books</Link>
@@ -21,11 +22,14 @@ const Header = (props) => {
             <Link to="/login">Login</Link>
           </li>
           <li>
+            <Link to="/register">Register</Link>
+          </li>
+          <li>
             <Link>Logout</Link>
           </li>
         </ul>
       </nav>
-    </header>
+    </Container>
   );
 };
 
