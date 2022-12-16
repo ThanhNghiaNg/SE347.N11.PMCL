@@ -7,7 +7,7 @@ const BookItem = (props) => {
   const navigate = useNavigate();
   const { book: bookInfo } = props;
 
-  console.log(bookInfo);
+  // console.log(bookInfo);
   const goToDetailHandler = (event) => {
     event.preventDefault();
     navigate(`/detail/${bookInfo._id}`);

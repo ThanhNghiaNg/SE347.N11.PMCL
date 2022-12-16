@@ -1,0 +1,38 @@
+.order{
+    padding: 1em;
+    box-shadow: 0 0 10px #ccc;
+    margin-bottom: 2rem;
+}
+
+.item{
+    padding: 1em;
+    border: 1px green solid;
+    margin-block: 0.5em;
+}
+
+.detail{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.actions-control{
+    display: flex;
+    gap:1em;
+    align-self: center;
+    justify-content: center;
+}
+.info-item{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+.info-item p:first-child{
+    font-weight: bold;
+}
+.input-status{
+    margin-bottom: 1rem;
+}
+.input-status p{
+    margin-bottom: 0;
+}
+.input-status input{
+    width: 70%;
+}

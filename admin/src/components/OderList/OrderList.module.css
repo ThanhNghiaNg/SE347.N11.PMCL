@@ -1,0 +1,17 @@
+.order-list{
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.search-form{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+.search-form input{
+    width: 75%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+}
