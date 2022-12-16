@@ -52,21 +52,26 @@ exports.postUpdateCartAmount = (req, res, next) => {
 
 exports.postOrder = (req, res, next) => {
   if (req.session.user.cart.items.length > 0) {
-    const price = req.session.user.cart.items.reduce(
-      (book, acc) => acc + book.price
-    );
+    req.session.user.populate("cart.items.bookId").then((result) => {
+      let totalPrice = 0;
+      result.cart.items.forEach((book) => {
+        console.log(book.bookId.price);
+        console.log(book.quantity);
+        totalPrice += book.bookId.price * book.quantity;
+      });
+      console.log(totalPrice);
+      const order = new Order({
+        books: [...req.session.user.cart.items],
+        status: { status: "Accepted", detail: "", date: new Date() },
+        user: req.session.user._id,
+        totalPrice: totalPrice,
+      });
 
-    const order = new Order({
-      books: [...req.session.user.cart.items],
-      status: { status: "Accepted", detail: "", date: new Date() },
-      user: req.session.user._id,
-      price: price,
-    });
-
-    order.save((err) => {
-      console.log(err);
-      req.session.user.resetCart();
-      return res.send({ message: "Order Successfully!" });
+      order.save((err) => {
+        console.log(err);
+        req.session.user.resetCart();
+        return res.send({ message: "Order Successfully!" });
+      });
     });
   } else {
     res.status(405).send({ message: "Cart is empty!" });
