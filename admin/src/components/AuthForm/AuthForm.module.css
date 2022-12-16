@@ -1,0 +1,13 @@
+.form{
+    padding: 2em 4em;
+    box-shadow: 0 0 10px #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 30em;
+    max-width: 100%;
+    background-color: white;
+    margin: 0 auto;
+    align-content: center;
+    border-radius: 6px;
+}
