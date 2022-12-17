@@ -1,15 +1,16 @@
 import classes from "./Header.module.css";
 import Container from "../UI/Container";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { productActions } from "../../store/products";
 import { errorsActions } from "../../store/errors";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ModalFormPortals } from "../ModalForm/ModalForm";
 
 const Header = (props) => {
-
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products.allProducts);
+  const [isShowModal, setIsShowModal] = useState(false);
   const searchInput = useRef();
 
   const searchHandler = (event) => {
@@ -28,8 +29,18 @@ const Header = (props) => {
     }
   };
 
+  const showModalFormHandler = (event) => {
+    event.preventDefault();
+    setIsShowModal(true);
+  };
+  const hideModalFormHandler = (event) => {
+    event.preventDefault();
+    setIsShowModal(false);
+  };
+
   return (
     <Container className={classes["main-header"]}>
+      {isShowModal && <ModalFormPortals onCloseModal={hideModalFormHandler} />}
       <div className={classes["header-container"]}>
         <div className={`${classes["header-wrapper"]} ${classes.edlkEo}`}>
           <div className={classes["left-container"]}>
@@ -66,7 +77,10 @@ const Header = (props) => {
             </div>
           </div>
           <div className={classes["user-style"]}>
-            <div className={classes["UserStyle-LoginItem"]}>
+            <div
+              className={classes["UserStyle-LoginItem"]}
+              onClick={showModalFormHandler}
+            >
               <img
                 src="https://salt.tikicdn.com/ts/upload/67/de/1e/90e54b0a7a59948dd910ba50954c702e.png"
                 alt=""
