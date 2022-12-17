@@ -2,4 +2,6 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1em;
+  height: fit-content;
+  margin-inline-start: 1em;
 }

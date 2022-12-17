@@ -1,5 +1,6 @@
 const Book = require("../models/book");
 const Author = require("../models/author");
+const Order = require("../models/order");
 
 // add book to database
 exports.addBook = (req, res, next) => {
@@ -85,5 +86,57 @@ exports.deleteBookById = (req, res, next) => {
   const id = req.body.id;
   Book.deleteOne({ _id: id }).then((result) => {
     return res.send({ message: "Deleted Book!" });
+  });
+};
+
+exports.getAllOrders = (req, res, next) => {
+  const query = req.query.query;
+  Order.find()
+    .populate("books.bookId")
+    .populate("user")
+    .then((results) => {
+      if (query) {
+        const filteredResult = [];
+        results.forEach((result) => {
+          const isQueryInOrderID = result._id.toString().includes(query);
+          const isQueryInUserID = result.user._id.toString().includes(query);
+          const isQueryInBookTitle = result.books
+            .map((book) => book.bookId.title)
+            .join(" ")
+            .toLowerCase()
+            .includes(query);
+
+          if (isQueryInOrderID || isQueryInUserID || isQueryInBookTitle) {
+            filteredResult.push(result);
+          }
+        });
+        return res.send(filteredResult);
+      }
+      return res.send(results);
+    });
+};
+
+exports.postUpdateOrder = (req, res, next) => {
+  const id = req.body.id;
+  const status = req.body.status;
+  const detail = req.body.detail;
+
+  Order.findOne({ _id: id }).then((order) => {
+    if (!order) {
+      return res.status(405).send({ message: "Order Id is not valid!" });
+    } else {
+      order.status.status = status;
+      order.status.detail = detail;
+      return order.save().then(() => {
+        return res.send({ message: "Updated Order!" });
+      });
+    }
+  });
+};
+
+exports.postDeleteOrder = (req, res, next) => {
+  const id = req.body.id;
+  Order.deleteOne({ _id: id }).then((result) => {
+    res.send({ message: `Deleted Order Id: ${id}` });
   });
 };

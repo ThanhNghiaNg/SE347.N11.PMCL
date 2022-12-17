@@ -20,10 +20,8 @@ const App = () => {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/*" element={<p>Page not found</p>} />
         </Routes>
-        {/* <ModalForm /> */}
       </Layout>
     </BrowserRouter>
-
   );
 };
 

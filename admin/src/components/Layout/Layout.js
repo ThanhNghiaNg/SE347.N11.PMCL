@@ -1,11 +1,11 @@
 import Header from "../Header/Header";
-
+import Container from "../UI/Container";
 const Layout = (props) => {
   return (
-    <>
+    <div>
       <Header />
-      {props.children}
-    </>
+      <Container>{props.children}</Container>
+    </div>
   );
 };
 
