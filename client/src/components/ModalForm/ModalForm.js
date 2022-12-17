@@ -3,10 +3,11 @@ import { useState } from "react";
 import LoginForm from "./LoginForm/LoginForm";
 import AlternativeForm from "./AlternativeForm/AlternativeForm";
 import RegisterForm from "./RegisterForm/RegisterForm";
-
+import Backdrop from "../UI/Backdrop";
 import classes from "./ModalForm.module.css";
+import { createPortal } from "react-dom";
 
-const ModalForm = () => {
+const ModalForm = (props) => {
   const [showRegisForm, setShowRegisForm] = useState(false);
 
   const showRegisFormHandler = () => {
@@ -14,24 +15,24 @@ const ModalForm = () => {
   };
 
   return (
-    <div
-      style={{
-        border: "none",
-        backgroundColor: "rgb(248, 248, 248)",
-        borderRadius: 20,
-        width: 800,
-        position: "relative",
-        margin: "80px auto",
-      }}
-    >
+    // <div
+    //   style={{
+    //     border: "none",
+    //     backgroundColor: "rgb(248, 248, 248)",
+    //     borderRadius: 20,
+    //     width: 800,
+    //     position: "relative",
+    //     margin: "80px auto",
+    //   }}
+    // >
+    <Backdrop>
       <div className={classes["modal-form"]}>
-        <button className={classes["modal-form__btn-close"]}>
+        <button className={classes["modal-form__btn-close"]} onClick={props.onCloseModal}>
           <img
             className={classes["close-img"]}
             src="https://salt.tikicdn.com/ts/upload/fe/20/d7/6d7764292a847adcffa7251141eb4730.png"
           />
         </button>
-
         <div className={classes["modal-form__left"]}>
           <div className={classes["modal-form__inner"]}>
             {showRegisForm && (
@@ -45,11 +46,12 @@ const ModalForm = () => {
                 />
               </button>
             )}
-
-            {showRegisForm === false ? <LoginForm /> : <RegisterForm onBackLogin={showRegisFormHandler}/>}
-
+            {showRegisForm === false ? (
+              <LoginForm />
+            ) : (
+              <RegisterForm onBackLogin={showRegisFormHandler} />
+            )}
             <AlternativeForm />
-
             {showRegisForm || (
               <div className={classes["modal-form__regis"]}>
                 <p>
@@ -60,18 +62,22 @@ const ModalForm = () => {
             )}
           </div>
         </div>
-
         <div className={classes["modal-form__right"]}>
           <img src="https://salt.tikicdn.com/ts/upload/eb/f3/a3/25b2ccba8f33a5157f161b6a50f64a60.png" />
-
           <div className={classes["content"]}>
             <h4>Mua sắm tại Owwi</h4>
             <p>Siêu ưu đãi mỗi ngày</p>
           </div>
         </div>
       </div>
-    </div>
+    </Backdrop>
+    // {/* </div> */}
   );
+};
+
+export const ModalFormPortals = (props) => {
+  const modalPortals = document.getElementById("modalPortals");
+  return <>{createPortal(<ModalForm onCloseModal={props.onCloseModal}/>, modalPortals)}</>;
 };
 
 export default ModalForm;
