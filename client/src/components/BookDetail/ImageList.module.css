@@ -1,0 +1,21 @@
+.images-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  justify-content: space-between;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.grid-images {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3px
+}
+
+.img-active {
+  border: solid 1px blue;
+  border-radius: 3px;
+}
