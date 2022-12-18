@@ -1,0 +1,10 @@
+.group{
+    border: solid 1px #ccc;
+    width: fit-content;
+    border-radius: 6px;
+}
+.group input{
+    text-align: center;
+    width: 3rem;
+    padding: 8px 16px;
+}

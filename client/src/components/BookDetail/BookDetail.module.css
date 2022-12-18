@@ -1,0 +1,55 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 3rem;
+  background-color: #fff;
+  height: 85vh;
+  max-height: fit-content;
+  padding: 3em 2em;
+}
+
+
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: normal;
+  margin-bottom: 1em;
+}
+
+.short_description {
+  margin-bottom: 2em;
+  line-height: 1.8;
+}
+
+.price{
+  color: var(--main-red);
+}
+
+.description {
+  background-color: #fff;
+  margin-top: 1em;
+  position: relative;
+}
+
+.stick-description {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding-block: 1em;
+}
+.stick-description em{
+    color: #1971c2;
+}
+
+.related{
+  background-color: #fff;
+  margin-top: 1em;
+}

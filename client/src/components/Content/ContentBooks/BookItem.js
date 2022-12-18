@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router";
 import classes from "./BookItem.module.css";
-export const addDotStyle = (str) => {
-  return str.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-};
+import { addDotStyle } from "../../../utils/global";
 const BookItem = (props) => {
   const navigate = useNavigate();
   const { book: bookInfo } = props;
@@ -10,7 +8,7 @@ const BookItem = (props) => {
   // console.log(bookInfo);
   const goToDetailHandler = (event) => {
     event.preventDefault();
-    navigate(`/detail/${bookInfo._id}`);
+    return navigate(`/detail/${bookInfo._id}`);
   };
 
   return (
