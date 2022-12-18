@@ -22,7 +22,6 @@ const BookDetail = (props) => {
         credentials: "include",
       });
       const data = await respone.json();
-      console.log(data);
       setBook(data);
     };
     getBook();
@@ -98,6 +97,7 @@ const BookDetail = (props) => {
           <RelatedBook category={book.category} id={book._id} />
         </Card>
       )}
+      <Card>Review</Card>
     </Container>
   );
 };

@@ -6,7 +6,6 @@ import { hostURL } from "../../utils/global";
 
 const RelatedBook = (props) => {
   const { category, id } = props;
-  console.log(category, id);
   const [allBooks, setAllBooks] = useState([]);
   useEffect(() => {
     const fecthBooks = async () => {

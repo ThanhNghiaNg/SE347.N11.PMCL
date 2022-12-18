@@ -25,7 +25,7 @@ const BookItem = (props) => {
       ) : (
         <p></p>
       )}
-      <p className={classes.price}>{addDotStyle(String(bookInfo.price))} VNĐ</p>
+      <p className={classes.price}>{addDotStyle(String(bookInfo.price))}</p>
     </div>
   );
 };
