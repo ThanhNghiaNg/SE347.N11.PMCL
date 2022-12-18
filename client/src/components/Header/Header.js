@@ -10,6 +10,7 @@ import { ModalFormPortals } from "../ModalForm/ModalForm";
 const Header = (props) => {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products.allProducts);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isShowModal, setIsShowModal] = useState(false);
   const searchInput = useRef();
 
@@ -31,10 +32,17 @@ const Header = (props) => {
 
   const showModalFormHandler = (event) => {
     event.preventDefault();
-    setIsShowModal(true);
+    console.log(isLoggedIn)
+    if (!isLoggedIn) {
+      setIsShowModal(true);
+    }
   };
   const hideModalFormHandler = (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
+    } catch (err) {
+      console.log(err);
+    }
     setIsShowModal(false);
   };
 
@@ -87,9 +95,12 @@ const Header = (props) => {
                 className={classes["profile-icon"]}
               ></img>
               <span className={classes["UserStyle-LoginItem-ItemText"]}>
-                <span className={classes["login-text"]}>
-                  Đăng Nhập / Đăng Ký
-                </span>
+                {!isLoggedIn && (
+                  <span className={classes["login-text"]}>
+                    Đăng Nhập / Đăng Ký
+                  </span>
+                )}
+
                 <span className={classes["account-label"]}>
                   <span>Tài khoản</span>
                   <img

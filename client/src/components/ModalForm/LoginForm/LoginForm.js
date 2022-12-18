@@ -2,12 +2,15 @@ import { useRef } from "react";
 import { hostURL } from "../../../utils/global";
 import classes from "./LoginForm.module.css";
 import { authActions } from "../../../store/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const dispatch = useDispatch();
+
   const emailRef = useRef();
   const passwordRef = useRef();
+  const rememberRef = useRef();
+
   const logoutHandler = () => {
     fetch("http://localhost:5000/logout", {
       method: "POST",
@@ -35,8 +38,14 @@ const LoginForm = () => {
         credentials: "include",
       });
       const data = await respone.json();
-      dispatch(authActions.login(data.token));
       console.log(data);
+      if (respone.status === 200) {
+        props.onCloseModal();
+        dispatch(authActions.login(data.token));
+        if (rememberRef.current.checked) {
+          dispatch(authActions.rememberUser());
+        }
+      }
     };
     postLogin();
   };
@@ -62,6 +71,10 @@ const LoginForm = () => {
             placeholder="Mật khẩu"
             ref={passwordRef}
           />
+        </div>
+        <div>
+          <input type="checkbox" ref={rememberRef}></input>
+          <label>Nhớ mật khẩu</label>
         </div>
         <div className={classes["login-form__actions"]}>
           <button>ĐĂNG NHẬP</button>

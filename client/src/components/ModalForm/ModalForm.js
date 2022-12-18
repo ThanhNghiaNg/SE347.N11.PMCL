@@ -27,7 +27,10 @@ const ModalForm = (props) => {
     // >
     <Backdrop>
       <div className={classes["modal-form"]}>
-        <button className={classes["modal-form__btn-close"]} onClick={props.onCloseModal}>
+        <button
+          className={classes["modal-form__btn-close"]}
+          onClick={props.onCloseModal}
+        >
           <img
             className={classes["close-img"]}
             src="https://salt.tikicdn.com/ts/upload/fe/20/d7/6d7764292a847adcffa7251141eb4730.png"
@@ -47,7 +50,7 @@ const ModalForm = (props) => {
               </button>
             )}
             {showRegisForm === false ? (
-              <LoginForm />
+              <LoginForm onCloseModal={props.onCloseModal} />
             ) : (
               <RegisterForm onBackLogin={showRegisFormHandler} />
             )}
@@ -77,7 +80,14 @@ const ModalForm = (props) => {
 
 export const ModalFormPortals = (props) => {
   const modalPortals = document.getElementById("modalPortals");
-  return <>{createPortal(<ModalForm onCloseModal={props.onCloseModal}/>, modalPortals)}</>;
+  return (
+    <>
+      {createPortal(
+        <ModalForm onCloseModal={props.onCloseModal} />,
+        modalPortals
+      )}
+    </>
+  );
 };
 
 export default ModalForm;
