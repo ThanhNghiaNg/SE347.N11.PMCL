@@ -42,12 +42,25 @@ exports.postUpdateCartAmount = (req, res, next) => {
     (book) => book.bookId.toString() === bookId
   );
   if (bookIdx >= 0) {
-    req.session.user.cart.items[bookIdx] = quantity;
+    req.session.user.cart.items[bookIdx].quantity = quantity;
     return req.session.user.save((err) => {
       return res.send({ message: "Updated Quantity" });
     });
   }
   res.status(405).send({ message: "Failed to Update" });
+};
+
+exports.postDeleteCartItem = (req, res, next) => {
+  const bookId = req.body.bookId;
+  const cartItemsUpdated = req.session.user.cart.items.filter(
+    (book) => book.bookId.toString() !== bookId
+  );
+  console.log("-", bookId);
+  req.session.user.cart.items =  [...cartItemsUpdated ];
+  console.log(cartItemsUpdated);
+  return req.session.user.save().then((result) => {
+    return res.send({ message: "Deleted product from cart!" });
+  });
 };
 
 exports.postOrder = (req, res, next) => {

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const QuantityInput = (props) => {
   const getQuantity = props.getQuantity;
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(props.default ? props.default : 1);
 
   const enteredQuantityHandler = (event) => {
     const quantity = event.target.value;
@@ -34,9 +34,13 @@ const QuantityInput = (props) => {
 
   return (
     <div className={`${classes.group} mt-4 mb-4`}>
-      <button onClick={decreaseQuantityHandler} className={`btn bg-light`}>-</button>
+      <button onClick={decreaseQuantityHandler} className={`btn bg-light`}>
+        -
+      </button>
       <input min={1} value={quantity} onChange={enteredQuantityHandler}></input>
-      <button onClick={increaseQuantityHandler} className={`btn bg-light`}>+</button>
+      <button onClick={increaseQuantityHandler} className={`btn bg-light`}>
+        +
+      </button>
     </div>
   );
 };
