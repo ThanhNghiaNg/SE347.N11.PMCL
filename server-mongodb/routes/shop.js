@@ -17,13 +17,16 @@ route.post("/add-to-cart", isAuth, shopControllers.postAddToCart);
 route.get("/cart", isAuth, shopControllers.getCart);
 
 // user update quantity of product in cart
-route.get("/cart-update-quantity", isAuth, shopControllers.postUpdateCartAmount)
+route.post("/cart-update-quantity", isAuth, shopControllers.postUpdateCartAmount)
+
+route.post("/cart-delete-item", isAuth, shopControllers.postDeleteCartItem)
 
 // Post order
 route.post("/order", isAuth, shopControllers.postOrder);
 
 // Get order items
 route.get("/order", isAuth, shopControllers.getOrder);
+
 
 
 module.exports = route;

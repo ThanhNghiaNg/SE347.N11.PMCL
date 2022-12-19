@@ -1,0 +1,20 @@
+.item {
+  display: grid;
+  grid-template-columns: var(--grid-3111);
+  gap: 1em;
+  margin-bottom: 2em;
+  align-items: center;
+}
+
+.content{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 0.5em
+}
+
+.content img{
+    width: 100%;
+}
+.btn-delete{
+    background-color: transparent;
+}

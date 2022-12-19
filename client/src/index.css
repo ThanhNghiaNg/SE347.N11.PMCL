@@ -2,7 +2,7 @@
   --main-background: #f5f5fa;
   --main-red: #ff424e;
 
-  --grid-2111: 2fr 1fr 1fr 1fr;
+  --grid-3111: 6fr 2fr 2fr 2fr 1fr;
 }
 
 * {
