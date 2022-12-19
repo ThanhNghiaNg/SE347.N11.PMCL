@@ -1,4 +1,4 @@
-import { addDotStyle } from "../../../../ContentBooks/BookItem";
+import { addDotStyle } from "../../../../../../utils/global";
 
 import classes from "./OrderContent.module.css";
 
