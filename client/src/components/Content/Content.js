@@ -9,6 +9,7 @@ import ContentBooks from "./ContentBooks/ContentBooks";
 import ContentCustomers from "./ContentCustomers/ContentCustomers";
 
 const Content = (props) => {
+  const useCustomer = props.useCustomer;
   const allProducts = useSelector((state) => state.products.allProducts);
   const dispatch = useDispatch();
 
@@ -26,9 +27,9 @@ const Content = (props) => {
 
   return (
     <Container className={classes.content}>
-      <Sidebar />
-      {/* <ContentBooks /> */}
-      <ContentCustomers />
+      <Sidebar useCustomer={useCustomer} />
+      {useCustomer && <ContentCustomers />}
+      {!useCustomer && <ContentBooks />}
     </Container>
   );
 };

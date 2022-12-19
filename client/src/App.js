@@ -1,5 +1,6 @@
 import "./App.css";
 import Home from "./pages/Home";
+import Customer from "./pages/Customer";
 import Layout from "./components/Layout/Layout";
 
 import LoginForm from "./components/ModalForm/LoginForm/LoginForm";
@@ -11,13 +12,12 @@ import Checkout from "./pages/Checkout";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./store/auth";
 
-
 const App = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  window.addEventListener('load', ()=>{
-    dispatch(authActions.clearSession())
-  })
+  window.addEventListener("load", () => {
+    dispatch(authActions.clearSession());
+  });
   return (
     <BrowserRouter>
       <Layout>
@@ -28,6 +28,7 @@ const App = () => {
             <>
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/customer" element={<Customer />} />
             </>
           )}
           <Route path="/*" element={<p>Page not found</p>} />

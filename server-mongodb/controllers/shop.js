@@ -30,7 +30,8 @@ exports.postAddToCart = (req, res, next) => {
 
 exports.getCart = (req, res, next) => {
   req.session.user.populate("cart.items.bookId").then((result) => {
-    return res.send(result.cart.items);
+    // const data = {cart:result.cart.items, email: result.email, id: result._id}
+    return res.send(result);
   });
 };
 
