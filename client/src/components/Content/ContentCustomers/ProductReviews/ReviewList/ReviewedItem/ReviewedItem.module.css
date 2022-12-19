@@ -1,0 +1,85 @@
+.reviewed-block {
+  width: 1029px;
+}
+
+.reviewed-item {
+  box-shadow: rgb(40 40 43 / 10%) 0px 4px 8px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 25px 16px;
+  position: relative;
+  z-index: 1;
+  white-space: normal;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.reviewed-item__product-image {
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+}
+
+.reviewed-item__product-image img {
+  width: 104px;
+  height: 104px;
+  flex-shrink: 0;
+}
+
+.reviewed-item__info {
+  width: calc(100% - 104px - 24px);
+}
+
+.product-info .title {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  color: rgb(56, 56, 61);
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.product-info .rating {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.product-info .rating .star {
+  margin-top: 4px;
+}
+
+.product-info .rating .star svg {
+  margin: 0 2px;
+}
+
+.review-item__comment {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.comment-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.comment-content {
+  min-height: 40px;
+}
+
+.comment-content div {
+  border: 1px solid rgb(238, 238, 238);
+  padding: 12px;
+  border-radius: 12px;
+  min-height: 40px;
+  width: 100%;
+  outline: 0px;
+  font-size: 13px;
+  line-height: 20px;
+  resize: none;
+  overflow: hidden;
+  text-align: justify;
+}

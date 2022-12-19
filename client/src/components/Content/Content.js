@@ -6,6 +6,7 @@ import { hostURL } from "../../utils/global";
 import React, { useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import ContentBooks from "./ContentBooks/ContentBooks";
+import ContentCustomers from "./ContentCustomers/ContentCustomers";
 
 const Content = (props) => {
   const allProducts = useSelector((state) => state.products.allProducts);
@@ -26,7 +27,8 @@ const Content = (props) => {
   return (
     <Container className={classes.content}>
       <Sidebar />
-      <ContentBooks />
+      {/* <ContentBooks /> */}
+      <ContentCustomers />
     </Container>
   );
 };

@@ -1,0 +1,12 @@
+select {
+  width: 100%;
+  border: 1px solid rgb(204, 204, 204);
+  height: 34px;
+  padding: 6px 12px;
+  line-height: 34px;
+  outline: none;
+  border-radius: 4px;
+  margin: 0 12px 0 0;
+  background: 0px center;
+  box-shadow: none;
+}

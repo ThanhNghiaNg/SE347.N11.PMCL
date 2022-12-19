@@ -1,0 +1,96 @@
+.waiting-block {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.scroll-component {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.waiting-item {
+  width: 310px;
+  height: 210px;
+  margin-right: 17px;
+  box-shadow: rgb(40 40 43 / 10%) 0px 4px 8px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 16px 16px 32px;
+  position: relative;
+  z-index: 1;
+  white-space: normal;
+  margin-bottom: 12px;
+}
+
+.waiting-item__info {
+  display: flex;
+  align-items: center;
+}
+
+.waiting-item__info img {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.waiting-item__info .title {
+  font-size: 14px;
+  line-height: 20px;
+  color: rgb(128, 128, 137);
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.waiting-item__info .rating {
+  display: flex;
+  margin-top: 4px;
+}
+
+.waiting-item__info .rating svg {
+  margin: 0 2px;
+}
+
+.waiting-item__message {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgb(128, 128, 137);
+  display: flex;
+  justify-content: center;
+  padding: 22px 0px;
+  font-style: italic;
+  text-align: center;
+}
+
+.waiting-item__actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+  gap: 4px;
+  height: 44px;
+  width: 270px;
+  border: 1px solid rgb(11, 116, 229);
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  color: rgb(11, 116, 229);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.waiting-item__actions img {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRef } from "react";
 import { productActions } from "../../../store/products";
 import { errorsActions } from "../../../store/errors";
 import { useDispatch, useSelector } from "react-redux";

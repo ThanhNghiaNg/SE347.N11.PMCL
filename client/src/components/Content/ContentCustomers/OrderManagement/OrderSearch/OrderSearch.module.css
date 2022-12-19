@@ -1,0 +1,36 @@
+.order-search {
+  position: relative;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.order-search svg {
+  color: rgb(128, 128, 137);
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+}
+
+.order-search .input-field {
+  height: 36px;
+  width: 100%;
+  border-radius: 4px;
+  padding: 10px 12px 10px 40px;
+  line-height: 20px;
+  outline: none;
+  border: 1px solid rgb(196, 196, 207);
+}
+
+.order-search .actions {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(11, 116, 229);
+  padding: 0 6px 0 16px;
+  border-left: 2px solid rgb(221, 221, 227);
+  cursor: pointer;
+}
