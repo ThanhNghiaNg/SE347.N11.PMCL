@@ -1,4 +1,10 @@
 .container {
+
   padding: 1em 18em;
+
+  /* padding: 0 18em; */
+  padding: 0 10em;
+
   background-color: var(--main-background);
+  padding-top: 1em;
 }

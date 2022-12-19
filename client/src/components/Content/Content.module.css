@@ -3,5 +3,5 @@
     padding-bottom: 3em;
     display: grid;
     grid-template-columns: 1fr 4fr;
-    background-color: var(--main-background);
+    background-color: transparent;
 }
