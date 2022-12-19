@@ -1,0 +1,8 @@
+.order-item__header {
+  border-bottom: 1px solid, rgb(235, 235, 240);
+  padding-bottom: 12px;
+  color: rgb(128, 128, 137);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}

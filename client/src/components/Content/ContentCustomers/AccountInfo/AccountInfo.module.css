@@ -1,0 +1,33 @@
+.account-info {
+  flex: 1 1 0%;
+}
+
+.account-info__heading {
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 300;
+  margin: 4px 0 12px;
+}
+
+.account-info__container form {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 8px;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.account-info__container .form-info {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  /* background-color: #fff; */
+  border-radius: 8px;
+  width: 100%;
+}
+
+.info__vertical {
+  border-left: 1px solid rgb(235, 235, 240);
+  margin: 16px 0;
+}

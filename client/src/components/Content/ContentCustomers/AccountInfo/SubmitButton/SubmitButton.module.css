@@ -1,0 +1,10 @@
+.form-actions {
+  width: 100%;
+  border: 0;
+  height: 40px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  background-color: rgb(11, 116, 229);
+  cursor: pointer;
+}
