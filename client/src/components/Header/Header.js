@@ -4,11 +4,12 @@ import { useRef, useState } from "react";
 import { productActions } from "../../store/products";
 import { errorsActions } from "../../store/errors";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ModalFormPortals } from "../ModalForm/ModalForm";
 
 const Header = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const allProducts = useSelector((state) => state.products.allProducts);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isShowModal, setIsShowModal] = useState(false);
@@ -32,9 +33,11 @@ const Header = (props) => {
 
   const showModalFormHandler = (event) => {
     event.preventDefault();
-    console.log(isLoggedIn)
+    console.log(isLoggedIn);
     if (!isLoggedIn) {
       setIsShowModal(true);
+    } else {
+      navigate("/customer");
     }
   };
   const hideModalFormHandler = (event) => {

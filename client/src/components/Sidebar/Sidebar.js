@@ -4,8 +4,13 @@ import SidebarCustomner from "./SidebarCustomer/SidebarCustomer";
 import React from "react";
 
 const Sidebar = (props) => {
-  const usingHome = true;
-  return <React.Fragment>{usingHome && <SidebarCustomner />}</React.Fragment>;
+  const useCustomer = props.useCustomer;
+  return (
+    <React.Fragment>
+      {useCustomer && <SidebarCustomner />}
+      {!useCustomer && <SidebarHome />}
+    </React.Fragment>
+  );
 };
 
 export default Sidebar;
