@@ -1,0 +1,24 @@
+.status-tab {
+  cursor: pointer;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  position: sticky;
+  top: 0px;
+  z-index: 10;
+}
+
+.status-tab .status {
+  width: calc(100% / 5);
+  padding: 12px 0;
+  text-align: center;
+  color: rgb(128, 128, 137);
+  border: none;
+}
+
+.status-tab .status.selected {
+  color: rgb(13, 92, 182);
+  border-bottom: 2px solid rgb(13, 92, 182);
+}

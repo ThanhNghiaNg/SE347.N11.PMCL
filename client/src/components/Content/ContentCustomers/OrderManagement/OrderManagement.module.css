@@ -1,0 +1,16 @@
+.order-management {
+  flex: 1 1 0%;
+}
+
+.order-management__heading {
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 300;
+  margin: 4px 0 12px;
+}
+
+.order-management__status-tab {
+  background-color: #fff;
+  cursor: pointer;
+  width: 100%;
+}

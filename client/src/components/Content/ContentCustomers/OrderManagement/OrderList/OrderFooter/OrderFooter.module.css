@@ -1,0 +1,39 @@
+.order-item__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.order-item__footer .total-price {
+  font-size: 17px;
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.total-price__title {
+  font-weight: 300;
+  color: rgb(128, 128, 137);
+  margin-right: 8px;
+}
+
+.total-price__total {
+  font-weight: 400;
+  color: rgb(56, 56, 61);
+}
+
+.order-item__footer .actions > div {
+  padding: 12px 8px;
+  height: 36px;
+  border-radius: 4px;
+  border: 1px solid rgb(11, 116, 229);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgb(11, 116, 229);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

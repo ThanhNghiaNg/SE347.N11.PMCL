@@ -1,0 +1,27 @@
+.review-list {
+  margin-top: 20px;
+}
+
+.review-list__block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.waiting-block {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.scroll-component {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}

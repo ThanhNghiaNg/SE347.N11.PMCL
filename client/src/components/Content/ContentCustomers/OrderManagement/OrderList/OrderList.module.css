@@ -1,0 +1,15 @@
+.order-list {
+  height: auto;
+  min-height: calc(100vh - 110px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-item {
+  background: #fff;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-bottom: 20px;
+  padding: 16px;
+}

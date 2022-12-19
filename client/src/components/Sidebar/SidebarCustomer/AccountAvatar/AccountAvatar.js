@@ -5,7 +5,7 @@ const AccountAvatar = (props) => {
     <div className={classes["account"]}>
       <img
         className={classes["account__avatar"]}
-        src="https://graph.facebook.com/v3.3/2694613500774296/picture?type=large&return_ssl_resources=1"
+        src="https://salt.tikicdn.com/desktop/img/avatar.png"
         alt="avatar"
       />
       <div className={classes["account__info"]}>
