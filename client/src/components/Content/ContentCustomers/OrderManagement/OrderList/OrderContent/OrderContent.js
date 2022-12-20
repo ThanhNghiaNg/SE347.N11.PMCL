@@ -22,7 +22,7 @@ const OrderContent = (props) => {
             </div>
             <div className={classes["price"]}>
               <span>
-                {addDotStyle(String(product.price * product.amount))} đ
+                {addDotStyle(String(product.price * product.amount))}
               </span>
             </div>
           </div>

@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 
 exports.getUpdate = (req, res, next) => {
   User.findOne({ _id: req.session.user._id }).then((user) => {
-    console.log(user)
+    console.log(user);
     return res.send({
       address: user.address ? user.address : "",
       email: user.email ? user.email : "",
@@ -61,7 +61,7 @@ exports.postUpdate = (req, res, next) => {
 exports.getReviewBook = (req, res, next) => {
   Order.find({
     user: req.session.user._id,
-    "status.status": "Done",
+    "status.status": "shipped",
   })
     .populate("books.bookId", "-description -short_description")
     .then((result) => {
@@ -82,11 +82,13 @@ exports.getReviewBook = (req, res, next) => {
     });
 };
 
-exports.getReviewedBook =  (req, res, next) => {
-  Review.find({user: req.session.user._id}).populate('book').then(reviews=>{
-    return res.send(reviews)
-  })
-}
+exports.getReviewedBook = (req, res, next) => {
+  Review.find({ user: req.session.user._id })
+    .populate("book")
+    .then((reviews) => {
+      return res.send(reviews);
+    });
+};
 
 exports.postReviewBook = (req, res, next) => {
   const rate = req.body.rate;
@@ -126,5 +128,21 @@ exports.postReviewBook = (req, res, next) => {
         });
       });
     });
+  });
+};
+
+// Get all order that user ordered
+exports.getOrdered = (req, res, next) => {
+  Order.find({ user: req.session.user._id })
+    .populate("books.bookId")
+    .then((orders) => {
+      return res.send(orders);
+    });
+};
+
+exports.deleteOrderById = (req, res, next) => {
+  const orderId = req.body.orderId;
+  Order.deleteOne({ _id: orderId }).then(() => {
+    res.send({ message: `Deleted Order ${orderId}` });
   });
 };

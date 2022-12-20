@@ -3,7 +3,8 @@ import OrderSearch from "./OrderSearch/OrderSearch";
 import OrderList from "./OrderList/OrderList";
 
 import classes from "./OrderManagement.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { hostURL } from "../../../../utils/global";
 
 const orderStatus = [
   {
@@ -39,90 +40,127 @@ const orderStatus = [
 ];
 
 const OrderManagement = (props) => {
-  const orders = [
-    {
-      id: 0,
-      status: "paying",
-      amount: 207000,
-      products: [
-        {
-          id: 0,
-          title: "Khéo Ăn Nói Sẽ Có Được Thiên Hạ",
-          price: 69000,
-          publisher: "Nhà sách Fahasa",
-          image:
-            "https://salt.tikicdn.com/cache/200x200/ts/product/22/a9/48/c55f8c043e5ff5842aa15dc1f3b6c20f.jpg",
-          amount: 2,
-        },
-        {
-          id: 1,
-          title: "Nhà giả kim",
-          price: 69000,
-          publisher: "AHABOOKS",
-          image:
-            "https://salt.tikicdn.com/cache/200x200/ts/product/83/30/87/737846efdb9f28f0f51352cacf9225c5.jpg",
-          amount: 1,
-        },
-      ],
-    },
-    {
-      id: 1,
-      status: "pending",
-      amount: 250000,
-      products: [
-        {
-          id: 2,
-          title: "Osho - Trưởng Thành - Chạm Tới Bầu Trời Nội Tâm Của Bạn",
-          price: 112000,
-          publisher: "Nhà sách Fahasa",
-          image:
-            "https://salt.tikicdn.com/cache/200x200/ts/product/0c/05/a4/637b29e57f847f8cec40cdc0fa7b2b93.jpg",
-          amount: 1,
-        },
-        {
-          id: 1,
-          title: "Nhà giả kim",
-          price: 69000,
-          publisher: "AHABOOKS",
-          image:
-            "https://salt.tikicdn.com/cache/200x200/ts/product/83/30/87/737846efdb9f28f0f51352cacf9225c5.jpg",
-          amount: 2,
-        },
-      ],
-    },
-    {
-      id: 2,
-      status: "shipping",
-      amount: 224000,
-      products: [
-        {
-          id: 2,
-          title: "Osho - Trưởng Thành - Chạm Tới Bầu Trời Nội Tâm Của Bạn",
-          price: 112000,
-          publisher: "Nhà sách Fahasa",
-          image:
-            "https://salt.tikicdn.com/cache/200x200/ts/product/0c/05/a4/637b29e57f847f8cec40cdc0fa7b2b93.jpg",
-          amount: 2,
-        },
-      ],
-    },
-    {
-      id: 3,
-      status: "shipped",
-      amount: 69000,
-      products: [
-        {
-          id: 0,
-          title: "Khéo Ăn Nói Sẽ Có Được Thiên Hạ",
-          price: 69000,
-          publisher: "Nhà sách Fahasa",
-          image:
-            "https://salt.tikicdn.com/cache/200x200/ts/product/22/a9/48/c55f8c043e5ff5842aa15dc1f3b6c20f.jpg",
-          amount: 1,
-        },
-      ],
-    },
-  ];
+  const [orders, setOrders] = useState([]);
+  const [toggleRefresh, setToggleRefresh] = useState(false);
+
+  const refreshHandler = () => {
+    setToggleRefresh((prev) => !prev);
+  };
+  useEffect(() => {
+    const getOrders = async () => {
+      const respone = await fetch(`${hostURL}/user/ordered`, {
+        credentials: "include",
+      });
+      const data = await respone.json();
+      const fetchedOrder = data.map((order) => {
+        return {
+          id: order._id,
+          status: order.status.status,
+          amount: order.totalPrice,
+          products: [
+            ...order.books.map((book) => {
+              return {
+                id: book.bookId._id,
+                title: book.bookId.title,
+                price: book.bookId.price,
+                amount: book.quantity,
+                publisher: book.bookId.publisher,
+                image: book.bookId.images[0].url,
+              };
+            }),
+          ],
+        };
+      });
+      console.log(fetchedOrder);
+      setOrders(fetchedOrder);
+    };
+    getOrders();
+  }, [toggleRefresh]);
+
+  // const orders = [
+  //   {
+  //     id: 0,
+  //     status: "paying",
+  //     amount: 207000,
+  //     products: [
+  //       {
+  //         id: 0,
+  //         title: "Khéo Ăn Nói Sẽ Có Được Thiên Hạ",
+  //         price: 69000,
+  //         publisher: "Nhà sách Fahasa",
+  //         image:
+  //           "https://salt.tikicdn.com/cache/200x200/ts/product/22/a9/48/c55f8c043e5ff5842aa15dc1f3b6c20f.jpg",
+  //         amount: 2,
+  //       },
+  //       {
+  //         id: 1,
+  //         title: "Nhà giả kim",
+  //         price: 69000,
+  //         publisher: "AHABOOKS",
+  //         image:
+  //           "https://salt.tikicdn.com/cache/200x200/ts/product/83/30/87/737846efdb9f28f0f51352cacf9225c5.jpg",
+  //         amount: 1,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 1,
+  //     status: "pending",
+  //     amount: 250000,
+  //     products: [
+  //       {
+  //         id: 2,
+  //         title: "Osho - Trưởng Thành - Chạm Tới Bầu Trời Nội Tâm Của Bạn",
+  //         price: 112000,
+  //         publisher: "Nhà sách Fahasa",
+  //         image:
+  //           "https://salt.tikicdn.com/cache/200x200/ts/product/0c/05/a4/637b29e57f847f8cec40cdc0fa7b2b93.jpg",
+  //         amount: 1,
+  //       },
+  //       {
+  //         id: 1,
+  //         title: "Nhà giả kim",
+  //         price: 69000,
+  //         publisher: "AHABOOKS",
+  //         image:
+  //           "https://salt.tikicdn.com/cache/200x200/ts/product/83/30/87/737846efdb9f28f0f51352cacf9225c5.jpg",
+  //         amount: 2,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 2,
+  //     status: "shipping",
+  //     amount: 224000,
+  //     products: [
+  //       {
+  //         id: 2,
+  //         title: "Osho - Trưởng Thành - Chạm Tới Bầu Trời Nội Tâm Của Bạn",
+  //         price: 112000,
+  //         publisher: "Nhà sách Fahasa",
+  //         image:
+  //           "https://salt.tikicdn.com/cache/200x200/ts/product/0c/05/a4/637b29e57f847f8cec40cdc0fa7b2b93.jpg",
+  //         amount: 2,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 3,
+  //     status: "shipped",
+  //     amount: 69000,
+  //     products: [
+  //       {
+  //         id: 0,
+  //         title: "Khéo Ăn Nói Sẽ Có Được Thiên Hạ",
+  //         price: 69000,
+  //         publisher: "Nhà sách Fahasa",
+  //         image:
+  //           "https://salt.tikicdn.com/cache/200x200/ts/product/22/a9/48/c55f8c043e5ff5842aa15dc1f3b6c20f.jpg",
+  //         amount: 1,
+  //       },
+  //     ],
+  //   },
+  // ];
 
   const [selectedStatus, setSelectedStatus] = useState("all");
   const setStatusCategory = (status) => {
@@ -135,10 +173,13 @@ const OrderManagement = (props) => {
   };
 
   // Filter order via order category
-  let filteredOrders =
-    selectedStatus === "all"
-      ? orders
-      : orders.filter((order) => order.status === selectedStatus);
+  let filteredOrders = [];
+  if (orders.length > 0) {
+    filteredOrders =
+      selectedStatus === "all"
+        ? orders
+        : orders.filter((order) => order.status === selectedStatus);
+  }
   if (searchInput) {
     filteredOrders = filteredOrders.filter((order) =>
       order.products.some((product) =>
@@ -157,7 +198,9 @@ const OrderManagement = (props) => {
         orderStatus={orderStatus}
       />
       <OrderSearch onSetSearchValue={setSearchValue} />
-      <OrderList orders={filteredOrders} orderStatus={orderStatus} />
+      {orders.length > 0 && (
+        <OrderList orders={filteredOrders} orderStatus={orderStatus} onRefresh={refreshHandler}/>
+      )}
     </div>
   );
 };
