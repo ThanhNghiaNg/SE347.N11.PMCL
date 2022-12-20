@@ -47,11 +47,23 @@ const AccountInfo = (props) => {
 
   const url = `${hostURL}/user/update`;
   useEffect(() => {
-    (async () => {
-      const respone = await fetch(url);
+    const getCustomerData = async () => {
+      const respone = await fetch(url, {
+        credentials: "include",
+      });
       const data = await respone.json();
+      setFullName(data.name ? data.name : "");
+      setDay(data.birthday ? new Date(data.birthday).getDate() : new Date().getDate());
+      setMonth(data.birthday ? new Date(data.birthday).getMonth() : new Date().getMonth());
+      setYear(data.birthday ? new Date(data.birthday).getFullYear() : new Date().getFullYear());
+      setGenderChecked(data.sex ? data.sex : "nam");
+      setNationality(data.country ? data.country : "Việt Nam");
+      setPhoneNumber(data.phone ? data.phone : "");
+      setEmail(data.email);
+      setAddress(data.address ? data.address : "");
       console.log(data);
-    })();
+    };
+    getCustomerData();
   }, [url]);
 
   const submitHandler = (e) => {
@@ -216,6 +228,7 @@ const AccountInfo = (props) => {
                       <input
                         onChange={(e) => setPhoneNumber(e.target.value)}
                         className={classes["input-field"]}
+                        value={phoneNumber}
                         name="phone-number"
                         type="tel"
                         placeholder="Thêm số điện thoại"
@@ -239,6 +252,7 @@ const AccountInfo = (props) => {
                       <input
                         onChange={(e) => setEmail(e.target.value)}
                         className={classes["input-field"]}
+                        value={email}
                         name="email"
                         type="email"
                         placeholder="Thêm email"
@@ -277,6 +291,7 @@ const AccountInfo = (props) => {
                       <input
                         onChange={(e) => setAddress(e.target.value)}
                         className={classes["input-field"]}
+                        value={address}
                         name="address"
                         type="text"
                         placeholder="Thêm địa chỉ"

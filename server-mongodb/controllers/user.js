@@ -5,14 +5,16 @@ const Book = require("../models/book");
 const bcrypt = require("bcryptjs");
 
 exports.getUpdate = (req, res, next) => {
-  User.find({ _id: req.session.user._id }).then((user) => {
+  User.findOne({ _id: req.session.user._id }).then((user) => {
+    console.log(user)
     return res.send({
-      address: user.address,
-      email: user.email,
-      phone: user.phone,
-      birthday: user.birthday,
-      sex: user.sex,
-      country: user.country,
+      address: user.address ? user.address : "",
+      email: user.email ? user.email : "",
+      name: user.name ? user.name : "",
+      phone: user.phone ? user.phone : "",
+      birthday: user.birthday ? user.birthday : "",
+      sex: user.sex ? user.sex : "",
+      country: user.country ? user.country : "",
     });
   });
 };
@@ -57,9 +59,6 @@ exports.postUpdate = (req, res, next) => {
 };
 
 exports.getReviewBook = (req, res, next) => {
-  // console.log(req.query.reviewed);
-  const isReviewed = req.query.reviewed ? true : false;
-  console.log(isReviewed);
   Order.find({
     user: req.session.user._id,
     "status.status": "Done",
@@ -69,7 +68,7 @@ exports.getReviewBook = (req, res, next) => {
       const booksReview = [];
       result.forEach((order) => {
         order.books.forEach((book) => {
-          if (book.reviewed === isReviewed) {
+          if (!book.reviewed) {
             booksReview.push({
               _id: book.bookId._id,
               title: book.bookId.title,
@@ -82,6 +81,12 @@ exports.getReviewBook = (req, res, next) => {
       return res.send(booksReview);
     });
 };
+
+exports.getReviewedBook =  (req, res, next) => {
+  Review.find({user: req.session.user._id}).populate('book').then(reviews=>{
+    return res.send(reviews)
+  })
+}
 
 exports.postReviewBook = (req, res, next) => {
   const rate = req.body.rate;
