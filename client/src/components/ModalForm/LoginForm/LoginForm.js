@@ -41,6 +41,7 @@ const LoginForm = (props) => {
       console.log(data);
       if (respone.status === 200) {
         props.onCloseModal();
+
         dispatch(authActions.login(data.token));
         if (rememberRef.current.checked) {
           dispatch(authActions.rememberUser());

@@ -132,7 +132,7 @@ const Header = (props) => {
 
               {isLoggedIn && (
                 <div className={classes["UserStyle__UserDropDown"]}>
-                  <NavLink to="/customer">
+                  <NavLink to="/customer/userInformation">
                     <p
                       className={classes["dropdown-item"]}
                       title="Tài khoản của tôi"
@@ -140,7 +140,7 @@ const Header = (props) => {
                       Tài khoản của tôi
                     </p>
                   </NavLink>
-                  <NavLink to="/customer">
+                  <NavLink to="/customer/passwordChange">
                     <p
                       className={classes["dropdown-item"]}
                       title="Đổi mật khẩu"
@@ -148,7 +148,7 @@ const Header = (props) => {
                       Đổi mật khẩu
                     </p>
                   </NavLink>
-                  <NavLink to="/customer">
+                  <NavLink to="/customer/orderManagement">
                     <p
                       className={classes["dropdown-item"]}
                       title="Đơn hàng của tôi"
@@ -156,7 +156,7 @@ const Header = (props) => {
                       Đơn hàng của tôi
                     </p>
                   </NavLink>
-                  <NavLink to="/customer">
+                  <NavLink to="/customer/productReviews">
                     <p
                       className={classes["dropdown-item"]}
                       title="Đánh giá sản phẩm"
