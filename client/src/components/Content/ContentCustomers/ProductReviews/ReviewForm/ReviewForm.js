@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 
-import SubmitButton from "../../AccountInfo/SubmitButton/SubmitButton";
+import SubmitButton from "../../SubmitButton/SubmitButton";
 import Backdrop from "../../../../UI/Backdrop";
 
 import classes from "./ReviewForm.module.css";
