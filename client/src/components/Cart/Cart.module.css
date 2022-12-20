@@ -20,9 +20,4 @@
   padding: 1em;
 }
 
-.user {
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-}
+
