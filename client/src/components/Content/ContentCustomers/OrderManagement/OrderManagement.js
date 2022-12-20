@@ -199,7 +199,11 @@ const OrderManagement = (props) => {
       />
       <OrderSearch onSetSearchValue={setSearchValue} />
       {orders.length > 0 && (
-        <OrderList orders={filteredOrders} orderStatus={orderStatus} onRefresh={refreshHandler}/>
+        <OrderList
+          orders={filteredOrders}
+          orderStatus={orderStatus}
+          onRefresh={refreshHandler}
+        />
       )}
     </div>
   );
