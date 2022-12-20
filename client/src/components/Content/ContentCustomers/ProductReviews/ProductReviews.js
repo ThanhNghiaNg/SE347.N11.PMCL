@@ -57,25 +57,27 @@ const ProductReviews = (props) => {
     getReviewBook();
 
     const getReviewedBook = async () => {
-      const respone = await fetch(`${hostURL}/user/review?reviewed=true`, {
+      const respone = await fetch(`${hostURL}/user/reviewed`, {
         credentials: "include",
       });
       const data = await respone.json();
+      console.log(data);
       const reviewed = data.map((book, i) => {
+        // console.log(book.book._id)
         return {
           id: i,
           status: "rated",
-          comment: "",
-          rate: null,
+          comment: book.content,
+          rate: book.rate,
           product: {
-            id: book._id,
-            title: book.title,
-            image: book.images[0].url,
+            id: book.book._id,
+            title: book.book.title,
+            image: book.book.images[0].url,
             orderId: book.orderId,
           },
         };
       });
-      console.log(reviewed);
+      // console.log(reviewed);
       setReviewed(reviewed);
     };
     getReviewedBook();

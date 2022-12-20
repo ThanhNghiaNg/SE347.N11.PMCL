@@ -9,6 +9,7 @@ route.post("/update", isAuth, userControllers.postUpdate);
 route.post("/change-password", isAuth, userControllers.postChangePassword);
 
 route.get('/review',isAuth, userControllers.getReviewBook)
+route.get('/reviewed',isAuth, userControllers.getReviewedBook)
 route.post('/review',isAuth, userControllers.postReviewBook)
 
 
