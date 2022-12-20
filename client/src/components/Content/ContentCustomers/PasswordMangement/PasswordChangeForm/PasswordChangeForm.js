@@ -32,7 +32,6 @@ const PasswordChangeForm = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
     props.onSavePasswords(passwords);
   };
 

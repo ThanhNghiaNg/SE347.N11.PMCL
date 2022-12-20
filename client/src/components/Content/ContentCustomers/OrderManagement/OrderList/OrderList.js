@@ -17,7 +17,12 @@ const OrderList = (props) => {
             }
           </OrderHeader>
           <OrderContent products={order.products} />
-          <OrderFooter status={order.status} amount={order.amount} />
+          <OrderFooter
+            status={order.status}
+            amount={order.amount}
+            orderId={order.id}
+            onRefresh={props.onRefresh}
+          />
         </div>
       ))}
     </div>
