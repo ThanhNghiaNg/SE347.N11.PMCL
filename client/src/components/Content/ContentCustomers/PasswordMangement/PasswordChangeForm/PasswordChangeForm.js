@@ -38,6 +38,7 @@ const PasswordChangeForm = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
+
     if (passwords.newPassword !== passwords.confirmPassword) {
       setShowErrorMessage(true);
       setPasswords({
@@ -49,6 +50,7 @@ const PasswordChangeForm = (props) => {
       setShowErrorMessage(false);
       props.onSavePasswords(passwords);
     }
+
   };
 
   return (

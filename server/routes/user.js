@@ -8,9 +8,11 @@ route.post("/update", isAuth, userControllers.postUpdate);
 
 route.post("/change-password", isAuth, userControllers.postChangePassword);
 
-route.get('/review',isAuth, userControllers.getReviewBook)
-route.get('/reviewed',isAuth, userControllers.getReviewedBook)
-route.post('/review',isAuth, userControllers.postReviewBook)
+route.get("/review", isAuth, userControllers.getReviewBook);
+route.get("/reviewed", isAuth, userControllers.getReviewedBook);
+route.post("/review", isAuth, userControllers.postReviewBook);
 
+route.get("/ordered", isAuth, userControllers.getOrdered);
+route.post("/cancel-order", isAuth, userControllers.deleteOrderById);
 
 module.exports = route;
