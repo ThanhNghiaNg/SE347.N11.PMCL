@@ -1,5 +1,9 @@
 const User = require("../models/user");
+const Review = require("../models/review");
+const Order = require("../models/order");
+const Book = require("../models/book");
 const bcrypt = require("bcryptjs");
+
 exports.getUpdate = (req, res, next) => {
   User.find({ _id: req.session.user._id }).then((user) => {
     return res.send({
@@ -30,7 +34,6 @@ exports.postChangePassword = (req, res, next) => {
 };
 
 exports.postUpdate = (req, res, next) => {
-  
   updatedAddress = req.body.address;
   updatedName = req.body.name;
   updatedEmail = req.body.email;
@@ -53,3 +56,70 @@ exports.postUpdate = (req, res, next) => {
   });
 };
 
+exports.getReviewBook = (req, res, next) => {
+  // console.log(req.query.reviewed);
+  const isReviewed = req.query.reviewed ? true : false;
+  console.log(isReviewed);
+  Order.find({
+    user: req.session.user._id,
+    "status.status": "Done",
+  })
+    .populate("books.bookId", "-description -short_description")
+    .then((result) => {
+      const booksReview = [];
+      result.forEach((order) => {
+        order.books.forEach((book) => {
+          if (book.reviewed === isReviewed) {
+            booksReview.push({
+              _id: book.bookId._id,
+              title: book.bookId.title,
+              images: book.bookId.images,
+              orderId: order._id,
+            });
+          }
+        });
+      });
+      return res.send(booksReview);
+    });
+};
+
+exports.postReviewBook = (req, res, next) => {
+  const rate = req.body.rate;
+  const content = req.body.content;
+  const bookId = req.body.bookId;
+  const orderId = req.body.orderId;
+
+  const review = new Review({
+    rate,
+    content,
+    book: bookId,
+    user: req.session.user._id,
+  });
+  console.log(bookId);
+  // Tạo và lưu review vào database
+  return review.save().then((result) => {
+    // Tìm order và sản phẩm tương ứng, đánh dấu đã review (true)
+    Order.findOne({ _id: orderId }).then((order) => {
+      const idxBookReviewed = order.books.findIndex(
+        (book) => book.bookId._id.toString() === bookId
+      );
+      console.log(idxBookReviewed);
+      console.log("id: ", order.books[idxBookReviewed]._id);
+      order.books[idxBookReviewed].reviewed = true;
+      return order.save().then(() => {
+        // Tìm sách vừa được đánh giá, cập nhật lại rate
+        return Review.find({ book: bookId }).then((result) => {
+          const avgRate =
+            result.reduce((acc, review) => acc + Number(review.rate), 0) /
+            result.length;
+          return Book.findOne({ _id: bookId }).then((book) => {
+            book.rate = Math.round(avgRate * 10) / 10;
+            return book.save().then(() => {
+              return res.send({ message: "Added Review." });
+            });
+          });
+        });
+      });
+    });
+  });
+};

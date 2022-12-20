@@ -9,6 +9,7 @@ const ReviewList = (props) => {
       <div className={classes["review-list__block"]}>
         {props.statusTab === "not-rated" ? (
           <WaitingItem
+            onRefresh={props.onRefresh}
             onClickShowReviewForm={props.onSetShowReviewForm}
             reviews={props.productReviews.filter(
               (review) => review.status === "not-rated"

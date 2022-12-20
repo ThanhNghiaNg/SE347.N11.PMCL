@@ -7,6 +7,12 @@ import classes from "./WaitingItem.module.css";
 const WaitingItem = (props) => {
   const [review, setReview] = useState({});
   const [showReviewForm, setShowReviewForm] = useState(false);
+  
+  const refreshHandler = ()=>{
+    console.log("waiting item")
+    props.onRefresh()
+    setReview({})
+  }
 
   return (
     <div className={classes["waiting-block"]}>
@@ -14,6 +20,7 @@ const WaitingItem = (props) => {
         <ReviewModalFormPortals
           review={review}
           onCloseModalForm={setShowReviewForm}
+          onRefresh={refreshHandler}
         />
       )}
       <div className={classes["scroll-component"]}>

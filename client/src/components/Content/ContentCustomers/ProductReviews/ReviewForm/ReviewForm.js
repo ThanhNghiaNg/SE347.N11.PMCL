@@ -1,15 +1,41 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
-
+import {useNavigate} from 'react-router-dom'
 import SubmitButton from "../../SubmitButton/SubmitButton";
 import Backdrop from "../../../../UI/Backdrop";
 
 import classes from "./ReviewForm.module.css";
+import { hostURL } from "../../../../../utils/global";
 
 const ReviewForm = (props) => {
+  const navigate = useNavigate()
   const [rate, setRate] = useState(0);
+  const contentRef = useRef();
+  console.log(props.review);
 
-  const submitHandler = () => {};
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const postReview = async () => {
+      console.log({ rate: rate, content: contentRef.current.value });
+      const respone = await fetch(`${hostURL}/user/review`, {
+        credentials: "include",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          bookId: props.review.product.id,
+          orderId: props.review.product.orderId,
+          rate: rate,
+          content: contentRef.current.value,
+        }),
+      });
+      const data = await respone.json();
+      // alert(data.message)
+      props.onSetShowReviewForm(false)
+      props.onRefresh()
+      console.log(data);
+    };
+    postReview();
+  };
 
   return (
     <Backdrop>
@@ -151,6 +177,7 @@ const ReviewForm = (props) => {
             <textarea
               className={classes["review-form__comment-field"]}
               placeholder="Hãy chia sẻ cảm nhận, đánh giá của bạn về sản phẩm này nhé."
+              ref={contentRef}
             ></textarea>
           </div>
           <div className={classes["review-form__actions"]}>
@@ -170,6 +197,7 @@ export const ReviewModalFormPortals = (props) => {
         <ReviewForm
           review={props.review}
           onSetShowReviewForm={props.onCloseModalForm}
+          onRefresh={props.onRefresh}
         />,
         modalPortals
       )}

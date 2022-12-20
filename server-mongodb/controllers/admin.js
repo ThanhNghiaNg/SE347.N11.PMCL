@@ -105,8 +105,19 @@ exports.getAllOrders = (req, res, next) => {
             .join(" ")
             .toLowerCase()
             .includes(query);
-
-          if (isQueryInOrderID || isQueryInUserID || isQueryInBookTitle) {
+          const isQueryInBookId = result.books
+            .map((book) => book.bookId._id.toString())
+            .join(" ")
+            .toLowerCase()
+            .includes(query);
+          const isQueryInUserEmail = result.user.email.includes(query);
+          if (
+            isQueryInOrderID ||
+            isQueryInUserID ||
+            isQueryInBookTitle ||
+            isQueryInUserEmail ||
+            isQueryInBookId
+          ) {
             filteredResult.push(result);
           }
         });
