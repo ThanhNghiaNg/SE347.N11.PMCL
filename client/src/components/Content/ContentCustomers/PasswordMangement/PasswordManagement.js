@@ -6,8 +6,9 @@ import classes from "./PasswordManagement.module.css";
 
 const PasswordManagement = (props) => {
   const savePasswords = (passwords) => {
-    (async () => {
-      const respone = await fetch(`${hostURL}/user/update`, {
+    console.log(passwords);
+    const postChangePassword = async () => {
+      const respone = await fetch(`${hostURL}/user/change-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -18,7 +19,8 @@ const PasswordManagement = (props) => {
       });
       const data = await respone.json();
       console.log(data);
-    })();
+    };
+    postChangePassword();
   };
 
   return (
