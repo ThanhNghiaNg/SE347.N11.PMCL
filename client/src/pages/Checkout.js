@@ -1,10 +1,15 @@
-import Confirm from "../components/Confirm/Confirm"
+import Confirm from "../components/Confirm/Confirm";
+import Container from "../components/UI/Container";
+import BodyWrap from "../components/UI/BodyWrap";
+const Checkout = (props) => {
+  return (
+    <BodyWrap>
+      <Container>
+        <h3>THANH TOÁN</h3>
+        <Confirm />
+      </Container>
+    </BodyWrap>
+  );
+};
 
-const Checkout = props=>{
-    return <div>
-        <p>Checkout Page</p>
-        <Confirm/>
-    </div>
-}
-
-export default Checkout
+export default Checkout;

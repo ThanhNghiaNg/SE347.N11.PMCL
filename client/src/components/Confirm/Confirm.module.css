@@ -1,0 +1,10 @@
+.content {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 1em;
+  align-items: center;
+}
+
+.content img {
+  width: 100%;
+}

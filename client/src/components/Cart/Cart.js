@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { addDotStyle, hostURL } from "../../utils/global";
-import { Link } from "react-router-dom";
 import Container from "../UI/Container";
 import BodyWrap from "../UI/BodyWrap";
 import Card from "../UI/Card";
 import CartItem from "./CartItem";
 
 import classes from "./Cart.module.css";
+import UserPayment from "./UserPayment";
 
 const Cart = (props) => {
   const [data, setData] = useState({});
@@ -36,6 +36,7 @@ const Cart = (props) => {
     </p>
   );
   let totalPriceCart = 0;
+  
   if (items.length > 0) {
     itemsListElement = items.map((item, i) => {
       return <CartItem item={item} key={i} onRefresh={refreshHandler} />;
@@ -62,19 +63,7 @@ const Cart = (props) => {
             </Card>
             <Card className={classes.items}>{itemsListElement}</Card>
           </div>
-          <Card className={classes.user}>
-            <div className="d-flex justify-content-between border-bottom">
-              <span>Tạm tính</span>
-              <span>{totalPriceCart}</span>
-            </div>
-            <div className="d-flex justify-content-between border-bottom fs-5">
-              <span>Tổng tiền</span>
-              <span className="text-danger fs-4">{totalPriceCart}</span>
-            </div>
-            <Link to="/checkout" className="btn btn-danger">
-              Đặt hàng
-            </Link>
-          </Card>
+          <UserPayment totalPriceCart={totalPriceCart}/>
         </div>
       </Container>
     </BodyWrap>
