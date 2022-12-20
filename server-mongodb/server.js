@@ -16,7 +16,9 @@ const store = new MongoDBStore({
 const adminRoute = require("./routes/admin");
 const shopRoute = require("./routes/shop");
 const authRoute = require("./routes/auth");
-// const userRoute = require('./routes/user')
+
+const userRoute = require('./routes/user')
+
 server.use(express.static("public"));
 // accept json and text
 server.use(express.json({ type: ["application/json", "text/plain"] }));

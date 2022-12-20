@@ -56,7 +56,7 @@ exports.postDeleteCartItem = (req, res, next) => {
     (book) => book.bookId.toString() !== bookId
   );
   console.log("-", bookId);
-  req.session.user.cart.items =  [...cartItemsUpdated ];
+  req.session.user.cart.items = [...cartItemsUpdated];
   console.log(cartItemsUpdated);
   return req.session.user.save().then((result) => {
     return res.send({ message: "Deleted product from cart!" });
@@ -72,9 +72,12 @@ exports.postOrder = (req, res, next) => {
         console.log(book.quantity);
         totalPrice += book.bookId.price * book.quantity;
       });
-      console.log(totalPrice);
+
+      const itemsOrder = req.session.user.cart.items.map((book) => {
+        return { ...book, reviewed: false };
+      });
       const order = new Order({
-        books: [...req.session.user.cart.items],
+        books: [...itemsOrder],
         status: { status: "Accepted", detail: "", date: new Date() },
         user: req.session.user._id,
         totalPrice: totalPrice,
