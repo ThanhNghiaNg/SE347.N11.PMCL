@@ -164,7 +164,7 @@ const Header = (props) => {
                       Đánh giá sản phẩm
                     </p>
                   </NavLink>
-                  <NavLink onClick={logoutHandler}>
+                  <NavLink to="/" onClick={logoutHandler}>
                     <p
                       className={classes["dropdown-item"]}
                       title="Thoát tài khoản"
