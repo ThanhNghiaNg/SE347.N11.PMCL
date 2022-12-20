@@ -53,11 +53,11 @@ const AccountInfo = (props) => {
       });
       const data = await respone.json();
       setFullName(data.name ? data.name : "");
-      setDay(data.birthday ? new Date(data.birthday).getDate() : new Date().getDate());
-      setMonth(data.birthday ? new Date(data.birthday).getMonth() : new Date().getMonth());
-      setYear(data.birthday ? new Date(data.birthday).getFullYear() : new Date().getFullYear());
+      setDay(data.birthday ? new Date(data.birthday).getDate() : 0);
+      setMonth(data.birthday ? new Date(data.birthday).getMonth() : 0);
+      setYear(data.birthday ? new Date(data.birthday).getFullYear() : 0);
       setGenderChecked(data.sex ? data.sex : "nam");
-      setNationality(data.country ? data.country : "Việt Nam");
+      setNationality(data.country ? data.country : "");
       setPhoneNumber(data.phone ? data.phone : "");
       setEmail(data.email);
       setAddress(data.address ? data.address : "");
@@ -113,6 +113,7 @@ const AccountInfo = (props) => {
                       type="text"
                       placeholder="Thêm họ tên"
                       maxLength="128"
+                      required
                     />
                   </div>
                 </div>
@@ -200,6 +201,7 @@ const AccountInfo = (props) => {
                       type="text"
                       placeholder="Thêm quốc tịch"
                       maxLength="128"
+                      required
                     />
                   </div>
                 </div>
@@ -233,6 +235,7 @@ const AccountInfo = (props) => {
                         type="tel"
                         placeholder="Thêm số điện thoại"
                         maxLength="10"
+                        required
                       />
                     </div>
                   </div>
@@ -257,6 +260,7 @@ const AccountInfo = (props) => {
                         type="email"
                         placeholder="Thêm email"
                         maxLength="128"
+                        required
                       />
                     </div>
                   </div>
@@ -296,6 +300,7 @@ const AccountInfo = (props) => {
                         type="text"
                         placeholder="Thêm địa chỉ"
                         maxLength="128"
+                        required
                       />
                     </div>
                   </div>

@@ -4,8 +4,9 @@ import { useRef, useState } from "react";
 import { productActions } from "../../store/products";
 import { errorsActions } from "../../store/errors";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import { ModalFormPortals } from "../ModalForm/ModalForm";
+import { authActions } from "../../store/auth";
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -31,13 +32,26 @@ const Header = (props) => {
     }
   };
 
+  const logoutHandler = () => {
+    fetch("http://localhost:5000/logout", {
+      method: "POST",
+      credentials: "include",
+    })
+      .then((respone) => {
+        console.log(respone);
+        return respone.json();
+      })
+      .then((data) => {
+        dispatch(authActions.logout());
+        console.log(data);
+      });
+  };
+
   const showModalFormHandler = (event) => {
     event.preventDefault();
     console.log(isLoggedIn);
     if (!isLoggedIn) {
       setIsShowModal(true);
-    } else {
-      navigate("/customer");
     }
   };
   const hideModalFormHandler = (event) => {
@@ -115,6 +129,51 @@ const Header = (props) => {
                   ></img>
                 </span>
               </span>
+
+              {isLoggedIn && (
+                <div className={classes["UserStyle__UserDropDown"]}>
+                  <NavLink to="/customer">
+                    <p
+                      className={classes["dropdown-item"]}
+                      title="Tài khoản của tôi"
+                    >
+                      Tài khoản của tôi
+                    </p>
+                  </NavLink>
+                  <NavLink to="/customer">
+                    <p
+                      className={classes["dropdown-item"]}
+                      title="Đổi mật khẩu"
+                    >
+                      Đổi mật khẩu
+                    </p>
+                  </NavLink>
+                  <NavLink to="/customer">
+                    <p
+                      className={classes["dropdown-item"]}
+                      title="Đơn hàng của tôi"
+                    >
+                      Đơn hàng của tôi
+                    </p>
+                  </NavLink>
+                  <NavLink to="/customer">
+                    <p
+                      className={classes["dropdown-item"]}
+                      title="Đánh giá sản phẩm"
+                    >
+                      Đánh giá sản phẩm
+                    </p>
+                  </NavLink>
+                  <NavLink onClick={logoutHandler}>
+                    <p
+                      className={classes["dropdown-item"]}
+                      title="Thoát tài khoản"
+                    >
+                      Thoát tài khoản
+                    </p>
+                  </NavLink>
+                </div>
+              )}
             </div>
             <div className={classes["UserStyle-CartItem"]}>
               <Link to="/cart">
