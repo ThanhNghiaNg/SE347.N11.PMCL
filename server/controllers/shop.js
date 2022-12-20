@@ -78,7 +78,7 @@ exports.postOrder = (req, res, next) => {
       });
       const order = new Order({
         books: [...itemsOrder],
-        status: { status: "Accepted", detail: "", date: new Date() },
+        status: { status: "paying", detail: "", date: new Date() },
         user: req.session.user._id,
         totalPrice: totalPrice,
       });

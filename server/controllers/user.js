@@ -23,7 +23,8 @@ exports.postChangePassword = (req, res, next) => {
   const { password, newPassowrd } = req.body;
   bcrypt.compare(password, req.session.user.password).then((doMatched) => {
     if (doMatched) {
-      return bcrypt.hash(newPassowrd).then((hashPassword) => {
+      console.log(doMatched)
+      return bcrypt.hash(newPassowrd, 12).then((hashPassword) => {
         req.session.user.password = hashPassword;
         return req.session.user.save().then((err) => {
           res.status(200).send({ message: "Changed Password!" });
