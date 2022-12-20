@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { hostURL } from "../../../../utils/global";
 
 import SubmitButton from "../SubmitButton/SubmitButton";
 
@@ -44,20 +45,36 @@ const AccountInfo = (props) => {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
 
+  const url = `${hostURL}/user/update`;
+  useEffect(() => {
+    (async () => {
+      const respone = await fetch(url);
+      const data = await respone.json();
+      console.log(data);
+    })();
+  }, [url]);
+
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const userInfo = {
-      fullName,
-      birthday: { day, month, year },
-      gender: genderChecked,
-      nationality,
-      phoneNumber,
-      email,
-      address,
-    };
-
-    console.log(userInfo);
+    (async () => {
+      const respone = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fullName,
+          birthday: new Date(year, month, day),
+          sex: genderChecked,
+          country: nationality,
+          phone: phoneNumber,
+          email,
+          address,
+        }),
+        credentials: "include",
+      });
+      const data = await respone.json();
+      console.log(data);
+    })();
   };
 
   return (

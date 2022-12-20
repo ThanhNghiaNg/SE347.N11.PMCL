@@ -17,7 +17,7 @@ const adminRoute = require("./routes/admin");
 const shopRoute = require("./routes/shop");
 const authRoute = require("./routes/auth");
 // const userRoute = require('./routes/user')
-server.use(express.static('public'));
+server.use(express.static("public"));
 // accept json and text
 server.use(express.json({ type: ["application/json", "text/plain"] }));
 // use cors to communicate with different client port
@@ -40,7 +40,7 @@ server.use(
 // Use routes
 server.use("/admin", adminRoute);
 server.use(authRoute);
-// server.use('/user', userRoute)
+server.use("/user", userRoute);
 server.use(shopRoute);
 
 mongoose.connect(URI).then((result) => {
