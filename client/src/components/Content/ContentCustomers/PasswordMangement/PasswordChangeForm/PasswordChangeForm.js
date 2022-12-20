@@ -28,11 +28,29 @@ const eyeSplashIcon =
   "https://frontend.tikicdn.com/_desktop-next/static/img/account/eye-splash.png";
 
 const PasswordChangeForm = (props) => {
-  const [passwords, setPasswords] = useState({});
+  const [passwords, setPasswords] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    props.onSavePasswords(passwords);
+
+
+    if (passwords.newPassword !== passwords.confirmPassword) {
+      setShowErrorMessage(true);
+      setPasswords({
+        oldPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+    } else {
+      setShowErrorMessage(false);
+      props.onSavePasswords(passwords);
+    }
+
   };
 
   return (
@@ -54,14 +72,22 @@ const PasswordChangeForm = (props) => {
               name={item.name}
               maxLength="32"
               placeholder={item.placeholder}
+              required
             />
           </div>
           {/* <img src={eyeIcon} className={classes["eye-icon"]} /> */}
           {item.name === "newPassword" ? (
-            <div className={classes["hint-message"]}>
+            <div className={classes["message"]}>
               Mật khẩu phải dài từ 8 đến 32 ký tự, bao gồm chữ và số
             </div>
           ) : null}
+          {item.name === "confirmPassword"
+            ? showErrorMessage && (
+                <div className={classes["message"]} style={{ color: "red" }}>
+                  Mật khẩu mới phải thống nhất giữa 2 lần nhập
+                </div>
+              )
+            : null}
         </div>
       ))}
       <SubmitButton />
