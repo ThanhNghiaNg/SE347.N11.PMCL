@@ -1,5 +1,6 @@
-import InputContainer from "../../../../UI/UserForm/InputContainer";
-import SubmitButton from "../../AccountInfo/SubmitButton/SubmitButton";
+import { useState } from "react";
+
+import SubmitButton from "../../SubmitButton/SubmitButton";
 
 import classes from "./PasswordChangeForm.module.css";
 
@@ -27,26 +28,38 @@ const eyeSplashIcon =
   "https://frontend.tikicdn.com/_desktop-next/static/img/account/eye-splash.png";
 
 const PasswordChangeForm = (props) => {
-  const submitHandler = () => {};
+  const [passwords, setPasswords] = useState({});
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    props.onSavePasswords(passwords);
+  };
 
   return (
     <form className={classes["form"]} onSubmit={submitHandler}>
       {inputFields.map((item, index) => (
         <div key={index} className={classes["form-control"]}>
           <label className={classes["input-label"]}>{item.label}</label>
-          <InputContainer>
+          <div className={classes["input-container"]}>
             <input
+              onChange={(e) =>
+                setPasswords((prev) => ({
+                  ...prev,
+                  [item.name]: e.target.value,
+                }))
+              }
+              value={passwords[item.name]}
               className={classes["input-field"]}
               type="password"
               name={item.name}
               maxLength="32"
               placeholder={item.placeholder}
             />
-            {/* <img src={eyeIcon} className={classes["eye-icon"]} /> */}
-          </InputContainer>
+          </div>
+          {/* <img src={eyeIcon} className={classes["eye-icon"]} /> */}
           {item.name === "newPassword" ? (
             <div className={classes["hint-message"]}>
-              {" "}
               Mật khẩu phải dài từ 8 đến 32 ký tự, bao gồm chữ và số
             </div>
           ) : null}
