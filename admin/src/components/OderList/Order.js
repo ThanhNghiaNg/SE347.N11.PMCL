@@ -62,7 +62,7 @@ const Order = (props) => {
   return (
     <div className={classes.order}>
       <h4>ID: #{order._id}</h4>
-      <div className={classes['items-header']}>
+      <div className={classes["items-header"]}>
         <p>Tên sản phẩm</p>
         <p>Đơn giá</p>
         <p>Số lượng</p>
@@ -84,7 +84,35 @@ const Order = (props) => {
             <p>Trạng thái:</p>
             {!edit && <p>{order.status.status}</p>}
             {edit && (
-              <input defaultValue={order.status.status} ref={statusRef}></input>
+              // <input defaultValue={order.status.status} ref={statusRef}></input>
+              <select name="status" id="status" ref={statusRef}>
+                <option
+                  value="paying"
+                  selected={order.status.status === "paying" ? "selected" : ""}
+                >
+                  paying
+                </option>
+                <option
+                  value="pending"
+                  selected={order.status.status === "pending" ? "selected" : ""}
+                >
+                  pending
+                </option>
+                <option
+                  value="shipping"
+                  selected={
+                    order.status.status === "shipping" ? "selected" : ""
+                  }
+                >
+                  shipping
+                </option>
+                <option
+                  value="shipped"
+                  selected={order.status.status === "shipped" ? "selected" : ""}
+                >
+                  shipped
+                </option>
+              </select>
             )}
           </div>
           <div className={`${classes["info-item"]} ${classes["input-status"]}`}>
