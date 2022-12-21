@@ -226,6 +226,15 @@ const OrderManagement = (props) => {
         title: "Đàn Ông Sao Hỏa Đàn Bà Sao Kim",
         amount: 1,
       },
+      {
+        id: "6399768fa229a95b88196c17",
+        image:
+          "https://salt.tikicdn.com/ts/product/5f/b2/f6/a4a78fa65bcdb701ac4b9e8f8e63ef46.jpg",
+        price: 149000,
+        publisher: "Aladanh",
+        title: "Sách ID Tiếng ANh cho người mới bắt đầu- Cô Trang Anh",
+        amount: 3,
+      },
     ],
   };
 
