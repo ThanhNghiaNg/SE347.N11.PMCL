@@ -1,9 +1,10 @@
 import OrderStatusTab from "./OrderStatusTab/OrderStatusTab";
 import OrderSearch from "./OrderSearch/OrderSearch";
 import OrderList from "./OrderList/OrderList";
+import OrderDetail from "./OrderDetail/OrderDetail";
 
 import classes from "./OrderManagement.module.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { hostURL } from "../../../../utils/global";
 
 const orderStatus = [
@@ -42,6 +43,12 @@ const orderStatus = [
 const OrderManagement = (props) => {
   const [orders, setOrders] = useState([]);
   const [toggleRefresh, setToggleRefresh] = useState(false);
+  const [isShowOrderDetail, setIsShowOrderDetail] = useState(false);
+  const [customerData, setcustomerData] = useState({
+    fullName: "",
+    phoneNumber: "",
+    address: "",
+  });
 
   const refreshHandler = () => {
     setToggleRefresh((prev) => !prev);
@@ -56,6 +63,7 @@ const OrderManagement = (props) => {
         return {
           id: order._id,
           status: order.status.status,
+          date: order.status.date,
           amount: order.totalPrice,
           products: [
             ...order.books.map((book) => {
@@ -76,6 +84,21 @@ const OrderManagement = (props) => {
     };
     getOrders();
   }, [toggleRefresh]);
+
+  useEffect(() => {
+    const getCustomerData = async () => {
+      const respone = await fetch(`${hostURL}/user/update`, {
+        credentials: "include",
+      });
+      const data = await respone.json();
+      setcustomerData({
+        fullName: data.name ? data.name : "",
+        phoneNumber: data.phone ? data.phone : "",
+        address: data.address ? data.address : "",
+      });
+    };
+    getCustomerData();
+  }, []);
 
   // const orders = [
   //   {
@@ -188,8 +211,31 @@ const OrderManagement = (props) => {
     );
   }
 
+  const orderDetail = {
+    id: "63a2dfdca6ddc143ffc68805",
+    status: "shipped",
+    date: "2022-12-21T10:28:44.561Z",
+    amount: 124000,
+    products: [
+      {
+        id: "6399766ca229a95b88196af8",
+        image:
+          "https://salt.tikicdn.com/media/catalog/producttmp/61/50/87/4beea7729fb70b30fd09a6acbae51103.jpg",
+        price: 124000,
+        publisher: "KNBooks",
+        title: "Đàn Ông Sao Hỏa Đàn Bà Sao Kim",
+        amount: 1,
+      },
+    ],
+  };
+
   return (
     <div className={classes["order-management"]}>
+      <OrderDetail
+        order={orderDetail}
+        customerData={customerData}
+        orderStatus={orderStatus}
+      />
       <div className={classes["order-management__heading"]}>
         Đơn hàng của tôi
       </div>
@@ -198,7 +244,7 @@ const OrderManagement = (props) => {
         orderStatus={orderStatus}
       />
       <OrderSearch onSetSearchValue={setSearchValue} />
-      {orders.length > 0 && (
+      {filteredOrders.length > 0 && (
         <OrderList
           orders={filteredOrders}
           orderStatus={orderStatus}
