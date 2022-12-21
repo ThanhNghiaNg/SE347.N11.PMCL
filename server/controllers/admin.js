@@ -11,40 +11,58 @@ exports.addBook = (req, res, next) => {
   const publisher = req.body.publisher;
   const short_description = req.body.short_description;
   const description = req.body.description;
-  const images = JSON.parse(req.body.images);
+  const images = req.body.images;
   const quantity_sold = req.body.quantity_sold;
   const amount = req.body.amount;
-
-  Author.findOne({ name: authors }).then((author) => {
-    const newBook = new Book({
-      title: title,
-      authors: [],
-      category: category,
-      publisher: publisher,
-      price: price,
-      images: images,
-      amount: amount,
-      quantity_sold: quantity_sold,
-      description: description,
-      short_description: short_description,
-      rate: 0,
-    });
-    if (!author) {
-      const newAuthor = new Author({ name: authors });
-      newAuthor.save().then((result) => {
-        newBook.authors = [{ authorId: newAuthor._id, name: newAuthor.name }];
-        return newBook.save().then(() => {
-          console.log("Add new Author");
-          res.send({ message: "Added Book!" });
-        });
-      });
-    } else {
-      newBook.authors = [{ authorId: author._id, name: author.name }];
-      return newBook.save().then(() => {
-        res.send({ message: "Added Book!" });
-      });
-    }
+  // console.log(authors);
+  const newBook = new Book({
+    title: title,
+    authors: authors,
+    category: category,
+    publisher: publisher,
+    price: price,
+    images: images,
+    amount: amount,
+    quantity_sold: quantity_sold,
+    description: description,
+    short_description: short_description,
+    rate: 0,
   });
+  return newBook.save().then(() => {
+    return res.send({ message: "Added Book!" });
+  });
+  console.log("OK");
+
+  // Author.findOne({ name: authors }).then((author) => {
+  //   const newBook = new Book({
+  //     title: title,
+  //     authors: [],
+  //     category: category,
+  //     publisher: publisher,
+  //     price: price,
+  //     images: images,
+  //     amount: amount,
+  //     quantity_sold: quantity_sold,
+  //     description: description,
+  //     short_description: short_description,
+  //     rate: 0,
+  //   });
+  //   if (!author) {
+  //     const newAuthor = new Author({ name: authors });
+  //     newAuthor.save().then((result) => {
+  //       newBook.authors = [{ authorId: newAuthor._id, name: newAuthor.name }];
+  //       return newBook.save().then(() => {
+  //         console.log("Add new Author");
+  //         res.send({ message: "Added Book!" });
+  //       });
+  //     });
+  //   } else {
+  //     newBook.authors = [{ authorId: author._id, name: author.name }];
+  //     return newBook.save().then(() => {
+  //       res.send({ message: "Added Book!" });
+  //     });
+  //   }
+  // });
 };
 
 exports.updateBook = (req, res, next) => {
@@ -56,7 +74,7 @@ exports.updateBook = (req, res, next) => {
   const publisher = req.body.publisher;
   const short_description = req.body.short_description;
   const description = req.body.description;
-  const images = JSON.parse(req.body.images);
+  const images = req.body.images;
   const quantity_sold = req.body.quantity_sold;
   const amount = req.body.amount;
 
@@ -149,5 +167,33 @@ exports.postDeleteOrder = (req, res, next) => {
   const id = req.body.id;
   Order.deleteOne({ _id: id }).then((result) => {
     res.send({ message: `Deleted Order Id: ${id}` });
+  });
+};
+
+exports.postAddAuthor = (req, res, next) => {
+  const authorName = req.body.name;
+  const authorPseudonym = req.body.pseudonym;
+
+  Author.find({ name: authorName }).then((result) => {
+    // No author, create new
+    if (!result[0]) {
+      const author = new Author({
+        name: authorName,
+        pseudonym: authorPseudonym,
+      });
+
+      return author.save().then(() => {
+        res.send(author);
+      });
+    }
+    // have author, return with pseudonym
+    else {
+      if (result.length > 1 && authorPseudonym) {
+        const author = result.filter((a) => a.pseudonym === authorPseudonym)[0];
+        return res.send(author);
+      } else {
+        return res.send(result[0]);
+      }
+    }
   });
 };

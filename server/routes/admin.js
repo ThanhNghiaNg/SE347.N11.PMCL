@@ -8,5 +8,6 @@ route.post("/delete-book", adminControllers.deleteBookById);
 route.get("/orders", adminControllers.getAllOrders);
 route.post("/update-order", adminControllers.postUpdateOrder);
 route.post("/delete-order", adminControllers.postDeleteOrder);
+route.post('/add-author',adminControllers.postAddAuthor);
 
 module.exports = route;
