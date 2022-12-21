@@ -114,7 +114,7 @@ const OrderDetail = (props) => {
             <td colSpan="3">
               <span>Phí vận chuyển</span>
             </td>
-            <td>0</td>
+            <td>{addDotStyle(String(0))}</td>
           </tr>
           <tr>
             <td colSpan="3">
@@ -131,7 +131,7 @@ const OrderDetail = (props) => {
                         (rawTotal, product) =>
                           rawTotal + product.amount * product.price,
                         0
-                      ) - props.order.fee
+                      ) + props.order.fee
                     : props.order.products.reduce(
                         (rawTotal, product) =>
                           rawTotal + product.amount * product.price,
