@@ -1,8 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { hostURL } from "../../utils/global";
 import classes from "./Order.module.css";
+import modalContext from "../../store/modalContext";
 
 const Order = (props) => {
+  const modalCtx = useContext(modalContext);
   const [edit, setEdit] = useState(false);
   const statusRef = useRef();
   const detailRef = useRef();
@@ -56,7 +58,7 @@ const Order = (props) => {
       console.log(data);
       props.onRefresh((prev) => !prev);
     };
-    postDeleteOrder();
+    modalCtx.showConfirm("Bạn có chắc muốn xoá đơn hàng này?", postDeleteOrder);
   };
 
   return (

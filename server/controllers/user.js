@@ -23,7 +23,7 @@ exports.postChangePassword = (req, res, next) => {
   const { password, newPassowrd } = req.body;
   bcrypt.compare(password, req.session.user.password).then((doMatched) => {
     if (doMatched) {
-      console.log(doMatched)
+      console.log(doMatched);
       return bcrypt.hash(newPassowrd, 12).then((hashPassword) => {
         req.session.user.password = hashPassword;
         return req.session.user.save().then((err) => {
@@ -138,6 +138,17 @@ exports.getOrdered = (req, res, next) => {
     .populate("books.bookId")
     .then((orders) => {
       return res.send(orders);
+    });
+};
+
+// Get all order that user ordered and user information
+exports.getOrderByID = (req, res, next) => {
+  const orderId = req.params.id
+  Order.findOne({ _id: orderId})
+    .populate("books.bookId")
+    .populate("user","-password")
+    .then((order) => {
+      return res.send(order);
     });
 };
 

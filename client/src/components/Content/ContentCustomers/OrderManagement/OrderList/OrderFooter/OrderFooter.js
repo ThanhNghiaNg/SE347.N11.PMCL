@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router";
 import { addDotStyle, hostURL } from "../../../../../../utils/global";
 
 import classes from "./OrderFooter.module.css";
 
 const OrderFooter = (props) => {
+  const navigate = useNavigate()
   const submitHandler = () => {
     if (props.order.status === "shipped") {
     } else {
@@ -21,6 +23,11 @@ const OrderFooter = (props) => {
     }
   };
 
+  const navigateOrderDetailHandler = ()=>{
+    console.log(props.order)
+    navigate(`/order/${props.order.id}`)
+  }
+
   return (
     <div className={classes["order-item__footer"]}>
       <div className={classes["total-price"]}>
@@ -35,7 +42,7 @@ const OrderFooter = (props) => {
             {props.order.status === "shipped" ? "Mua lại" : "Hủy đơn hàng"}
           </div>
         </div>
-        <div className={classes["actions-button"]}>
+        <div className={classes["actions-button"]} onClick={navigateOrderDetailHandler}>
           <div>Xem chi tiết</div>
         </div>
       </div>

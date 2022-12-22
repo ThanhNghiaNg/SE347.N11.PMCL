@@ -21,6 +21,7 @@
 .rate {
   display: flex;
   align-items: center;
+  height: 20px;
 }
 .rate i {
   font-size:12px;
@@ -30,4 +31,9 @@
 .price{
   color:orangered;
   font-weight: bold;
+}
+
+.action-control{
+  display: flex;
+  justify-content: center;
 }

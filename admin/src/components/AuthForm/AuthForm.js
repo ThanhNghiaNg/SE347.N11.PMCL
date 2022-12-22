@@ -3,30 +3,40 @@ import { hostURL } from "../../utils/global";
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import authContext from "../../store/authContext";
+import modalContext from "../../store/modalContext";
 
 const AuthForm = (props) => {
   const authCtx = useContext(authContext);
+  const modalCtx = useContext(modalContext);
+
   const navigate = useNavigate();
   const isLogin = props.isLogin;
   const usernameRef = useRef();
   const secretKeyRef = useRef();
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState("");
   const enteredPasswordHandler = (event) => {
     setPassword(event.target.value);
   };
 
   const authHandler = (event) => {
     event.preventDefault();
+    console.log(secretKeyRef);
+    const username = usernameRef.current.value;
+    const secretKey = secretKeyRef.current ? secretKeyRef.current.value : false;
+
+    if (!username || !password || (!isLogin && !secretKey)) {
+      return modalCtx.showError("Bạn phải nhập đầy đủ các trường!");
+    }
     const postAdminAuth = async () => {
       const sendObj = isLogin
         ? {
-            username: usernameRef.current.value,
+            username: username,
             password: password,
           }
         : {
-            username: usernameRef.current.value,
+            username: username,
             password: password,
-            secretKey: secretKeyRef.current.value,
+            secretKey: secretKey,
           };
       const respone = await fetch(
         `${hostURL}/${isLogin ? "admin-login" : "admin-register"}`,
@@ -43,10 +53,11 @@ const AuthForm = (props) => {
           authCtx.login(data.token);
           navigate("/");
         } else {
+          modalCtx.showInform("Đăng ký thành công!");
           navigate("/login");
         }
       } else {
-        alert(data.message);
+        modalCtx.showError(data.message);
       }
       console.log(data);
     };
@@ -66,7 +77,7 @@ const AuthForm = (props) => {
         <input type="text" placeholder="Secret Key" ref={secretKeyRef}></input>
       )}
       <button className={`btn bg-success text-white`} onClick={authHandler}>
-        {isLogin ? "Login" : "Register"}
+        {isLogin ? "Đăng nhập" : "Đăng ký"}
       </button>
     </form>
   );

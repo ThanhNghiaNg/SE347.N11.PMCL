@@ -11,6 +11,7 @@ import Cart from "./components/Cart/Cart";
 import Checkout from "./pages/Checkout";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./store/auth";
+import Order from "./pages/Order";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const App = () => {
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/customer/:id" element={<Customer />} />
+              <Route path="/order/:id/" element={<Order/>}/>
             </>
           )}
           <Route path="/*" element={<p>Page not found</p>} />
