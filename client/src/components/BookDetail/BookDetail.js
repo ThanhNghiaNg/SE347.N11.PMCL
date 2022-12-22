@@ -8,9 +8,12 @@ import ImageList from "./ImageList";
 import RelatedBook from "./RelatedBooks";
 import classes from "./BookDetail.module.css";
 import Card from "../UI/Card";
+import { useDispatch } from "react-redux";
+import { productActions } from "../../store/products";
 
 const BookDetail = (props) => {
   window.scroll(0, 0);
+  const dispatch = useDispatch();
   const id = props.id;
   const [toggleDescription, setToggleDescription] = useState(false);
   const [book, setBook] = useState({});
@@ -40,7 +43,11 @@ const BookDetail = (props) => {
         }),
       });
       const data = await respone.json();
-      console.log(data);
+      dispatch(
+        productActions.setQuantityProductCart(
+          data.cart.items.reduce(((acc, item) => item.quantity + acc))
+        )
+      );
     };
     postAddBook();
   };
@@ -58,7 +65,7 @@ const BookDetail = (props) => {
   return (
     <Container>
       <Card className={classes.wrap}>
-        {book.images && <ImageList images={book.images} id={book._id}/>}
+        {book.images && <ImageList images={book.images} id={book._id} />}
         <div className={classes.content}>
           <div>
             <p>Tác giả: {authors}</p>

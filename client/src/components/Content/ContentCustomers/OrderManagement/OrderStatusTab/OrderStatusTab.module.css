@@ -6,7 +6,7 @@
   flex-direction: row;
   overflow: hidden;
   position: sticky;
-  top: 0px;
+  top: 0;
   z-index: 10;
 }
 

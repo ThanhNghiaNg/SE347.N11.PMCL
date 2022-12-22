@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { hostURL } from "../../../../utils/global";
-
+import {useDispatch} from "react-redux"
+import {popupActions} from "../../../../store/popup"
 import SubmitButton from "../SubmitButton/SubmitButton";
 
 import classes from "./AccountInfo.module.css";
@@ -35,6 +36,7 @@ const genderOptions = [
 ];
 
 const AccountInfo = (props) => {
+  const dispatch = useDispatch()
   const [fullName, setFullName] = useState("");
   const [day, setDay] = useState();
   const [month, setMonth] = useState();
@@ -84,8 +86,7 @@ const AccountInfo = (props) => {
         }),
         credentials: "include",
       });
-      const data = await respone.json();
-      console.log(data);
+      dispatch(popupActions.showInform("Đã cập nhật thông tin."))
     })();
   };
 

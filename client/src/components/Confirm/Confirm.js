@@ -5,9 +5,12 @@ import UserPayment from "../Cart/UserPayment";
 import wrapClasses from "../Cart/Cart.module.css";
 import classes from "./Confirm.module.css";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { popupActions } from "../../store/popup";
 
 const Confirm = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [data, setData] = useState({});
   const [items, setItems] = useState([]);
 
@@ -33,7 +36,7 @@ const Confirm = (props) => {
         method: "POST",
       });
       const data = await respone.json();
-      console.log(data);
+      dispatch(popupActions.showInform("Đặt hàng thành công!"));
       navigate("/");
     };
     postOrder();

@@ -24,14 +24,14 @@ exports.postRegister = (req, res, next) => {
           cart: { items: [] },
         });
         return newUser.save().then((err) => {
-          return res.status(200).send({ message: "Register Successfully!" });
+          return res.status(200).send({ message: "Đăng ký thành công!" });
         });
       });
     }
     // Nếu đã có xuất ra thông báo lỗi
     return res
       .status(401)
-      .send({ message: "Register Fail! Email Already Exists!" });
+      .send({ message: "Email đăng ký đã tồn tại!" });
   });
 };
 
@@ -41,7 +41,7 @@ exports.postLogin = (req, res, next) => {
     if (!user) {
       return res
         .status(401)
-        .send({ message: "Login fail! User is not registered!" });
+        .send({ message: "Email chưa được đăng ký!" });
     } else {
       return bcrypt.compare(password, user.password).then((doMatched) => {
         if (doMatched) {
@@ -52,10 +52,10 @@ exports.postLogin = (req, res, next) => {
             console.log(err);
             return res
               .status(200)
-              .send({ message: "Login successfully!", token: user._id });
+              .send({ message: "Đăng nhập thành công!", token: user._id });
           });
         } else {
-          return res.status(401).send({ message: "Password is incorrect!" });
+          return res.status(401).send({ message: "Mật khẩu không đúng!" });
         }
       });
     }

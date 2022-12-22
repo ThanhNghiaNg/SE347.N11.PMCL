@@ -1,19 +1,51 @@
 import classes from "./Header.module.css";
 import Container from "../UI/Container";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { productActions } from "../../store/products";
 import { errorsActions } from "../../store/errors";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ModalFormPortals } from "../ModalForm/ModalForm";
 import { authActions } from "../../store/auth";
+import { hostURL } from "../../utils/global";
 
 const Header = (props) => {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products.allProducts);
+  const numberProductCart = useSelector(
+    (state) => state.products.numberProductCart
+  );
+  const quantityProductCart = useSelector(
+    (state) => state.products.quantityProductCart
+  );
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isShowModal, setIsShowModal] = useState(false);
+  const [toggleBump, setToggleBump] = useState(false);
   const searchInput = useRef();
+
+  useEffect(() => {
+    console.log(quantityProductCart)
+    const getCart = async () => {
+      const respone = await fetch(`${hostURL}/cart`, {
+        credentials: "include",
+      });
+      const data = await respone.json();
+      dispatch(productActions.setNumberProductCart(data.cart.items.length));
+      dispatch(
+        productActions.setQuantityProductCart(
+          data.cart.items.reduce((acc, item) => {return item.quantity + acc},0)
+        )
+      );
+      console.log(data);
+    };
+    getCart();
+
+    setToggleBump(true);
+
+    setTimeout(() => {
+      setToggleBump(false);
+    }, 300);
+  }, [quantityProductCart]);
 
   const searchHandler = (event) => {
     event.preventDefault();
@@ -53,6 +85,7 @@ const Header = (props) => {
       setIsShowModal(true);
     }
   };
+
   const hideModalFormHandler = (event) => {
     try {
       event.preventDefault();
@@ -176,7 +209,11 @@ const Header = (props) => {
             </div>
             <div className={classes["UserStyle-CartItem"]}>
               <Link to="/cart">
-                <div className={classes["UserStyle-CartItemInner"]}>
+                <div
+                  className={`${classes["UserStyle-CartItemInner"]} ${
+                    toggleBump ? classes.bump : ""
+                  }`}
+                >
                   <div className={classes["cart-wrapper"]}>
                     <img
                       src="https://salt.tikicdn.com/ts/upload/40/44/6c/b80ad73e5e84aeb71c08e5d8d438eaa1.png"
@@ -186,7 +223,7 @@ const Header = (props) => {
                       className={classes["cart-icon"]}
                     ></img>
                     <span className={classes["UserStyle-CartItemCount"]}>
-                      0
+                      {numberProductCart}
                     </span>
                   </div>
                   <span className={classes["cart-text"]}>Giỏ Hàng</span>

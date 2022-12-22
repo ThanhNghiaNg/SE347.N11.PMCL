@@ -1,8 +1,11 @@
 import classes from "./CartItem.module.css";
 import QuantityInput from "../BookDetail/QuantityInput";
 import { addDotStyle, hostURL } from "../../utils/global";
+import { useDispatch } from "react-redux";
+import { productActions } from "../../store/products";
+import { popupActions } from "../../store/popup";
 const CartItem = (props) => {
-  // console.log(props.item);
+  const dispatch = useDispatch();
   const item = props.item;
   const bookPrice = addDotStyle(String(item.bookId.price));
   const bookTotalPrice = addDotStyle(String(item.bookId.price * item.quantity));
@@ -35,9 +38,15 @@ const CartItem = (props) => {
       });
       const data = await respone.json();
       console.log(data);
+      dispatch(productActions.descreaseNumberProductCart());
       props.onRefresh();
     };
-    postDeleteBook();
+    dispatch(
+      popupActions.showConfirm({
+        message: "Bạn có muốn xoá sản phẩm đang chọn?",
+        action: postDeleteBook,
+      })
+    );
   };
 
   return (

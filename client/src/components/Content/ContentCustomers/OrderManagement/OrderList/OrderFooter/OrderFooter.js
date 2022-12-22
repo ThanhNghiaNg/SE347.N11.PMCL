@@ -1,10 +1,13 @@
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { popupActions } from "../../../../../../store/popup";
 import { addDotStyle, hostURL } from "../../../../../../utils/global";
 
 import classes from "./OrderFooter.module.css";
 
 const OrderFooter = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const submitHandler = () => {
     if (props.order.status === "shipped") {
     } else {
@@ -19,14 +22,19 @@ const OrderFooter = (props) => {
         console.log(data);
         props.onRefresh();
       };
-      postDeteleOrder();
+      dispatch(
+        popupActions.showConfirm({
+          message: "Bạn có muốn huỷ đơn hàng này không?",
+          action: postDeteleOrder,
+        })
+      );
     }
   };
 
-  const navigateOrderDetailHandler = ()=>{
-    console.log(props.order)
-    navigate(`/order/${props.order.id}`)
-  }
+  const navigateOrderDetailHandler = () => {
+    console.log(props.order);
+    navigate(`/order/${props.order.id}`);
+  };
 
   return (
     <div className={classes["order-item__footer"]}>
@@ -42,7 +50,10 @@ const OrderFooter = (props) => {
             {props.order.status === "shipped" ? "Mua lại" : "Hủy đơn hàng"}
           </div>
         </div>
-        <div className={classes["actions-button"]} onClick={navigateOrderDetailHandler}>
+        <div
+          className={classes["actions-button"]}
+          onClick={navigateOrderDetailHandler}
+        >
           <div>Xem chi tiết</div>
         </div>
       </div>

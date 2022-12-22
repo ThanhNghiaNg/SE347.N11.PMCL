@@ -9,18 +9,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Detail from "./pages/Detail";
 import Cart from "./components/Cart/Cart";
 import Checkout from "./pages/Checkout";
+
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./store/auth";
+import { CLOSE } from "./store/popup";
 import Order from "./pages/Order";
+import Popup from "./components/Popup/Popup";
 
 const App = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const statusPopup = useSelector((state) => state.popup.status);
   window.addEventListener("load", () => {
     dispatch(authActions.clearSession());
   });
   return (
     <BrowserRouter>
+      {statusPopup !== CLOSE && <Popup />}
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -30,7 +35,7 @@ const App = () => {
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/customer/:id" element={<Customer />} />
-              <Route path="/order/:id/" element={<Order/>}/>
+              <Route path="/order/:id/" element={<Order />} />
             </>
           )}
           <Route path="/*" element={<p>Page not found</p>} />

@@ -1,6 +1,6 @@
 .wrap {
   display: block;
-  min-height: 80vh;
+  min-height: 90vh;
   height: auto;
   overflow-y: auto;
   background-color: var(--main-background);
