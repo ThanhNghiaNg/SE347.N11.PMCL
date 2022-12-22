@@ -24,7 +24,10 @@ exports.postAddToCart = (req, res, next) => {
   console.log(bookId, quantity);
   // .then?ok? oked.
   req.session.user.addToCart(bookId, quantity).then(() => {
-    return res.send({ message: "Added Book To Cart" });
+    return res.send({
+      message: "Added Book To Cart",
+      cart: req.session.user.cart,
+    });
   });
 };
 
@@ -55,11 +58,12 @@ exports.postDeleteCartItem = (req, res, next) => {
   const cartItemsUpdated = req.session.user.cart.items.filter(
     (book) => book.bookId.toString() !== bookId
   );
-  console.log("-", bookId);
   req.session.user.cart.items = [...cartItemsUpdated];
-  console.log(cartItemsUpdated);
   return req.session.user.save().then((result) => {
-    return res.send({ message: "Deleted product from cart!" });
+    return res.send({
+      message: "Deleted product from cart!",
+      cart: req.session.user.cart,
+    });
   });
 };
 

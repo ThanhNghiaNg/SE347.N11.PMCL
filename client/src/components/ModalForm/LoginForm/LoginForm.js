@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { hostURL } from "../../../utils/global";
 import classes from "./LoginForm.module.css";
 import { authActions } from "../../../store/auth";
@@ -10,6 +10,7 @@ const LoginForm = (props) => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const rememberRef = useRef();
+  const [errorMessage, setErrorMessage] = useState();
 
   const logoutHandler = () => {
     fetch("http://localhost:5000/logout", {
@@ -46,10 +47,13 @@ const LoginForm = (props) => {
         if (rememberRef.current.checked) {
           dispatch(authActions.rememberUser());
         }
+      } else {
+        setErrorMessage(data.message);
       }
     };
     postLogin();
   };
+
   return (
     <div>
       <div className={classes["login-form__heading"]}>
@@ -73,6 +77,7 @@ const LoginForm = (props) => {
             ref={passwordRef}
           />
         </div>
+        <p className="py-1 text-danger">{errorMessage}</p>
         <div>
           <input type="checkbox" ref={rememberRef}></input>
           <label>Nhớ mật khẩu</label>

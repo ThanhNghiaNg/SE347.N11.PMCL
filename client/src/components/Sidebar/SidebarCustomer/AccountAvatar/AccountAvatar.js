@@ -1,6 +1,19 @@
+import { useEffect, useState } from "react";
+import { hostURL } from "../../../../utils/global";
 import classes from "./AccountAvatar.module.css";
 
 const AccountAvatar = (props) => {
+  const [name, setName] = useState("");
+  useEffect(() => {
+    const getUser = async () => {
+      const respone = await fetch(`${hostURL}/user/update`, {
+        credentials: "include",
+      });
+      const data = await respone.json();
+      setName(data.name)
+    };
+    getUser();
+  }, []);
   return (
     <div className={classes["account"]}>
       <img
@@ -9,7 +22,7 @@ const AccountAvatar = (props) => {
         alt="avatar"
       />
       <div className={classes["account__info"]}>
-        Tài khoản của <strong>Nhân Phan</strong>
+        Tài khoản của <strong>{name}</strong>
       </div>
     </div>
   );

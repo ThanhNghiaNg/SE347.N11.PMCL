@@ -3,6 +3,7 @@ import classes from "./ContentBooks.module.css";
 import BookItem from "./BookItem";
 
 const ContentBooks = (props) => {
+  window.scroll(0, 0)
   const currentProducts = useSelector(
     (state) => state.products.currentProducts
   );
