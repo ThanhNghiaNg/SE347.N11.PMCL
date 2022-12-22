@@ -45,7 +45,6 @@ const Cart = (props) => {
       (acc, item) => acc + item.bookId.price * item.quantity,
       0
     );
-    console.log(totalPriceCart);
     totalPriceCart = addDotStyle(String(totalPriceCart));
   }
 
@@ -63,7 +62,7 @@ const Cart = (props) => {
             </Card>
             <Card className={classes.items}>{itemsListElement}</Card>
           </div>
-          <UserPayment totalPriceCart={totalPriceCart}/>
+          <UserPayment totalPriceCart={totalPriceCart} user={data}/>
         </div>
       </Container>
     </BodyWrap>
