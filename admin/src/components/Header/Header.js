@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import Container from "../UI/Container";
 import classes from "./Header.module.css";
 import authContext from "../../store/authContext";
+import modalContext from '../../store/modalContext'
 import { useContext } from "react";
 import { hostURL } from "../../utils/global";
 
 const Header = (props) => {
   const authCtx = useContext(authContext);
+  const modalCtx = useContext(modalContext)
 
   const logoutHandler = (event) => {
     event.preventDefault();
@@ -19,7 +21,7 @@ const Header = (props) => {
         authCtx.logout()
       }
     }
-    postLogout()
+    modalCtx.showConfirm(`Bấm "Xác nhận" để đăng xuất`, postLogout)
   };
 
   return (

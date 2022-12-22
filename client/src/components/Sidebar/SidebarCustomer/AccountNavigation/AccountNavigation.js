@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { navigationActions } from "../../../../store/UserNavigationBar";
 
 import classes from "./AccountNavigation.module.css";
@@ -31,11 +32,11 @@ const navItems = [
 ];
 
 const AccountNavigation = (props) => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
   const currentState = useSelector((state) => state.navigation.selectedNav);
 
   const clickHandler = (navID) => {
-    dispatch(navigationActions.setSelectedNav(navID));
+    navigate(`/customer/${navID}`)
   };
 
   return (

@@ -10,7 +10,6 @@ import { authActions } from "../../store/auth";
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const allProducts = useSelector((state) => state.products.allProducts);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isShowModal, setIsShowModal] = useState(false);

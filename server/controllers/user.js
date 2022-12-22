@@ -141,6 +141,17 @@ exports.getOrdered = (req, res, next) => {
     });
 };
 
+// Get all order that user ordered and user information
+exports.getOrderByID = (req, res, next) => {
+  const orderId = req.params.id
+  Order.findOne({ _id: orderId})
+    .populate("books.bookId")
+    .populate("user","-password")
+    .then((order) => {
+      return res.send(order);
+    });
+};
+
 exports.deleteOrderById = (req, res, next) => {
   const orderId = req.body.orderId;
   Order.deleteOne({ _id: orderId }).then(() => {

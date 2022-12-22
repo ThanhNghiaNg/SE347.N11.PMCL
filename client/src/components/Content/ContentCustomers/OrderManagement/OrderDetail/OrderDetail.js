@@ -1,42 +1,43 @@
 import { NavLink } from "react-router-dom";
 
-import { addDotStyle } from "../../../../../utils/global";
+import { addDotStyle, orderStatus } from "../../../../../utils/global";
 
 import classes from "./OrderDetail.module.css";
 
 const OrderDetail = (props) => {
+  const order = props.order;
   return (
     <div className={classes["order-detail"]}>
       <div className={classes["order-detail__heading"]}>
-        <span>Chi tiết đơn hàng #{props.order.id}</span>
+        <span>Chi tiết đơn hàng #{order._id}</span>
         <span className={classes["split"]}>-</span>
         <span className={classes["status"]}>
           {
-            props.orderStatus.filter(
-              (statusItem) => statusItem.code === props.order.status
+            orderStatus.filter(
+              (statusItem) => statusItem.code === order.status.status
             )[0].status
           }
         </span>
       </div>
       <div className={classes["order-detail__created-date"]}>
-        {`Ngày đặt hàng: ${new Date(props.order.date).getHours()}:${new Date(
-          props.order.date
-        ).getMinutes()} ${new Date(props.order.date).getDate()}/${new Date(
-          props.order.date
-        ).getMonth()}/${new Date(props.order.date).getFullYear()}`}
+        {`Ngày đặt hàng: ${new Date(order.status.date).getHours()}:${new Date(
+          order.status.date
+        ).getMinutes()} ${new Date(order.status.date).getDate()}/${new Date(
+          order.status.date
+        ).getMonth()}/${new Date(order.status.date).getFullYear()}`}
       </div>
       <div className={classes["order-detail__information"]}>
         <div className={classes["information-item"]}>
           <div className={classes["title"]}>ĐỊA CHỈ NGƯỜI NHẬN</div>
           <div className={classes["content"]}>
-            <p className={classes["name"]}>{props.customerData.fullName}</p>
+            <p className={classes["name"]}>{order.user.name}</p>
             <p className={classes["address"]}>
               <span>Địa chỉ: </span>
-              {props.customerData.address}
+              {order.user.address}
             </p>
             <p className={classes["phone"]}>
               <span>Điện thoại: </span>
-              {props.customerData.phoneNumber}
+              {order.user.phone}
             </p>
           </div>
         </div>
@@ -65,33 +66,36 @@ const OrderDetail = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.order.products.map((product) => (
-            <tr>
-              <td>
-                <div className={classes["product-item"]}>
-                  <img src={product.image} />
-                  <div className={classes["product-info"]}>
-                    <NavLink
-                      className={classes["product-name"]}
-                      to={`/detail/${product.id}`}
-                    >
-                      {product.title}
-                    </NavLink>
-                    <div className={classes["product-publisher"]}>
-                      Sản xuất bởi {product.publisher}
+          {order.books.map((book) => {
+            const product = book.bookId;
+            return (
+              <tr>
+                <td>
+                  <div className={classes["product-item"]}>
+                    <img src={product.images[0].url} />
+                    <div className={classes["product-info"]}>
+                      <NavLink
+                        className={classes["product-name"]}
+                        to={`/detail/${product.id}`}
+                      >
+                        {product.title}
+                      </NavLink>
+                      <div className={classes["product-publisher"]}>
+                        Sản xuất bởi {product.publisher}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-              <td className={classes["price"]}>
-                {addDotStyle(String(product.price))}
-              </td>
-              <td className={classes["quantity"]}>{product.amount}</td>
-              <td className={classes["raw-total"]}>
-                {addDotStyle(String(product.price * product.amount))}
-              </td>
-            </tr>
-          ))}
+                </td>
+                <td className={classes["price"]}>
+                  {addDotStyle(String(product.price))}
+                </td>
+                <td className={classes["quantity"]}>{book.quantity}</td>
+                <td className={classes["raw-total"]}>
+                  {addDotStyle(String(product.price * book.quantity))}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
         <tfoot>
           <tr>
@@ -101,11 +105,7 @@ const OrderDetail = (props) => {
             <td>
               {addDotStyle(
                 String(
-                  props.order.products.reduce(
-                    (rawTotal, product) =>
-                      rawTotal + product.amount * product.price,
-                    0
-                  )
+                  order.totalPrice
                 )
               )}
             </td>
@@ -126,17 +126,7 @@ const OrderDetail = (props) => {
             >
               {addDotStyle(
                 String(
-                  props.order.fee
-                    ? props.order.products.reduce(
-                        (rawTotal, product) =>
-                          rawTotal + product.amount * product.price,
-                        0
-                      ) + props.order.fee
-                    : props.order.products.reduce(
-                        (rawTotal, product) =>
-                          rawTotal + product.amount * product.price,
-                        0
-                      )
+                  order.fee ? order.fee + order.totalPrice : order.totalPrice
                 )
               )}
             </td>
