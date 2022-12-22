@@ -1,0 +1,222 @@
+.order-detail {
+  font-size: 13px;
+  color: rgb(36, 36, 36);
+  line-height: 1.5;
+}
+
+.order-detail__heading {
+  font-size: 20px;
+  font-weight: 300;
+  margin: 20px 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.order-detail__heading .split {
+  margin: 0 5px;
+}
+
+.order-detail__heading .status {
+  font-weight: bold;
+}
+
+.order-detail__created-date {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.order-detail__information {
+  display: flex;
+  margin: 10px 0 20px;
+}
+
+.order-detail__information .information-item {
+  display: flex;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 0.65);
+  width: calc(100% / 3);
+  margin: 0 5px;
+}
+.order-detail__information .information-item:first-child {
+  margin-left: 0;
+}
+
+.order-detail__information .information-item:last-child {
+  margin-right: 0;
+}
+
+.information-item .title {
+  font-size: 13px;
+  text-transform: uppercase;
+  margin: 0 0 15px;
+  color: rgb(36, 36, 36);
+}
+
+.information-item .content {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  height: 100%;
+}
+
+.information-item .content p {
+  margin: 5px 0 0;
+}
+
+.information-item .content span {
+  color: rgb(74, 74, 74);
+  font-weight: bold;
+}
+
+.information-item .content .name {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(36, 36, 36);
+}
+
+.order-detail__product-list {
+  width: 100%;
+  color: rgb(66, 66, 66);
+  display: table;
+  font-size: 13px;
+  background-color: #fff;
+  border-radius: 4px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.order-detail__product-list thead {
+  display: table-header-group;
+}
+
+.order-detail__product-list tbody,
+.order-detail__product-list tfoot {
+  display: table-row-group;
+}
+
+.order-detail__product-list tr {
+  display: table-row;
+  padding: 10px;
+}
+
+.order-detail__product-list thead tr th {
+  display: table-cell;
+  padding: 20px 15px;
+  min-width: 100px;
+  position: relative;
+  background: 0 0;
+  color: rgb(120, 120, 120);
+  font-size: 15px;
+  font-weight: 400;
+  border-bottom: 1px solid rgb(244, 244, 244);
+  text-align: left;
+}
+
+.order-detail__product-list thead tr th:nth-child(3) {
+  text-align: right;
+}
+
+.order-detail__product-list thead tr th:last-child {
+  text-align: right;
+  min-width: 160px;
+}
+
+.order-detail__product-list tbody tr {
+  border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.order-detail__product-list tbody tr td {
+  border: none;
+  position: relative;
+  display: table-cell;
+  padding: 20px 15px;
+  color: rgb(36, 36, 36);
+  vertical-align: top;
+  min-width: 100px;
+}
+
+.order-detail__product-list tbody tr td:last-child {
+  text-align: right;
+  min-width: 160px;
+}
+
+.order-detail__product-list tbody tr td:nth-child(3) {
+  text-align: right;
+}
+
+.order-detail__product-list tbody tr td .product-item {
+  display: flex;
+}
+
+.order-detail__product-list tbody tr td .product-item img {
+  width: 60px;
+  height: 60;
+  margin-right: 15px;
+}
+
+.order-detail__product-list
+  tbody
+  tr
+  td
+  .product-item
+  .product-info
+  .product-name {
+  font-size: 14px;
+  color: rgb(36, 36, 36);
+}
+
+.order-detail__product-list
+  tbody
+  tr
+  td
+  .product-item
+  .product-info
+  .product-publisher {
+  font-size: 11px;
+  margin: 12px 0 0;
+}
+
+.order-detail__product-list tfoot tr:first-child td {
+  padding-top: 30px;
+}
+
+.order-detail__product-list tfoot tr:last-child td {
+  padding-bottom: 30px;
+}
+
+.order-detail__product-list tfoot tr td {
+  text-align: right;
+  display: table-cell;
+  padding: 5px 20px;
+  max-width: 550px;
+  min-width: 125px;
+  color: rgb(36, 36, 36);
+}
+
+.order-detail__product-list tfoot tr td span {
+  color: rgb(120, 120, 120);
+  font-size: 14px;
+}
+
+.order-detail__product-list tfoot tr td .sum {
+  color: rgb(255, 59, 39);
+  font-size: 18px;
+}
+
+.order-detail .view-order-list {
+  margin: 20px 0 30px 0;
+  display: inline-block;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  color: rgb(11, 116, 229);
+}
+
+.order-detail a {
+  text-decoration: none;
+}
