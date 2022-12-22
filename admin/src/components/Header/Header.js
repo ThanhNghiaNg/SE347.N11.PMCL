@@ -28,13 +28,13 @@ const Header = (props) => {
         {authCtx.isLoggedIn && (
           <ul className={classes["nav-items"]}>
             <li>
-              <Link to="/">Books</Link>
+              <Link to="/">Tất cả sách</Link>
             </li>
             <li>
-              <Link to="/add-book">Add book</Link>
+              <Link to="/add-book">Thêm sách</Link>
             </li>
             <li>
-              <Link to="/orders">Orders</Link>
+              <Link to="/orders">Đơn hàng</Link>
             </li>
           </ul>
         )}
@@ -42,16 +42,16 @@ const Header = (props) => {
           {!authCtx.isLoggedIn && (
             <>
               <li>
-                <Link to="/login">Login</Link>
+                <Link to="/login">Đăng nhập</Link>
               </li>
               <li>
-                <Link to="/register">Register</Link>
+                <Link to="/register">Đăng Ký</Link>
               </li>
             </>
           )}
           {authCtx.isLoggedIn && (
             <li>
-              <Link onClick={logoutHandler}>Logout</Link>
+              <Link onClick={logoutHandler}>Đăng xuất</Link>
             </li>
           )}
         </ul>

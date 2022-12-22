@@ -7,13 +7,18 @@ import OrderList from "./components/OderList/OrderList";
 import AuthForm from "./components/AuthForm/AuthForm";
 
 import authContext from "./store/authContext";
+import Modal from "./components/Modal/Modal";
 import { useContext } from "react";
+import modalContext from "./store/modalContext";
 
 function App() {
   const authCtx = useContext(authContext);
+  const modalCtx = useContext(modalContext)
+  const showModal = modalCtx.isShowError || modalCtx.isShowInform || modalCtx.isShowConfirm
   return (
     <BrowserRouter>
       <Layout>
+        {(showModal) && <Modal />}
         <Routes>
           {authCtx.isLoggedIn && (
             <>

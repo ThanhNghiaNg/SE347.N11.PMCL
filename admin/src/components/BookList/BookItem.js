@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { hostURL } from "../../utils/global";
+import { useContext } from "react";
 import classes from "./BookItem.module.css";
+import modalContext from "../../store/modalContext";
 export const addDotStyle = (str) => {
   return str.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
 const BookItem = (props) => {
   const { book: bookInfo } = props;
+  const modalCtx = useContext(modalContext);
 
   const deleteBookHandler = (event) => {
     event.preventDefault();
@@ -21,7 +24,7 @@ const BookItem = (props) => {
         props.onRefresh((prevState) => !prevState);
       }
     };
-    postDeleteBook();
+    modalCtx.showConfirm("Bạn có muốn xoá sách này?", postDeleteBook);
   };
 
   return (
@@ -36,21 +39,21 @@ const BookItem = (props) => {
           </span>
         </p>
       ) : (
-        <p></p>
+        <p className={classes.rate}></p>
       )}
       <p className={classes.price}>{addDotStyle(String(bookInfo.price))} VNĐ</p>
-      <div className="d-flex p-2 justify-content-center">
+      <div className={classes["action-control"]}>
         <Link
           to={`/edit/${bookInfo._id}`}
-          className="btn bg-success text-white"
+          className="btn bg-success text-white fs-6"
         >
-          Edit
+          Chỉnh sửa
         </Link>
         <button
-          className="btn bg-danger text-white ms-4"
+          className="btn bg-danger text-white ms-1"
           onClick={deleteBookHandler}
         >
-          Delete
+          Xoá
         </button>
       </div>
     </div>

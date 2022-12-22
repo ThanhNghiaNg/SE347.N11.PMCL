@@ -1,13 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router";
+import { useEffect, useRef, useState, useContext } from "react";
+import { useNavigate, useParams } from "react-router";
 import { hostURL } from "../../utils/global";
 import classes from "./BookForm.module.css";
 import AddAuthorForm from "./AddAuthorForm";
+import modalContext from "../../store/modalContext";
 
 const BookForm = (props) => {
   const edit = props.edit;
   const params = useParams();
   const id = params.id;
+  const modalCtx = useContext(modalContext);
+  const navigate = useNavigate();
   const [book, setBook] = useState();
   const [authors, setAuthors] = useState([]);
   const [images, setImages] = useState([]);
@@ -21,7 +24,6 @@ const BookForm = (props) => {
   const publisherRef = useRef();
   const shortDescriptionRef = useRef();
   const descriptionRef = useRef();
-  const imagesRef = useRef();
   const quantitySoldRef = useRef();
   const amountRef = useRef();
   console.log(book);
@@ -43,6 +45,28 @@ const BookForm = (props) => {
 
   const postBookHandler = (event) => {
     event.preventDefault();
+    const title = titleRef.current.value;
+    const price = priceRef.current.value;
+    const category = categoryRef.current.value;
+    const publisher = publisherRef.current.value;
+    const short_description = shortDescriptionRef.current.value;
+    const description = descriptionRef.current.value;
+    const quantity_sold = quantitySoldRef.current.value;
+    const amount = amountRef.current.value;
+    if (
+      !title ||
+      !price ||
+      !category ||
+      !publisher ||
+      !short_description ||
+      !description ||
+      !quantity_sold ||
+      !amount ||
+      authors.length === 0 ||
+      images.length === 0
+    ) {
+      return modalCtx.showError("Bạn phải nhập đầy đủ các trường dữ liệu!");
+    }
     const postRequest = async () => {
       const respone = await fetch(
         `${hostURL}/admin/${edit ? `update-book/${id}` : "add-book"}`,
@@ -51,21 +75,26 @@ const BookForm = (props) => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            title: titleRef.current.value,
-            price: priceRef.current.value,
-            authors: authors,
-            category: categoryRef.current.value,
-            publisher: publisherRef.current.value,
-            short_description: shortDescriptionRef.current.value,
-            description: descriptionRef.current.value,
-            images: images,
-            quantity_sold: quantitySoldRef.current.value,
-            amount: amountRef.current.value,
+            title,
+            price,
+            authors,
+            category,
+            publisher,
+            short_description,
+            description,
+            images,
+            quantity_sold,
+            amount,
           }),
         }
       );
       const data = await respone.json();
       console.log(data);
+      const message = edit
+        ? "Đã cập nhật thông tin sách!"
+        : "Thêm sách thành công!";
+      modalCtx.showInform(message);
+      navigate("/");
     };
     postRequest();
   };

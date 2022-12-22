@@ -1,0 +1,22 @@
+.backdrop {
+  background-color: #0000008e;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.overlay {
+  z-index: 5;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  padding: 2em;
+  text-align: center;
+  width: 35%;
+}
+
+.icon{
+    font-size: 34px;
+}

@@ -66,7 +66,7 @@ const AuthForm = (props) => {
         <input type="text" placeholder="Secret Key" ref={secretKeyRef}></input>
       )}
       <button className={`btn bg-success text-white`} onClick={authHandler}>
-        {isLogin ? "Login" : "Register"}
+        {isLogin ? "Đăng nhập" : "Đăng ký"}
       </button>
     </form>
   );

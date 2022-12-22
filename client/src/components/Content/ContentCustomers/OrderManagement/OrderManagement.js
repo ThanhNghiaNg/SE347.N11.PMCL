@@ -52,6 +52,7 @@ const OrderManagement = (props) => {
         credentials: "include",
       });
       const data = await respone.json();
+      console.log(data)
       const fetchedOrder = data.map((order) => {
         return {
           id: order._id,
