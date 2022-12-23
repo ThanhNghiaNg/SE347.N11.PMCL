@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { popupActions } from "../../../../../../store/popup";
+import { productActions } from "../../../../../../store/products";
 import { addDotStyle, hostURL } from "../../../../../../utils/global";
 
 import classes from "./OrderFooter.module.css";
@@ -10,6 +11,26 @@ const OrderFooter = (props) => {
   const dispatch = useDispatch();
   const submitHandler = () => {
     if (props.order.status === "shipped") {
+      const postReOrder = async () => {
+        const respone = await fetch(`${hostURL}/user/re-order`, {
+          credentials: "include",
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ orderId: props.order.id }),
+        });
+        if (respone.status === 200) {
+          const data = await respone.json();
+          console.log(data);
+
+          dispatch(
+            productActions.setQuantityProductCart(
+              data.cart.items.reduce((acc, item) => item.quantity + acc)
+            )
+          );
+          navigate("/cart");
+        }
+      };
+      postReOrder();
     } else {
       const postDeteleOrder = async () => {
         const respone = await fetch(`${hostURL}/user/cancel-order`, {

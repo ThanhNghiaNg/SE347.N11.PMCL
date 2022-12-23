@@ -11,7 +11,6 @@ exports.fetchAllBooks = (req, res, next) => {
 // fecth book by Id, get from url's params
 exports.fetchBookById = (req, res, next) => {
   const id = req.params.id;
-  console.log(id);
   return Book.find({ _id: id }).then((books) => {
     return res.send(books[0]);
   });
@@ -21,7 +20,6 @@ exports.fetchBookById = (req, res, next) => {
 exports.postAddToCart = (req, res, next) => {
   const bookId = req.body.bookId;
   const quantity = req.body.quantity;
-  console.log(bookId, quantity);
   // .then?ok? oked.
   req.session.user.addToCart(bookId, quantity).then(() => {
     return res.send({
@@ -74,8 +72,6 @@ exports.postOrder = (req, res, next) => {
     req.session.user.populate("cart.items.bookId").then((result) => {
       let totalPrice = 0;
       result.cart.items.forEach((book) => {
-        console.log(book.bookId.price);
-        console.log(book.quantity);
         totalPrice += book.bookId.price * book.quantity;
       });
 
@@ -96,7 +92,9 @@ exports.postOrder = (req, res, next) => {
       order.save((err) => {
         console.log(err);
         req.session.user.resetCart();
-        return res.send({ message: "Order Successfully!" });
+        return res.send({
+          message: "Order Successfully!",
+        });
       });
     });
   } else {
