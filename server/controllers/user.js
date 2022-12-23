@@ -3,10 +3,11 @@ const Review = require("../models/review");
 const Order = require("../models/order");
 const Book = require("../models/book");
 const bcrypt = require("bcryptjs");
+const user = require("../models/user");
+const sleep = require("../utils/global").sleep;
 
 exports.getUpdate = (req, res, next) => {
   User.findOne({ _id: req.session.user._id }).then((user) => {
-    console.log(user);
     return res.send({
       address: user.address ? user.address : "",
       email: user.email ? user.email : "",
@@ -23,7 +24,6 @@ exports.postChangePassword = (req, res, next) => {
   const { password, newPassowrd } = req.body;
   bcrypt.compare(password, req.session.user.password).then((doMatched) => {
     if (doMatched) {
-      console.log(doMatched);
       return bcrypt.hash(newPassowrd, 12).then((hashPassword) => {
         req.session.user.password = hashPassword;
         return req.session.user.save().then((err) => {
@@ -103,7 +103,6 @@ exports.postReviewBook = (req, res, next) => {
     book: bookId,
     user: req.session.user._id,
   });
-  console.log(bookId);
   // Tạo và lưu review vào database
   return review.save().then((result) => {
     // Tìm order và sản phẩm tương ứng, đánh dấu đã review (true)
@@ -111,8 +110,6 @@ exports.postReviewBook = (req, res, next) => {
       const idxBookReviewed = order.books.findIndex(
         (book) => book.bookId._id.toString() === bookId
       );
-      console.log(idxBookReviewed);
-      console.log("id: ", order.books[idxBookReviewed]._id);
       order.books[idxBookReviewed].reviewed = true;
       return order.save().then(() => {
         // Tìm sách vừa được đánh giá, cập nhật lại rate
@@ -143,10 +140,10 @@ exports.getOrdered = (req, res, next) => {
 
 // Get all order that user ordered and user information
 exports.getOrderByID = (req, res, next) => {
-  const orderId = req.params.id
-  Order.findOne({ _id: orderId})
+  const orderId = req.params.id;
+  Order.findOne({ _id: orderId })
     .populate("books.bookId")
-    .populate("user","-password")
+    .populate("user", "-password")
     .then((order) => {
       return res.send(order);
     });
@@ -156,5 +153,33 @@ exports.deleteOrderById = (req, res, next) => {
   const orderId = req.body.orderId;
   Order.deleteOne({ _id: orderId }).then(() => {
     res.send({ message: `Deleted Order ${orderId}` });
+  });
+};
+
+exports.postReOrder = (req, res, next) => {
+  const orderId = req.body.orderId;
+  Order.findOne({ _id: orderId }).then((order) => {
+    if (!order) {
+      return res.status(405).send("Can'not re-order!");
+    } else {
+      const items = [...req.session.user.cart.items];
+      order.books.forEach((bookOrdered) => {
+        const bookIdx = items.findIndex((book) => {
+          return book.bookId.toString() === bookOrdered.bookId.toString();
+        });
+        console.log(bookIdx);
+        if (bookIdx >= 0) {
+          items[bookIdx].quantity += Number(bookOrdered.quantity);
+        } else {
+          items.push({
+            bookId: bookOrdered.bookId,
+            quantity: bookOrdered.quantity,
+          });
+        }
+      });
+      req.session.user.cart.items = [...items];
+      req.session.user.save();
+      return res.send({ message: "added books to cart!", cart: req.session.user.cart,});
+    }
   });
 };

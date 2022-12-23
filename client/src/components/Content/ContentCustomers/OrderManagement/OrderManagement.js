@@ -21,7 +21,7 @@ const OrderManagement = (props) => {
         credentials: "include",
       });
       const data = await respone.json();
-      console.log(data)
+      console.log(data);
       const fetchedOrder = data.map((order) => {
         return {
           id: order._id,
@@ -73,8 +73,6 @@ const OrderManagement = (props) => {
       )
     );
   }
-
-
 
   return (
     <div className={classes["order-management"]}>
