@@ -34,3 +34,7 @@ export const orderStatus = [
     status: "Giao hàng thành công",
   },
 ];
+
+export const hasNumber = (myString) => {
+  return /\d/.test(myString);
+};

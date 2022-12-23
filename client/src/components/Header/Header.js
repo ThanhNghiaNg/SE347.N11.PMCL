@@ -107,7 +107,8 @@ const Header = (props) => {
             <div className={classes["logo-menu"]}>
               <div className={classes["style-LogoMenu"]}>
                 <Link to="/" className={classes["tiki-logo"]}>
-                  <img src={logo} alt="owwi watcher book store logo" />
+                  {/* <img src={logo} alt="owwi watcher book store logo" /> */}
+                  <i class="fa-solid fa-paw fs-1 text-white"></i>
                 </Link>
               </div>
             </div>

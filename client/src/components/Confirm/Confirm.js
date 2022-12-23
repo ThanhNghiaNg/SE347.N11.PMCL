@@ -13,6 +13,8 @@ const Confirm = (props) => {
   const dispatch = useDispatch();
   const [data, setData] = useState({});
   const [items, setItems] = useState([]);
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [deliveryService, setDeliveryService] = useState("");
 
   useEffect(() => {
     const getCart = async () => {
@@ -34,12 +36,35 @@ const Confirm = (props) => {
       const respone = await fetch(`${hostURL}/order`, {
         credentials: "include",
         method: "POST",
+        body: JSON.stringify({ deliveryService, paymentMethod }),
       });
       const data = await respone.json();
       dispatch(popupActions.showInform("Đặt hàng thành công!"));
       navigate("/");
     };
-    postOrder();
+    console.log(paymentMethod, deliveryService, !deliveryService);
+    if (!deliveryService) {
+      console.log(deliveryService);
+      return dispatch(
+        popupActions.showError("Vui lòng chọn hình thức giao hàng!")
+      );
+    }
+    if (!paymentMethod) {
+      return dispatch(
+        popupActions.showError("Vui lòng chọn hình thức thanh toán!")
+      );
+    }
+
+    return postOrder();
+  };
+
+  const enteredPaymentMethod = (event) => {
+    console.log(`target payment: ${event.target.value}`);
+    setPaymentMethod(event.target.value);
+  };
+  const enteredDeliveryService = (event) => {
+    console.log(`target: ${event.target.value}`);
+    setDeliveryService(event.target.value);
   };
 
   let totalPriceCart = 0;
@@ -76,28 +101,40 @@ const Confirm = (props) => {
       <div className={wrapClasses["list-items"]}>
         <Card>
           <h5 className="pb-3">Hình thức giao hàng</h5>
-          <div className="d-flex pb-2">
-            <input type="radio" value={"Giao Hàng Nhanh"} name="ship"></input>
-            <label className="ps-3">Giao Hàng Nhanh</label>
-          </div>
-          <div className="d-flex">
-            <input
-              type="radio"
-              value={"Giao Hàng Tiết Kiệm"}
-              name="ship"
-            ></input>
-            <label className="ps-3">Giao Hàng Tiết Kiệm</label>
+          <div className="payment-method" onChange={enteredDeliveryService}>
+            <div className="d-flex pb-2">
+              <input type="radio" value={"Giao Hàng Nhanh"} name="ship"></input>
+              <label className="ps-3">Giao Hàng Nhanh</label>
+            </div>
+            <div className="d-flex">
+              <input
+                type="radio"
+                value={"Giao Hàng Tiết Kiệm"}
+                name="ship"
+              ></input>
+              <label className="ps-3">Giao Hàng Tiết Kiệm</label>
+            </div>
           </div>
         </Card>
         <Card>
           <h5 className="pb-3">Hình thức thanh toán</h5>
-          <div className="d-flex pb-2">
-            <input type="radio" value={"cash"} name="payment"></input>
-            <label className="ps-3">Thanh toán bằng tiền mặt</label>
-          </div>
-          <div className="d-flex">
-            <input type="radio" value={"momo"} name="payment"></input>
-            <label className="ps-3">Thanh toán qua Momo</label>
+          <div class="delivery-service" onChange={enteredPaymentMethod}>
+            <div className="d-flex pb-2">
+              <input
+                type="radio"
+                value={"Thanh toán bằng tiền mặt"}
+                name="payment"
+              ></input>
+              <label className="ps-3">Thanh toán bằng tiền mặt</label>
+            </div>
+            <div className="d-flex">
+              <input
+                type="radio"
+                value={"Thanh toán qua Momo"}
+                name="payment"
+              ></input>
+              <label className="ps-3">Thanh toán qua Momo</label>
+            </div>
           </div>
         </Card>
         <Card className={wrapClasses.items}>{itemsListElement}</Card>

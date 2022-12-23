@@ -68,6 +68,8 @@ exports.postDeleteCartItem = (req, res, next) => {
 };
 
 exports.postOrder = (req, res, next) => {
+  const deliveryService = req.body.deliveryService;
+  const paymentMethod = req.body.paymentMethod;
   if (req.session.user.cart.items.length > 0) {
     req.session.user.populate("cart.items.bookId").then((result) => {
       let totalPrice = 0;
@@ -83,6 +85,10 @@ exports.postOrder = (req, res, next) => {
       const order = new Order({
         books: [...itemsOrder],
         status: { status: "paying", detail: "", date: new Date() },
+        payment: {
+          deliveryService: deliveryService,
+          paymentMethod: paymentMethod,
+        },
         user: req.session.user._id,
         totalPrice: totalPrice,
       });
@@ -110,5 +116,5 @@ exports.getOrder = (req, res, next) => {
 exports.postUpdateOrder = (req, res, next) => {};
 
 exports.getReviews = (req, res, next) => {
-  const bookId = req.params.id
+  const bookId = req.params.id;
 };
