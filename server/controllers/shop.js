@@ -108,3 +108,7 @@ exports.getOrder = (req, res, next) => {
 };
 
 exports.postUpdateOrder = (req, res, next) => {};
+
+exports.getReviews = (req, res, next) => {
+  const bookId = req.params.id
+};

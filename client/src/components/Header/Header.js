@@ -8,6 +8,7 @@ import { Link, NavLink } from "react-router-dom";
 import { ModalFormPortals } from "../ModalForm/ModalForm";
 import { authActions } from "../../store/auth";
 import { hostURL } from "../../utils/global";
+import logo from "../../assets/logo/newLogo.png";
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Header = (props) => {
   const searchInput = useRef();
 
   useEffect(() => {
-    console.log(quantityProductCart)
+    console.log(quantityProductCart);
     const getCart = async () => {
       const respone = await fetch(`${hostURL}/cart`, {
         credentials: "include",
@@ -33,7 +34,9 @@ const Header = (props) => {
       dispatch(productActions.setNumberProductCart(data.cart.items.length));
       dispatch(
         productActions.setQuantityProductCart(
-          data.cart.items.reduce((acc, item) => {return item.quantity + acc},0)
+          data.cart.items.reduce((acc, item) => {
+            return item.quantity + acc;
+          }, 0)
         )
       );
       console.log(data);
@@ -104,10 +107,7 @@ const Header = (props) => {
             <div className={classes["logo-menu"]}>
               <div className={classes["style-LogoMenu"]}>
                 <Link to="/" className={classes["tiki-logo"]}>
-                  <img
-                    src="https://salt.tikicdn.com/ts/upload/ae/f5/15/2228f38cf84d1b8451bb49e2c4537081.png"
-                    alt="owwi watcher book store logo"
-                  />
+                  <img src={logo} alt="owwi watcher book store logo" />
                 </Link>
               </div>
             </div>
