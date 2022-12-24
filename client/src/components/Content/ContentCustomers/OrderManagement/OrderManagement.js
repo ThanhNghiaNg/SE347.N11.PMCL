@@ -10,7 +10,6 @@ import { hostURL, orderStatus } from "../../../../utils/global";
 const OrderManagement = (props) => {
   const [orders, setOrders] = useState([]);
   const [toggleRefresh, setToggleRefresh] = useState(false);
-  const [isShowOrderDetail, setIsShowOrderDetail] = useState(false);
 
   const refreshHandler = () => {
     setToggleRefresh((prev) => !prev);
@@ -21,7 +20,7 @@ const OrderManagement = (props) => {
         credentials: "include",
       });
       const data = await respone.json();
-      console.log(data)
+      console.log(data);
       const fetchedOrder = data.map((order) => {
         return {
           id: order._id,
@@ -73,8 +72,6 @@ const OrderManagement = (props) => {
       )
     );
   }
-
-
 
   return (
     <div className={classes["order-management"]}>

@@ -68,6 +68,7 @@ const OrderDetail = (props) => {
         <tbody>
           {order.books.map((book) => {
             const product = book.bookId;
+            console.log(`----id: ${product._id}`);
             return (
               <tr>
                 <td>
@@ -76,7 +77,7 @@ const OrderDetail = (props) => {
                     <div className={classes["product-info"]}>
                       <NavLink
                         className={classes["product-name"]}
-                        to={`/detail/${product.id}`}
+                        to={`/detail/${product._id}`}
                       >
                         {product.title}
                       </NavLink>
@@ -102,13 +103,7 @@ const OrderDetail = (props) => {
             <td colSpan="3">
               <span>Tạm tính</span>
             </td>
-            <td>
-              {addDotStyle(
-                String(
-                  order.totalPrice
-                )
-              )}
-            </td>
+            <td>{addDotStyle(String(order.totalPrice))}</td>
           </tr>
           <tr>
             <td colSpan="3">

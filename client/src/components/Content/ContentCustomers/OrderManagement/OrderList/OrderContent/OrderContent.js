@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import { addDotStyle } from "../../../../../../utils/global";
 
 import classes from "./OrderContent.module.css";
@@ -16,14 +18,17 @@ const OrderContent = (props) => {
                 <span className={classes["quantity"]}>x{product.amount}</span>
               </div>
               <div className={classes["product__info"]}>
-                <p className={classes["title"]}>{product.title}</p>
+                <NavLink
+                  to={`/detail/${product.id}`}
+                  className={classes["title"]}
+                >
+                  {product.title}
+                </NavLink>
                 <p className={classes["publisher"]}>{product.publisher}</p>
               </div>
             </div>
             <div className={classes["price"]}>
-              <span>
-                {addDotStyle(String(product.price * product.amount))}
-              </span>
+              <span>{addDotStyle(String(product.price * product.amount))}</span>
             </div>
           </div>
         ))}
