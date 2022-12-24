@@ -21,26 +21,28 @@ const OrderManagement = (props) => {
       });
       const data = await respone.json();
       console.log(data);
-      const fetchedOrder = data.map((order) => {
-        return {
-          id: order._id,
-          status: order.status.status,
-          date: order.status.date,
-          amount: order.totalPrice,
-          products: [
-            ...order.books.map((book) => {
-              return {
-                id: book.bookId._id,
-                title: book.bookId.title,
-                price: book.bookId.price,
-                amount: book.quantity,
-                publisher: book.bookId.publisher,
-                image: book.bookId.images[0].url,
-              };
-            }),
-          ],
-        };
-      });
+      const fetchedOrder = data
+        .map((order) => {
+          return {
+            id: order._id,
+            status: order.status.status,
+            date: order.status.date,
+            amount: order.totalPrice,
+            products: [
+              ...order.books.map((book) => {
+                return {
+                  id: book.bookId._id,
+                  title: book.bookId.title,
+                  price: book.bookId.price,
+                  amount: book.quantity,
+                  publisher: book.bookId.publisher,
+                  image: book.bookId.images[0].url,
+                };
+              }),
+            ],
+          };
+        })
+        .reverse();
       console.log(fetchedOrder);
       setOrders(fetchedOrder);
     };
@@ -69,6 +71,11 @@ const OrderManagement = (props) => {
     filteredOrders = filteredOrders.filter((order) =>
       order.products.some((product) =>
         product.title.toLowerCase().includes(searchInput.toLowerCase())
+      )
+    );
+    filteredOrders = filteredOrders.filter((order) =>
+      order.products.some((product) =>
+        product.id.toLowerCase().includes(searchInput.toLowerCase())
       )
     );
   }
