@@ -5,6 +5,7 @@ import OrderFooter from "./OrderFooter/OrderFooter";
 import classes from "./OrderList.module.css";
 
 const OrderList = (props) => {
+  console.log(props.orders);
   return (
     <div className={classes["order-list"]}>
       {props.orders.map((order) => (
