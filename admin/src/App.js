@@ -15,6 +15,9 @@ function App() {
   const authCtx = useContext(authContext);
   const modalCtx = useContext(modalContext)
   const showModal = modalCtx.isShowError || modalCtx.isShowInform || modalCtx.isShowConfirm
+  window.addEventListener('load',()=>{
+    authCtx.clearSession()
+  })
   return (
     <BrowserRouter>
       <Layout>
