@@ -7,6 +7,7 @@ import { popupActions } from "../../store/popup";
 const CartItem = (props) => {
   const dispatch = useDispatch();
   const item = props.item;
+  console.log(item.quantity);
   const bookPrice = addDotStyle(String(item.bookId.price));
   const bookTotalPrice = addDotStyle(String(item.bookId.price * item.quantity));
 
@@ -21,9 +22,7 @@ const CartItem = (props) => {
           quantity: quantityUpdated,
         }),
       });
-      const data = await respone.json();
       props.onRefresh();
-      console.log(data);
     };
     postChangeQuantity();
   };
@@ -36,8 +35,6 @@ const CartItem = (props) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ bookId: item.bookId._id }),
       });
-      const data = await respone.json();
-      console.log(data);
       dispatch(productActions.descreaseNumberProductCart());
       props.onRefresh();
     };

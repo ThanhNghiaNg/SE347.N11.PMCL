@@ -8,6 +8,7 @@ import ImageList from "./ImageList";
 import RelatedBook from "./RelatedBooks";
 import classes from "./BookDetail.module.css";
 import Card from "../UI/Card";
+import BookReviews from "./BookReviews";
 import { useDispatch } from "react-redux";
 import { productActions } from "../../store/products";
 
@@ -45,7 +46,7 @@ const BookDetail = (props) => {
       const data = await respone.json();
       dispatch(
         productActions.setQuantityProductCart(
-          data.cart.items.reduce(((acc, item) => item.quantity + acc))
+          data.cart.items.reduce((acc, item) => item.quantity + acc)
         )
       );
     };
@@ -104,7 +105,7 @@ const BookDetail = (props) => {
           <RelatedBook category={book.category} id={book._id} />
         </Card>
       )}
-      <Card>Review</Card>
+      {<BookReviews />}
     </Container>
   );
 };

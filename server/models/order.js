@@ -6,7 +6,7 @@ const orderSchema = Schema({
     {
       bookId: { type: Schema.Types.ObjectId, require: true, ref: "Book" },
       quantity: { type: Number, require: true },
-      reviewed: {type: Boolean, require: true}
+      reviewed: { type: Boolean, require: true },
     },
   ],
   status: {
@@ -19,6 +19,16 @@ const orderSchema = Schema({
     },
     date: {
       type: Date,
+      require: true,
+    },
+  },
+  payment: {
+    deliveryService: {
+      type: String,
+      require: true,
+    },
+    paymentMethod: {
+      type: String,
       require: true,
     },
   },

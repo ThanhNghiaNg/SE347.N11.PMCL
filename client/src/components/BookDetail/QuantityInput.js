@@ -1,10 +1,12 @@
 import classes from "./QuantityInput.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const QuantityInput = (props) => {
   const getQuantity = props.getQuantity;
   const [quantity, setQuantity] = useState(props.default ? props.default : 1);
-
+  useEffect(() => {
+    setQuantity(props.default);
+  }, [props.default]);
   const enteredQuantityHandler = (event) => {
     const quantity = event.target.value;
     setQuantity((prev) => {

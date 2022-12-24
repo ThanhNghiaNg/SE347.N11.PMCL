@@ -11,7 +11,6 @@ exports.fetchAllBooks = (req, res, next) => {
 // fecth book by Id, get from url's params
 exports.fetchBookById = (req, res, next) => {
   const id = req.params.id;
-  console.log(id);
   return Book.find({ _id: id }).then((books) => {
     return res.send(books[0]);
   });
@@ -21,7 +20,6 @@ exports.fetchBookById = (req, res, next) => {
 exports.postAddToCart = (req, res, next) => {
   const bookId = req.body.bookId;
   const quantity = req.body.quantity;
-  console.log(bookId, quantity);
   // .then?ok? oked.
   req.session.user.addToCart(bookId, quantity).then(() => {
     return res.send({
@@ -68,12 +66,12 @@ exports.postDeleteCartItem = (req, res, next) => {
 };
 
 exports.postOrder = (req, res, next) => {
+  const deliveryService = req.body.deliveryService;
+  const paymentMethod = req.body.paymentMethod;
   if (req.session.user.cart.items.length > 0) {
     req.session.user.populate("cart.items.bookId").then((result) => {
       let totalPrice = 0;
       result.cart.items.forEach((book) => {
-        console.log(book.bookId.price);
-        console.log(book.quantity);
         totalPrice += book.bookId.price * book.quantity;
       });
 
@@ -83,6 +81,10 @@ exports.postOrder = (req, res, next) => {
       const order = new Order({
         books: [...itemsOrder],
         status: { status: "paying", detail: "", date: new Date() },
+        payment: {
+          deliveryService: deliveryService,
+          paymentMethod: paymentMethod,
+        },
         user: req.session.user._id,
         totalPrice: totalPrice,
       });
@@ -90,7 +92,9 @@ exports.postOrder = (req, res, next) => {
       order.save((err) => {
         console.log(err);
         req.session.user.resetCart();
-        return res.send({ message: "Order Successfully!" });
+        return res.send({
+          message: "Order Successfully!",
+        });
       });
     });
   } else {
@@ -108,3 +112,7 @@ exports.getOrder = (req, res, next) => {
 };
 
 exports.postUpdateOrder = (req, res, next) => {};
+
+exports.getReviews = (req, res, next) => {
+  const bookId = req.params.id;
+};

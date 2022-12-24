@@ -10,6 +10,9 @@ route.get("/", shopControllers.fetchAllBooks);
 // Get book from database by Id
 route.get("/book/:id", shopControllers.fetchBookById);
 
+// Get reviews by book ID
+route.get("/book/:id/reviews", shopControllers.getReviews);
+
 // Post Add item to  cart
 route.post("/add-to-cart", isAuth, shopControllers.postAddToCart);
 
@@ -26,6 +29,8 @@ route.post("/order", isAuth, shopControllers.postOrder);
 
 // Get order items
 route.get("/order", isAuth, shopControllers.getOrder);
+
+
 
 
 

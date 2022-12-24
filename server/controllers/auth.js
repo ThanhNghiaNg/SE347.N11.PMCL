@@ -63,7 +63,6 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.postLogout = (req, res, next) => {
-  console.log(req);
   req.session.destroy((err) => {
     if (!err) {
       return res.status(200).send({ message: "Successfully Logout!" });
@@ -131,7 +130,6 @@ exports.postAdminLogin = (req, res, next) => {
 };
 
 exports.postAdminLogout = (req, res, next) => {
-  console.log(req.session);
   req.session.destroy((err) => {
     if (!err) {
       return res.status(200).send({ message: "Successfully Logout!" });

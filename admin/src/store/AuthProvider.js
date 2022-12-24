@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import authContext, { initAuthCtx } from "./authContext";
 
+
 const authReducer = (state, action) => {
   if (action.type === "LOGIN") {
     if (action.token) {
@@ -17,6 +18,7 @@ const authReducer = (state, action) => {
     localStorage.removeItem("isLoggedIn");
     return { isLoggedIn: false, token: "" };
   }
+
   return { ...state };
 };
 

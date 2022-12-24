@@ -1,14 +1,15 @@
 import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import {useNavigate} from 'react-router-dom'
 import SubmitButton from "../../SubmitButton/SubmitButton";
 import Backdrop from "../../../../UI/Backdrop";
 
 import classes from "./ReviewForm.module.css";
 import { hostURL } from "../../../../../utils/global";
+import { useDispatch } from "react-redux";
+import {popupActions} from '../../../../../store/popup'
 
 const ReviewForm = (props) => {
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [rate, setRate] = useState(0);
   const contentRef = useRef();
   console.log(props.review);
@@ -29,10 +30,9 @@ const ReviewForm = (props) => {
         }),
       });
       const data = await respone.json();
-      // alert(data.message)
       props.onSetShowReviewForm(false)
       props.onRefresh()
-      console.log(data);
+      dispatch(popupActions.showInform("Owwi cảm ơn bạn đã đánh giá sản phẩm!"))
     };
     postReview();
   };

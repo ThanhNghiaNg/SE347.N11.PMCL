@@ -44,14 +44,16 @@ const OrderDetail = (props) => {
         <div className={classes["information-item"]}>
           <div className={classes["title"]}>HÌNH THỨC GIAO HÀNG</div>
           <div className={classes["content"]}>
-            <p className={classes["delivery"]}>Giao hàng nhanh</p>
+            <p className={classes["delivery"]}>
+              {order.payment.deliveryService}
+            </p>
           </div>
         </div>
         <div className={classes["information-item"]}>
           <div className={classes["title"]}>HÌNH THỨC THANH TOÁN</div>
           <div className={classes["content"]}>
             <div className={classes["payments"]}>
-              Thanh toán tiền mặt khi nhận hàng
+              {order.payment.paymentMethod}
             </div>
           </div>
         </div>
