@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { hostURL } from "../../utils/global";
 import { useDispatch } from "react-redux";
 import { popupActions } from "../../store/popup";
+import {productActions} from '../../store/products'
 
 const UserPayment = (props) => {
   const navigate = useNavigate();
@@ -19,7 +20,6 @@ const UserPayment = (props) => {
       const respone = await fetch(`${hostURL}/user/update`, {
         credentials: "include",
       });
-
       const data = await respone.json();
       setUser(data);
     };
