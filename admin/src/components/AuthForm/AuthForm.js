@@ -66,15 +66,15 @@ const AuthForm = (props) => {
 
   return (
     <form className={classes.form}>
-      <input type="text" placeholder="Username" ref={usernameRef}></input>
+      <input type="text" placeholder="Username" ref={usernameRef} className='form-control'></input>
       <input
         type="password"
         placeholder="Password"
         value={password}
-        onChange={enteredPasswordHandler}
+        onChange={enteredPasswordHandler} className='form-control'
       ></input>
       {!isLogin && (
-        <input type="text" placeholder="Secret Key" ref={secretKeyRef}></input>
+        <input type="text" placeholder="Secret Key" ref={secretKeyRef} className='form-control'></input>
       )}
       <button className={`btn bg-success text-white`} onClick={authHandler}>
         {isLogin ? "Đăng nhập" : "Đăng ký"}
