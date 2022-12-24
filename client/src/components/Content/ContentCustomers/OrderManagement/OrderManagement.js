@@ -10,7 +10,6 @@ import { hostURL, orderStatus } from "../../../../utils/global";
 const OrderManagement = (props) => {
   const [orders, setOrders] = useState([]);
   const [toggleRefresh, setToggleRefresh] = useState(false);
-  const [isShowOrderDetail, setIsShowOrderDetail] = useState(false);
 
   const refreshHandler = () => {
     setToggleRefresh((prev) => !prev);

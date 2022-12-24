@@ -70,6 +70,7 @@ const OrderDetail = (props) => {
         <tbody>
           {order.books.map((book) => {
             const product = book.bookId;
+            console.log(`----id: ${product._id}`);
             return (
               <tr>
                 <td>
@@ -78,7 +79,7 @@ const OrderDetail = (props) => {
                     <div className={classes["product-info"]}>
                       <NavLink
                         className={classes["product-name"]}
-                        to={`/detail/${product.id}`}
+                        to={`/detail/${product._id}`}
                       >
                         {product.title}
                       </NavLink>
