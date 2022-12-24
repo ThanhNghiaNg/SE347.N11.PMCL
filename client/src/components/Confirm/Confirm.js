@@ -7,7 +7,7 @@ import classes from "./Confirm.module.css";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { popupActions } from "../../store/popup";
-
+import { productActions } from "../../store/products";
 const Confirm = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const Confirm = (props) => {
         popupActions.showError("Vui lòng chọn hình thức thanh toán!")
       );
     }
-
+    dispatch(productActions.setNumberProductCart(0));
     return postOrder();
   };
 
