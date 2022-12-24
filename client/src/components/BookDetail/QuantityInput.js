@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 
 const QuantityInput = (props) => {
   const getQuantity = props.getQuantity;
-  const [quantity, setQuantity] = useState(props.default ? props.default : 1);
+  const [quantity, setQuantity] = useState(1);
   useEffect(() => {
-    setQuantity(props.default);
+    setQuantity(props.default ? props.default : 1);
   }, [props.default]);
   const enteredQuantityHandler = (event) => {
     const quantity = event.target.value;
@@ -19,6 +19,7 @@ const QuantityInput = (props) => {
     event.preventDefault();
     setQuantity((prev) => {
       const quantity = Number(prev) + 1;
+      console.log(prev)
       getQuantity && getQuantity(quantity);
       return quantity;
     });

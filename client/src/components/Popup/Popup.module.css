@@ -24,6 +24,9 @@
   position: absolute;
   top:0;
   right:0;
-  transform: translate(50%, -50%);
+  transform: translate(40%, -40%);
   border-radius: 50%;
+  background-color: #fff!important;
+  opacity: 1;
+  box-shadow: 0 0 3px #ccc;
 }

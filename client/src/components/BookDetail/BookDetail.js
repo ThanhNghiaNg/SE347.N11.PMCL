@@ -105,7 +105,7 @@ const BookDetail = (props) => {
           <RelatedBook category={book.category} id={book._id} />
         </Card>
       )}
-      {<BookReviews />}
+      {book._id && <BookReviews id={book._id}/>}
     </Container>
   );
 };

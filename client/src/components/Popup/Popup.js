@@ -29,8 +29,9 @@ const Overlay = (props) => {
     <Backdrop onClick={closePopupHandler}>
       <Card className={classes.overlay}>
         <button
-          className={`bg-white text-light btn-close ${classes["btn-close-modal"]}`}
+          className={`text-light btn-close ${classes["btn-close-modal"]}`}
           onClick={closePopupHandler}
+          aria-label="Close"
         ></button>
         <div className={`${classes.icon}`}>
           {status === INFORM && (
