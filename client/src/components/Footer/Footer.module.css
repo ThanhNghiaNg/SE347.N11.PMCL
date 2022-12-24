@@ -1,7 +1,15 @@
-.footer{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    /* gap: 4em;
-    padding-top: 1em;
-    padding-top: 1em; */
+.footer {
+    background-color: #000;
+}
+
+.footer ul {
+  list-style: none;
+  display: flex;
+}
+.footer ul li {
+  cursor: pointer;
+}
+.footer ul li a i {
+  font-size: 24px;
+  color: #fff;
 }
