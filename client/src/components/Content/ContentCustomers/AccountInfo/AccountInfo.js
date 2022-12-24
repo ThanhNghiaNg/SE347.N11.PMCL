@@ -67,7 +67,7 @@ const AccountInfo = (props) => {
     };
     getCustomerData();
   }, [url]);
-
+  console.log(year,'-', month,'-', day)
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -88,7 +88,11 @@ const AccountInfo = (props) => {
       });
       dispatch(popupActions.showInform("Đã cập nhật thông tin."));
     };
-
+    if (!day || !month || !year || Number(year) < 1900){
+      return dispatch(
+        popupActions.showError("Vui lòng nhập đầy đủ ngày tháng năm sinh của bạn!")
+      );
+    }
     if (hasNumber(fullName)) {
       return dispatch(
         popupActions.showError("Tên của bạn không được chứa số!")
@@ -136,7 +140,7 @@ const AccountInfo = (props) => {
                       onChange={(e) => setDay(e.target.value)}
                       name="day"
                     >
-                      <option value="0">Ngày</option>
+                      <option value="">Ngày</option>
                       {dayOptions.map((day) => (
                         <option key={day} value={day}>
                           {day}
@@ -148,7 +152,7 @@ const AccountInfo = (props) => {
                       onChange={(e) => setMonth(e.target.value)}
                       name="month"
                     >
-                      <option value="0">Tháng</option>
+                      <option value="">Tháng</option>
                       {monthOptions.map((month) => (
                         <option key={month} value={month}>
                           {month}
@@ -160,7 +164,7 @@ const AccountInfo = (props) => {
                       onChange={(e) => setYear(e.target.value)}
                       name="year"
                     >
-                      <option value="0">Năm</option>
+                      <option value="">Năm</option>
                       {yearOptions.map((year) => (
                         <option key={year} value={year}>
                           {year}

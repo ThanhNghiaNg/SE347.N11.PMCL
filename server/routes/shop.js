@@ -31,7 +31,4 @@ route.post("/order", isAuth, shopControllers.postOrder);
 route.get("/order", isAuth, shopControllers.getOrder);
 
 
-
-
-
 module.exports = route;

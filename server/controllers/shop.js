@@ -1,5 +1,6 @@
 const Book = require("../models/book");
 const Order = require("../models/order");
+const Review = require("../models/review");
 
 // fetch all book from database
 exports.fetchAllBooks = (req, res, next) => {
@@ -115,4 +116,10 @@ exports.postUpdateOrder = (req, res, next) => {};
 
 exports.getReviews = (req, res, next) => {
   const bookId = req.params.id;
+  console.log(bookId);
+  Review.find({ book: bookId })
+    .populate("user", "name")
+    .then((reviews) => {
+      return res.send(reviews);
+    });
 };
