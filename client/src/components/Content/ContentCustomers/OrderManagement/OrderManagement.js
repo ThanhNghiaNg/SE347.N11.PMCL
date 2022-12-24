@@ -69,13 +69,10 @@ const OrderManagement = (props) => {
   }
   if (searchInput) {
     filteredOrders = filteredOrders.filter((order) =>
-      order.products.some((product) =>
-        product.title.toLowerCase().includes(searchInput.toLowerCase())
-      )
-    );
-    filteredOrders = filteredOrders.filter((order) =>
-      order.products.some((product) =>
-        product.id.toLowerCase().includes(searchInput.toLowerCase())
+      order.products.some(
+        (product) =>
+          product.title.toLowerCase().includes(searchInput.toLowerCase()) ||
+          order.id.toLowerCase().includes(searchInput.toLowerCase())
       )
     );
   }
