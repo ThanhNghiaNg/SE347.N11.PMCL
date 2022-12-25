@@ -25,7 +25,6 @@ const Header = (props) => {
   const searchInput = useRef();
 
   useEffect(() => {
-    console.log(quantityProductCart);
     const getCart = async () => {
       const respone = await fetch(`${hostURL}/cart`, {
         credentials: "include",
@@ -39,7 +38,6 @@ const Header = (props) => {
           }, 0)
         )
       );
-      console.log(data);
     };
     getCart();
 
@@ -53,11 +51,9 @@ const Header = (props) => {
   const searchHandler = (event) => {
     event.preventDefault();
     const searchEntered = searchInput.current.value;
-    console.log(searchEntered);
     const result = allProducts.filter((book) =>
       book.title.toLowerCase().includes(searchEntered.toLowerCase())
     );
-    console.log(result);
     dispatch(productActions.setCurrentProducts(result));
     if (result.length > 0) {
       dispatch(errorsActions.setSuccessFound());
@@ -83,7 +79,6 @@ const Header = (props) => {
 
   const showModalFormHandler = (event) => {
     event.preventDefault();
-    console.log(isLoggedIn);
     if (!isLoggedIn) {
       setIsShowModal(true);
     }

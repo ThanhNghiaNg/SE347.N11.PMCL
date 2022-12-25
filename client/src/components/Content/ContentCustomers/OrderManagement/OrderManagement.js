@@ -20,7 +20,6 @@ const OrderManagement = (props) => {
         credentials: "include",
       });
       const data = await respone.json();
-      console.log(data);
       const fetchedOrder = data
         .map((order) => {
           return {
@@ -43,7 +42,6 @@ const OrderManagement = (props) => {
           };
         })
         .reverse();
-      console.log(fetchedOrder);
       setOrders(fetchedOrder);
     };
     getOrders();

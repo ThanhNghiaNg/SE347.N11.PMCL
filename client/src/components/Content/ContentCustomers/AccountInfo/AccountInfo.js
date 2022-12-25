@@ -63,11 +63,9 @@ const AccountInfo = (props) => {
       setPhoneNumber(data.phone ? data.phone : "");
       setEmail(data.email);
       setAddress(data.address ? data.address : "");
-      console.log(data);
     };
     getCustomerData();
   }, [url]);
-  console.log(year,'-', month,'-', day)
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -88,9 +86,11 @@ const AccountInfo = (props) => {
       });
       dispatch(popupActions.showInform("Đã cập nhật thông tin."));
     };
-    if (!day || !month || !year || Number(year) < 1900){
+    if (!day || !month || !year || Number(year) < 1900) {
       return dispatch(
-        popupActions.showError("Vui lòng nhập đầy đủ ngày tháng năm sinh của bạn!")
+        popupActions.showError(
+          "Vui lòng nhập đầy đủ ngày tháng năm sinh của bạn!"
+        )
       );
     }
     if (hasNumber(fullName)) {

@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import classes from "./ReviewedItem.module.css";
 
 const ReviewedItem = (props) => {
@@ -10,9 +12,12 @@ const ReviewedItem = (props) => {
           </div>
           <div className={classes["reviewed-item__info"]}>
             <div className={classes["product-info"]}>
-              <div className={classes["title"]}>
+              <NavLink
+                to={`/detail/${review.product.id}`}
+                className={classes["title"]}
+              >
                 <span>{review.product.title}</span>
-              </div>
+              </NavLink>
               <div className={classes["rating"]}>
                 <div className={classes["rating-star"]}></div>
                 <svg
