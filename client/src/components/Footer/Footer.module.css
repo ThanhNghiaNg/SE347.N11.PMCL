@@ -5,19 +5,18 @@
 }
 
 .footer__content {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: normal;
   line-height: 16px;
   color: rgb(128, 128, 128);
 }
 
 .footer__information {
-  padding: 16px 0;
+  padding: 20px 0;
 }
 
 .information__container {
   display: flex;
-  justify-content: space-between;
   width: 100%;
 }
 
@@ -30,11 +29,25 @@
 }
 
 .contact__image {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .contact__image img {
   width: 80%;
+}
+
+.contact__email,
+.contact_hotline,
+.contact__address {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.contact__email i,
+.contact_hotline i,
+.contact__address i {
+  margin-right: 8px;
 }
 
 .contact-icon {
@@ -43,6 +56,32 @@
   vertical-align: middle;
   width: 32px;
   height: 32px;
+}
+
+.introduction__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.introduction__heading {
+  margin-bottom: 15px;
+}
+
+.introduction__heading h4 {
+  font-size: 30px;
+  line-height: 24px;
+  font-weight: 500;
+  color: rgb(56, 56, 61);
+}
+
+.introduction__quote {
+  padding: 0 15px;
+  text-align: center;
+}
+
+.introduction__quote p {
+  line-height: 22px;
 }
 
 .footer__separator {
@@ -54,6 +93,7 @@
 
 .footer__license {
   padding: 16px 0;
+  font-size: 12px;
 }
 
 .license__container {
@@ -69,5 +109,5 @@
 }
 
 .copyright-paragraph {
-  margin-bottom: none;
+  margin-bottom: 0;
 }
