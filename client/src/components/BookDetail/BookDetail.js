@@ -8,7 +8,7 @@ import ImageList from "./ImageList";
 import RelatedBook from "./RelatedBooks";
 import classes from "./BookDetail.module.css";
 import Card from "../UI/Card";
-import BookReviews from "./BookReviews";
+import BookReviews from "./BookReviews";  
 import { useDispatch } from "react-redux";
 import { productActions } from "../../store/products";
 

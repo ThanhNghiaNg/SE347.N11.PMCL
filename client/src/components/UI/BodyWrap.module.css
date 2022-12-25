@@ -4,4 +4,5 @@
   height: auto;
   overflow-y: auto;
   background-color: var(--main-background);
+  padding-bottom: 2em;
 }
