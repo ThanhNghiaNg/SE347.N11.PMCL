@@ -51,7 +51,6 @@ const ProductReviews = (props) => {
           },
         };
       });
-      console.log(data);
       setNotReview(reviews);
     };
     getReviewBook();
@@ -61,7 +60,6 @@ const ProductReviews = (props) => {
         credentials: "include",
       });
       const data = await respone.json();
-      console.log(data);
       const reviewed = data.map((book, i) => {
         // console.log(book.book._id)
         return {

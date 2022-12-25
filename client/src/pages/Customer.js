@@ -5,8 +5,7 @@ import { useParams } from "react-router";
 
 const Customer = (props) => {
   const dispatch = useDispatch();
-  const params = useParams()
-  console.log(params.id)
+  const params = useParams();
   dispatch(navigationActions.setSelectedNav(params.id));
   return (
     <div>
