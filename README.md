@@ -30,7 +30,12 @@
     npm start
     ```
 
-## II. Tạo MongoDB Cloud
+ _Như vậy, chúng ta đã có thể tạo và khởi chạy dự án thành công với dữ liệu từ Database đã được tạo sẵn._
+
+ _Hoặc nếu muốn sử dụng và quản lý Database cho chính mình, hãy tiếp tục thực hiện phần II_
+
+
+## II. Tạo và kết nối MongoDB Cloud với NodeJS Server
 
 1. Tạo database với MongoDB Cloud
 
