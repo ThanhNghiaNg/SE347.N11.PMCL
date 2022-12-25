@@ -18,14 +18,16 @@ const Footer = (props) => {
                 </NavLink>
               </div>
               <div className={classes["contact__email"]}>
-                <p>nhanphan.dev@gmail.com</p>
-                <p>javIsDaBez@gmail.com</p>
+                <i class="fa fa-envelope"></i>
+                <span>owwi.support@gmail.com</span>
               </div>
               <div className={classes["contact_hotline"]}>
-                <p>Tổng đài: 1900 1508</p>
+                <i class="fa fa-phone"></i>
+                <span>1900 1508</span>
               </div>
               <div className={classes["contact__address"]}>
-                <p>Vựa bưởi to lớn nhất Tân Triều Đồng Nai</p>
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Vựa bưởi to nhất Tân Triều Đồng Nai</span>
               </div>
               <div className={classes["contact__social"]}>
                 <NavLink
@@ -103,15 +105,31 @@ const Footer = (props) => {
               </div>
             </div>
             <div className={classes["introduction"]}>
-              <div className={classes["introduction__heading"]}>Về Owwi</div>
-              <p>
-                Owwi là một cửa hàng sách với phương châm kiến thức là vàng, lợi
-                nhuận là kimn cương. Owwi lúc nào cũng đặt cái tâm vào những độc
-                giả...
-              </p>
+              <div className={classes["introduction__container"]}>
+                <div className={classes["introduction__heading"]}>
+                  <h4>Về Owwi</h4>
+                </div>
+                <div className={classes["introduction__quote"]}>
+                  <p>
+                    Owwi là một ứng dụng web React trực tuyến nơi khách hàng có
+                    thể mua sách trực tuyến. Thông qua cửa hàng này, người dùng
+                    có thể tìm kiếm sách một cuốn sách theo tiêu đề của nó, sau
+                    đó có thể thêm vào giỏ hàng và cuối cùng đặt mua những sản
+                    phẩm của mình thông qua nhiều hình thức giao hàng và thanh
+                    toán khác nhau. Khi đặt hàng thành công, người dùng có thể
+                    theo dõi đơn hàng của mình trong mục Quản lý đơn hàng. Trong
+                    quá trình mua sách người dùng có thể xem được những thông
+                    tin chi tiết của cuốn sách như tác giả, nhà xuất bản, mô
+                    tả,... và đồng thời có thể xem được những đánh giá về cuốn
+                    sách đó và những cuốn sách liên quan. Hiện tại ứng dụng vẫn
+                    còn đang trong quá trình phát triển, trong tương lai ứng
+                    dụng sẽ phát triển thêm nhiều tính năng để nâng cao trải
+                    nghiệm của người dùng.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className={classes["contact"]}></div>
         </div>
         <div className={classes["footer__separator"]}></div>
         <div className={classes["footer__license"]}>
