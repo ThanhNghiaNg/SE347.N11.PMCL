@@ -111,20 +111,20 @@ const Footer = (props) => {
                 </div>
                 <div className={classes["introduction__quote"]}>
                   <p>
-                    Owwi là một ứng dụng web React trực tuyến nơi khách hàng có
-                    thể mua sách trực tuyến. Thông qua cửa hàng này, người dùng
-                    có thể tìm kiếm sách một cuốn sách theo tiêu đề của nó, sau
-                    đó có thể thêm vào giỏ hàng và cuối cùng đặt mua những sản
-                    phẩm của mình thông qua nhiều hình thức giao hàng và thanh
-                    toán khác nhau. Khi đặt hàng thành công, người dùng có thể
-                    theo dõi đơn hàng của mình trong mục Quản lý đơn hàng. Trong
-                    quá trình mua sách người dùng có thể xem được những thông
-                    tin chi tiết của cuốn sách như tác giả, nhà xuất bản, mô
-                    tả,... và đồng thời có thể xem được những đánh giá về cuốn
-                    sách đó và những cuốn sách liên quan. Hiện tại ứng dụng vẫn
-                    còn đang trong quá trình phát triển, trong tương lai ứng
-                    dụng sẽ phát triển thêm nhiều tính năng để nâng cao trải
-                    nghiệm của người dùng.
+                    Owwi là một ứng dụng web React nơi người dùng có thể mua
+                    sách trực tuyến. Thông qua cửa hàng này, người dùng có thể
+                    tìm kiếm một cuốn sách theo tiêu đề của nó, sau đó có thể
+                    thêm vào giỏ hàng và cuối cùng đặt mua những cuốn sách của
+                    mình thông qua nhiều hình thức giao hàng và thanh toán khác
+                    nhau. Khi đặt hàng thành công, người dùng có thể theo dõi
+                    đơn hàng của mình trong mục Quản lý đơn hàng. Trong quá
+                    trình mua sách người dùng có thể xem được những thông tin
+                    chi tiết của cuốn sách như tác giả, nhà xuất bản, mô tả,...
+                    và đồng thời có thể xem được những đánh giá về cuốn sách đó
+                    và những cuốn sách liên quan. Hiện tại ứng dụng vẫn còn đang
+                    trong quá trình phát triển, trong tương lai ứng dụng sẽ phát
+                    triển thêm nhiều tính năng để nâng cao trải nghiệm của người
+                    dùng.
                   </p>
                 </div>
               </div>
