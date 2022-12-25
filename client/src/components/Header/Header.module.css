@@ -17,14 +17,15 @@
   display: flex;
   align-items: center;
   flex: 1 1 0%;
+  justify-content: space-between;
 }
 
 .logo-menu {
   display: flex;
   align-items: flex-start;
-  flex-basis: 202px;
+  flex-basis: 304px;
   flex-shrink: 0;
-  margin-right: 16px;
+  margin-right: 32px;
 }
 
 .style-LogoMenu {
@@ -52,6 +53,7 @@
 .FormSearch-Root {
   width: 100%;
   display: flex;
+  justify-content: end;
   position: relative;
   box-shadow: rgb(98 98 98 / 50%) 0px 1px 2px 0px;
 }
