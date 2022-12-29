@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+
 import { Link } from "react-router-dom";
 import { hostURL } from "../../utils/global";
 import { useContext } from "react";
@@ -29,7 +29,7 @@ const BookItem = (props) => {
 
   return (
     <div className={classes.book}>
-      <img src={bookInfo.images[0].url}></img>
+      <img src={bookInfo.images[0].url} alt={bookInfo.title}></img>
       <div className={classes.name}>{bookInfo.title}</div>
       {bookInfo.rate > 0 ? (
         <p className={classes.rate}>

@@ -26,9 +26,8 @@ const BookForm = (props) => {
   const descriptionRef = useRef();
   const quantitySoldRef = useRef();
   const amountRef = useRef();
-  console.log(book);
-  console.log(authors);
 
+  // eslint-disable-next-line
   useEffect(() => {
     const getBook = async () => {
       const respone = await fetch(`${hostURL}/book/${id}`);
@@ -45,7 +44,7 @@ const BookForm = (props) => {
     else{
       document.title = "Add Book"
     }
-  }, [edit]);
+  }, [edit, id]);
 
   const postBookHandler = (event) => {
     event.preventDefault();
