@@ -6,6 +6,7 @@ import ProductReviews from "./ProductReviews/ProductReviews";
 import OrderManagement from "./OrderManagement/OrderManagement";
 
 import classes from "./ContentCustomers.module.css";
+import { useEffect } from "react";
 
 const navItems = [
   {
@@ -25,6 +26,7 @@ const navItems = [
     component: <ProductReviews />,
   },
 ];
+
 
 const ContentCustomers = (props) => {
   const currentState = useSelector((state) => state.navigation.selectedNav);

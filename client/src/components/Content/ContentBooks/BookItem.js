@@ -23,7 +23,7 @@ const BookItem = (props) => {
           </span>
         </p>
       ) : (
-        <p></p>
+        <p className={classes.rate}></p>
       )}
       <p className={classes.price}>{addDotStyle(String(bookInfo.price))}</p>
     </div>

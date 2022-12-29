@@ -49,6 +49,7 @@ const AccountInfo = (props) => {
 
   const url = `${hostURL}/user/update`;
   useEffect(() => {
+    document.title = "User Information"
     const getCustomerData = async () => {
       const respone = await fetch(url, {
         credentials: "include",

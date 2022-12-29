@@ -8,6 +8,7 @@ const BookList = (props) => {
   const [toggleRefresh, setToggleRefresh] = useState(false)
 
   useEffect(() => {
+    document.title = "Admin Home"
     const getAllBooks = async () => {
       const respone = await fetch(`${hostURL}/`, {
         credentials: "include",

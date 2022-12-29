@@ -10,6 +10,7 @@ const OrderList = (props) => {
   const queryRef = useRef();
 
   useEffect(() => {
+    document.title = "Admin Orders Management"
     const getAllOrders = async () => {
       try {
         const respone = await fetch(`${hostURL}/admin/orders?query=${query}`, {

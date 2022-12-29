@@ -32,6 +32,7 @@ const ProductReviews = (props) => {
     setToggleRefresh((prev) => !prev);
   };
   useEffect(() => {
+    document.title = "Reviews"
     const getReviewBook = async () => {
       const respone = await fetch(`${hostURL}/user/review`, {
         credentials: "include",

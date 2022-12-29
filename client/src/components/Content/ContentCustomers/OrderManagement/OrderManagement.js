@@ -15,6 +15,7 @@ const OrderManagement = (props) => {
     setToggleRefresh((prev) => !prev);
   };
   useEffect(() => {
+    document.title = "Order Management"
     const getOrders = async () => {
       const respone = await fetch(`${hostURL}/user/ordered`, {
         credentials: "include",

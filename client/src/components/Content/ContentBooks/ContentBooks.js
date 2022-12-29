@@ -1,8 +1,12 @@
 import { useSelector } from "react-redux";
 import classes from "./ContentBooks.module.css";
 import BookItem from "./BookItem";
+import { useEffect } from "react";
 
 const ContentBooks = (props) => {
+  useEffect(()=>{
+    document.title = "Home"
+  },[])
   window.scroll(0, 0)
   const currentProducts = useSelector(
     (state) => state.products.currentProducts

@@ -4,6 +4,7 @@ import PasswordChangeForms from "./PasswordChangeForm/PasswordChangeForm";
 
 import classes from "./PasswordManagement.module.css";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const PasswordManagement = (props) => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const PasswordManagement = (props) => {
     };
     postChangePassword();
   };
+  useEffect(()=>{document.title = "Change Password"},[])
 
   return (
     <div className={classes["password-management"]}>
