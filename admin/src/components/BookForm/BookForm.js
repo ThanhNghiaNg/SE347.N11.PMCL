@@ -39,7 +39,11 @@ const BookForm = (props) => {
       console.log(data);
     };
     if (edit) {
+      document.title = "Update Book"
       getBook();
+    }
+    else{
+      document.title = "Add Book"
     }
   }, [edit]);
 
@@ -128,7 +132,7 @@ const BookForm = (props) => {
       )}
 
       <div className={classes["input-controls"]}>
-        <label>Title</label>
+        <label>Tiêu đề sách</label>
         <input
           className="form-control"
           defaultValue={book && book.title}
@@ -136,7 +140,7 @@ const BookForm = (props) => {
         ></input>
       </div>
       <div className={classes["input-controls"]}>
-        <label>Price</label>
+        <label>Giá</label>
         <input
           className="form-control"
           defaultValue={book && book.price}
@@ -144,7 +148,7 @@ const BookForm = (props) => {
         ></input>
       </div>
       <div className={classes["input-controls"]}>
-        <label>Authors</label>
+        <label>Tác giả</label>
         <div>
           {isAddingAuthor && <AddAuthorForm onAddAuthor={addAuthors} />}
           {!isAddingAuthor && (
@@ -168,7 +172,7 @@ const BookForm = (props) => {
         </div>
       </div>
       <div className={classes["input-controls"]}>
-        <label>Category</label>
+        <label>Danh mục</label>
         <input
           className="form-control"
           defaultValue={book ? book.category : ""}
@@ -176,7 +180,7 @@ const BookForm = (props) => {
         ></input>
       </div>
       <div className={classes["input-controls"]}>
-        <label>Publisher</label>
+        <label>Nhà xuất bản</label>
         <input
           className="form-control"
           defaultValue={book && book.publisher}
@@ -184,7 +188,7 @@ const BookForm = (props) => {
         ></input>
       </div>
       <div className={classes["input-controls"]}>
-        <label>Short description</label>
+        <label>Mô tả nhanh</label>
         <textarea
           defaultValue={book && book.short_description}
           ref={shortDescriptionRef}
@@ -192,7 +196,7 @@ const BookForm = (props) => {
         ></textarea>
       </div>
       <div className={classes["input-controls"]}>
-        <label>Description</label>
+        <label>Mô tả</label>
         <textarea
           className="form-control"
           defaultValue={book && book.description}
@@ -201,7 +205,7 @@ const BookForm = (props) => {
       </div>
 
       <div className={classes["input-controls"]}>
-        <label>Image URLs</label>
+        <label>URL hình ảnh</label>
         <div>
           {images.map((image) => (
             <input
@@ -225,7 +229,7 @@ const BookForm = (props) => {
         </div>
       </div>
       <div className={classes["input-controls"]}>
-        <label>Quantity Sold</label>
+        <label>Số lượng bán ra</label>
         <input
           className="form-control"
           defaultValue={book && book.quantity_sold}
@@ -233,7 +237,7 @@ const BookForm = (props) => {
         ></input>
       </div>
       <div className={classes["input-controls"]}>
-        <label>Amount</label>
+        <label>Số lượng còn lại</label>
         <input
           className="form-control"
           defaultValue={book && book.amount}
@@ -242,7 +246,7 @@ const BookForm = (props) => {
       </div>
       {edit && (
         <div className={classes["input-controls"]}>
-          <label>Rate</label>
+          <label>Điểm đánh giá</label>
           <input
             className="form-control"
             defaultValue={book && book.rate}
@@ -256,7 +260,7 @@ const BookForm = (props) => {
           className={`btn bg-success text-white`}
           onClick={postBookHandler}
         >
-          {edit ? "Update" : "Add"}
+          {edit ? "Cập nhật sách" : "Thêm sách"}
         </button>
       </div>
     </form>

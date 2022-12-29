@@ -17,6 +17,7 @@ const Confirm = (props) => {
   const [deliveryService, setDeliveryService] = useState("");
 
   useEffect(() => {
+    document.title = "Checkout"
     const getCart = async () => {
       const respone = await fetch(`${hostURL}/cart`, {
         credentials: "include",

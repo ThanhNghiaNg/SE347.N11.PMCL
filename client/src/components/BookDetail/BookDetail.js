@@ -21,6 +21,7 @@ const BookDetail = (props) => {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
+    document.title = "Book Detail"
     const getBook = async () => {
       const respone = await fetch(`${hostURL}/book/${id}`, {
         credentials: "include",

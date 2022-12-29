@@ -14,6 +14,7 @@ const Cart = (props) => {
   const [toggleRefrresh, setToggleRefresh] = useState(false);
 
   useEffect(() => {
+    document.title = "Cart"
     const getCart = async () => {
       const respone = await fetch(`${hostURL}/cart`, {
         credentials: "include",
