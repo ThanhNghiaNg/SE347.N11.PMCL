@@ -35,9 +35,9 @@
  _Hoặc nếu muốn sử dụng và quản lý Database cho chính mình, hãy tiếp tục thực hiện phần II_
 
 
-## II. Tạo và kết nối MongoDB Cloud với NodeJS Server
+## II. Tạo và kết nối MongoDB Atlas với NodeJS Server
 
-1. Tạo database với MongoDB Cloud
+1. Tạo database với MongoDB Atlas
 
    Truy cập đến [Trang đăng nhập của MongoDB](account.mongodb.com) và tạo tài khoản hoặc đăng nhập.
 
@@ -49,13 +49,13 @@
 
    ![](./setup//Account.png)
 
-   Ở bước tiếp theo, chọn `Add My Current IP Address` để cấp quyền truy cập vào MongoDB Cloud cho máy tính hiện tại. Và hoàn thành việc tạo Database
+   Ở bước tiếp theo, chọn `Add My Current IP Address` để cấp quyền truy cập vào MongoDB Atlas cho máy tính hiện tại. Và hoàn thành việc tạo Database
 
    ![](./setup/AddIP.png)
 
-2. Liên kết MongoDB Cloud với dự án
+2. Liên kết MongoDB Atlas với dự án
 
-   Sau khi đã tạo xong Database với MongoDB Cloud, chúng ta cần lấy được URI ở MongoDB Cloud để kết nối Server và Database
+   Sau khi đã tạo xong Database với MongoDB Atlas, chúng ta cần lấy được URI ở MongoDB Atlas để kết nối Server và Database
 
    ![](./setup//GetURI.png)
 
