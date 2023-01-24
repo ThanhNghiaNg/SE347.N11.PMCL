@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { productActions } from "../../../store/products";
 import { errorsActions } from "../../../store/errors";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,8 +11,10 @@ import filterBook from "./filterBook";
 import classes from "./SidebarHome.module.css";
 
 const SidebarHome = (props) => {
+  console.log("sidebar home running");
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.products.allProducts);
+  const [refresh, setRefresh] = useState(false)
   const [allFilters, setAllFilters] = useState({
     category: null,
     authors: null,
@@ -24,20 +26,21 @@ const SidebarHome = (props) => {
   const saveAllFilters = (filter) => {
     const filterName = Object.keys(filter)[0];
     setAllFilters((prev) => ({ ...prev, [filterName]: filter[filterName] }));
+    setRefresh(prev=>!prev)
   };
-
   //   Filter book
   useEffect(() => {
+    console.log("sidebar home running2");
+    console.log(refresh);
     const result = filterBook(allFilters, allProducts);
 
-    // console.log(result);
     dispatch(productActions.setCurrentProducts(result));
     if (result.length > 0) {
       dispatch(errorsActions.setSuccessFound());
-    } else {
+    } else if (Object.values(allFilters).some((value) => value)) {
       dispatch(errorsActions.setNotFound());
     }
-  }, [allFilters]);
+  }, [refresh]);
 
   if (allProducts.length === 0) {
     return <div></div>;
@@ -93,4 +96,4 @@ const SidebarHome = (props) => {
   );
 };
 
-export default SidebarHome;
+export default React.memo(SidebarHome);

@@ -22,7 +22,7 @@ const Overlay = (props) => {
     dispatch(popupActions.closePopup());
   };
   const confirmHandler = () => {
-    action();
+    action.callback();
   };
 
   return (

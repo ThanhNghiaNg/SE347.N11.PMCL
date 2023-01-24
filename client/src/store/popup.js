@@ -7,7 +7,7 @@ export const CLOSE = "CLOSE";
 const initPopupState = {
   message: "",
   status: CLOSE,
-  action: () => {},
+  action: { callback: () => {} },
 };
 
 const popupSlice = createSlice({
@@ -24,13 +24,13 @@ const popupSlice = createSlice({
     },
     showConfirm: (state, action) => {
       state.message = action.payload.message;
-      state.action = action.payload.action;
+      state.action.callback = action.payload.action;
       state.status = CONFIRM;
     },
     closePopup: (state, action) => {
       state.message = "";
       state.status = CLOSE;
-      state.action = () => {};
+      state.action.callback = ()=>{ };
     },
   },
 });

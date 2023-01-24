@@ -5,10 +5,12 @@ import { productActions } from "../../store/products";
 import { hostURL } from "../../utils/global";
 import React, { useEffect } from "react";
 import Sidebar from "../Sidebar/Sidebar";
+import SidebarHome from "../Sidebar/SidebarHome/SidebarHome";
 import ContentBooks from "./ContentBooks/ContentBooks";
 import ContentCustomers from "./ContentCustomers/ContentCustomers";
 
 const Content = (props) => {
+  console.log("content running");
   const useCustomer = props.useCustomer;
   const allProducts = useSelector((state) => state.products.allProducts);
   const dispatch = useDispatch();
@@ -17,12 +19,12 @@ const Content = (props) => {
   useEffect(() => {
     const fecthBooks = async (url) => {
       const respone = await fetch(url);
-      // console.log(respone)
       const data = await respone.json();
-      // console.log(data)
       dispatch(productActions.setAllProducts(data.data));
     };
-    fecthBooks(url);
+    if (allProducts.length === 0) {
+      fecthBooks(url);
+    }
   }, [url]);
 
   return (

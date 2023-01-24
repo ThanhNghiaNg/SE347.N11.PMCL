@@ -4,6 +4,7 @@ import Container from "../UI/Container";
 import BodyWrap from "../UI/BodyWrap";
 import Card from "../UI/Card";
 import CartItem from "./CartItem";
+import Spinner from "../Spinner/Spinner";
 
 import classes from "./Cart.module.css";
 import UserPayment from "./UserPayment";
@@ -12,17 +13,22 @@ const Cart = (props) => {
   const [data, setData] = useState({});
   const [items, setItems] = useState([]);
   const [toggleRefrresh, setToggleRefresh] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    document.title = "Cart"
+    document.title = "Cart";
+    console.log("came");
     const getCart = async () => {
+      setIsLoading(true);
       const respone = await fetch(`${hostURL}/cart`, {
         credentials: "include",
+        method: "GET",
       });
+      console.log(respone);
       const data = await respone.json();
-      console.log(data);
       setData(data);
       setItems(data.cart.items);
+      setIsLoading(false);
     };
     getCart();
   }, [toggleRefrresh]);
@@ -31,14 +37,12 @@ const Cart = (props) => {
     setToggleRefresh((prev) => !prev);
   };
 
-  let itemsListElement = (
-    <p className="text-center fs-5">
-      Chưa có sản phẩm nào trong giỏ hàng của bạn!
-    </p>
-  );
+  let itemsListElement;
   let totalPriceCart = 0;
-  
-  if (items.length > 0) {
+
+  if (isLoading) {
+    itemsListElement = <Spinner />;
+  } else if (items.length > 0) {
     itemsListElement = items.map((item, i) => {
       return <CartItem item={item} key={i} onRefresh={refreshHandler} />;
     });
@@ -47,6 +51,12 @@ const Cart = (props) => {
       0
     );
     totalPriceCart = addDotStyle(String(totalPriceCart));
+  } else {
+    itemsListElement = (
+      <p className="text-center fs-5">
+        Chưa có sản phẩm nào trong giỏ hàng của bạn!
+      </p>
+    );
   }
 
   return (
@@ -63,7 +73,7 @@ const Cart = (props) => {
             </Card>
             <Card className={classes.items}>{itemsListElement}</Card>
           </div>
-          <UserPayment totalPriceCart={totalPriceCart} user={data}/>
+          <UserPayment totalPriceCart={totalPriceCart} user={data} />
         </div>
       </Container>
     </BodyWrap>

@@ -30,6 +30,7 @@ const Header = (props) => {
         credentials: "include",
       });
       const data = await respone.json();
+      
       dispatch(productActions.setNumberProductCart(data.cart.items.length));
       dispatch(
         productActions.setQuantityProductCart(
@@ -54,6 +55,7 @@ const Header = (props) => {
     const result = allProducts.filter((book) =>
       book.title.toLowerCase().includes(searchEntered.toLowerCase())
     );
+    // alert(JSON.stringify(result))
     dispatch(productActions.setCurrentProducts(result));
     if (result.length > 0) {
       dispatch(errorsActions.setSuccessFound());

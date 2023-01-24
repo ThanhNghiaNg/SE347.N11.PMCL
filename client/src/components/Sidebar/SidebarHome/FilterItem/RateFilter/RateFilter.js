@@ -11,12 +11,9 @@ const RateFilter = (props) => {
   const checkHandler = (value) => {
     setChecked((prev) => (prev !== value ? value : null));
   };
-  const onSaveAllFilters = props.onSaveAllFilters
   useEffect(() => {
-    
-    onSaveAllFilters({ rate: checked });
-    // props.onFilterBook();
-  }, [checked, onSaveAllFilters]);
+    props.onSaveAllFilters({ rate: checked });
+  }, [checked]);
 
   return (
     <Filter id="rate-filter">
