@@ -20,6 +20,7 @@ const App = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const statusPopup = useSelector((state) => state.popup.status);
+  console.log(statusPopup)
   window.addEventListener("load", () => {
     dispatch(authActions.clearSession());
   });

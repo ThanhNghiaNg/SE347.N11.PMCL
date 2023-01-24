@@ -12,7 +12,6 @@ const BookInforFilter = (props) => {
   );
 
   const checkHandler = (value) => {
-    
     setChecked((prev) => {
       if (checked.includes(value)) {
         return checked.filter((item) => item !== value);
@@ -24,7 +23,6 @@ const BookInforFilter = (props) => {
 
   useEffect(() => {
     props.onSaveAllFilters({ [props.filteredTopic]: checked });
-    // props.onFilterBook();
   }, [checked]);
 
   const expandListHandler = () => {

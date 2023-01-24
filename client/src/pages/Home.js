@@ -1,10 +1,6 @@
 import Content from "../components/Content/Content";
 const Home = (props) => {
-  return (
-    <div>
-      <Content />
-    </div>
-  );
+  return <Content />;
 };
 
-export default Home
+export default Home;

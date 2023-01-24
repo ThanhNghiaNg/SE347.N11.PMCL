@@ -18,15 +18,15 @@ const Footer = (props) => {
                 </NavLink>
               </div>
               <div className={classes["contact__email"]}>
-                <i class="fa fa-envelope"></i>
+                <i className="fa fa-envelope"></i>
                 <span>owwi.support@gmail.com</span>
               </div>
               <div className={classes["contact_hotline"]}>
-                <i class="fa fa-phone"></i>
+                <i className="fa fa-phone"></i>
                 <span>1900 1508</span>
               </div>
               <div className={classes["contact__address"]}>
-                <i class="fa-solid fa-location-dot"></i>
+                <i className="fa-solid fa-location-dot"></i>
                 <span>Vựa bưởi to nhất Tân Triều Đồng Nai</span>
               </div>
               <div className={classes["contact__social"]}>
@@ -141,7 +141,7 @@ const Footer = (props) => {
                 window.open("https://github.com/ThanhNghiaNg/SE347.N11.PMCL")
               }
             >
-              <i class="fa-brands fa-github fa-2x"></i>
+              <i className="fa-brands fa-github fa-2x"></i>
             </div>
             <p className={classes["copyright-paragraph"]}>
               &copy; 2022 - Bản quyền của Công ty TNHH Owwi
