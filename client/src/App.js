@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import Customer from "./pages/Customer";
 import Layout from "./components/Layout/Layout";
 
-import LoginForm from "./components/ModalForm/LoginForm/LoginForm";
 import ModalForm from "./components/ModalForm/ModalForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Detail from "./pages/Detail";
@@ -20,7 +19,7 @@ const App = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const statusPopup = useSelector((state) => state.popup.status);
-  console.log(statusPopup)
+  console.log(statusPopup);
   window.addEventListener("load", () => {
     dispatch(authActions.clearSession());
   });
@@ -37,9 +36,12 @@ const App = () => {
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/customer/:id" element={<Customer />} />
               <Route path="/order/:id/" element={<Order />} />
+              <Route path="/*" element={<p>Page not found</p>} />
             </>
           )}
-          <Route path="/*" element={<p>Page not found</p>} />
+          {!isLoggedIn && <>
+            <Route path="/*" element={<ModalForm/>}/>
+          </>}
         </Routes>
       </Layout>
     </BrowserRouter>

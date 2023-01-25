@@ -78,7 +78,7 @@ const PasswordChangeForm = (props) => {
           {/* <img src={eyeIcon} className={classes["eye-icon"]} /> */}
           {item.name === "newPassword" ? (
             <div className={classes["message"]}>
-              Mật khẩu phải dài từ 8 đến 32 ký tự, bao gồm chữ và số
+              Mật khẩu phải dài từ 8 ký tự
             </div>
           ) : null}
           {item.name === "confirmPassword"

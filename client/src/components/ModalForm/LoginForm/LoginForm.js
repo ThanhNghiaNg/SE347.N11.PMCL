@@ -3,14 +3,35 @@ import { hostURL } from "../../../utils/global";
 import classes from "./LoginForm.module.css";
 import { authActions } from "../../../store/auth";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+
+export const validatePassword = (value, callback) => {
+  if (!value) {
+    return callback("Mật khẩu không được để trống!");
+  }
+  if (value.length < 8) {
+    return callback("Mật khẩu phải dài hơn 8 ký tự.");
+  }
+  else{
+    callback("")
+    return true
+  }
+};
 
 const LoginForm = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const emailRef = useRef();
-  const passwordRef = useRef();
   const rememberRef = useRef();
   const [errorMessage, setErrorMessage] = useState();
+  const [password, setPassword] = useState("");
+
+  const changePasswordHandler = (event) => {
+    const currentValue = event.target.value;
+    setPassword(event.target.value);
+    validatePassword(currentValue, setErrorMessage)
+  };
 
   const logoutHandler = () => {
     fetch("http://localhost:5000/logout", {
@@ -28,9 +49,10 @@ const LoginForm = (props) => {
 
   const loginHandler = (event) => {
     event.preventDefault();
-    const password = passwordRef.current.value;
     const email = emailRef.current.value;
-
+    if (validatePassword(password, setErrorMessage)!==true){
+      // return
+    }
     const postLogin = async () => {
       const respone = await fetch(`${hostURL}/login`, {
         method: "POST",
@@ -41,12 +63,12 @@ const LoginForm = (props) => {
       const data = await respone.json();
       console.log(data);
       if (respone.status === 200) {
-        props.onCloseModal();
-
+        props.onCloseModal && props.onCloseModal();
         dispatch(authActions.login(data.token));
         if (rememberRef.current.checked) {
           dispatch(authActions.rememberUser());
         }
+        navigate('/')
       } else {
         setErrorMessage(data.message);
       }
@@ -74,22 +96,23 @@ const LoginForm = (props) => {
             type="password"
             name="login-password"
             placeholder="Mật khẩu"
-            ref={passwordRef}
+            value={password}
+            onChange={changePasswordHandler}
           />
         </div>
         <p className="py-1 text-danger">{errorMessage}</p>
-        <div>
+        {/* <div>
           <input type="checkbox" ref={rememberRef}></input>
           <label>Nhớ mật khẩu</label>
-        </div>
+        </div> */}
         <div className={classes["login-form__actions"]}>
           <button>ĐĂNG NHẬP</button>
         </div>
       </form>
 
-      <div className={classes["login-form__reset"]} onClick={logoutHandler}>
+      {/* <div className={classes["login-form__reset"]} onClick={logoutHandler}>
         <p>Quên mật khẩu</p>
-      </div>
+      </div> */}
     </div>
   );
 };
