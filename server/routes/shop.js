@@ -28,7 +28,7 @@ route.post("/cart-delete-item", isAuth, shopControllers.postDeleteCartItem)
 route.post("/order", isAuth, shopControllers.postOrder);
 
 // Get order items
-route.get("/order", isAuth, shopControllers.getOrder);
+route.get("/order", isAuth, shopControllers.getOrders);
 
 
 module.exports = route;

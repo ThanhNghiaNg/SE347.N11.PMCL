@@ -22,6 +22,7 @@ const Header = (props) => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isShowModal, setIsShowModal] = useState(false);
   const [toggleBump, setToggleBump] = useState(false);
+  const [refresh, setRefresh] = useState(false)
   const searchInput = useRef();
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const Header = (props) => {
         credentials: "include",
       });
       const data = await respone.json();
-      
+
       dispatch(productActions.setNumberProductCart(data.cart.items.length));
       dispatch(
         productActions.setQuantityProductCart(
@@ -47,7 +48,7 @@ const Header = (props) => {
     setTimeout(() => {
       setToggleBump(false);
     }, 300);
-  }, [quantityProductCart]);
+  }, [quantityProductCart, isLoggedIn]);
 
   const searchHandler = (event) => {
     event.preventDefault();
@@ -75,7 +76,8 @@ const Header = (props) => {
       })
       .then((data) => {
         dispatch(authActions.logout());
-        console.log(data);
+        dispatch(productActions.setNumberProductCart(0));
+        dispatch(productActions.setQuantityProductCart(0));
       });
   };
 
@@ -110,7 +112,7 @@ const Header = (props) => {
               </div>
             </div>
             <div className={classes["form-search"]}>
-              <div className={classes["FormSearch-Root"]}>
+              <form className={classes["FormSearch-Root"]}>
                 <input
                   type="text"
                   placeholder="Tìm sách theo tên"
@@ -128,7 +130,7 @@ const Header = (props) => {
                   ></img>
                   Tìm Kiếm
                 </button>
-              </div>
+              </form>
             </div>
           </div>
           <div className={classes["user-style"]}>

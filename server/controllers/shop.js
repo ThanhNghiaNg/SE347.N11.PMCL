@@ -103,12 +103,12 @@ exports.postOrder = (req, res, next) => {
   }
 };
 
-exports.getOrder = (req, res, next) => {
+exports.getOrders = (req, res, next) => {
   Order.find({ user: req.session.user._id })
     .populate("user", "-password")
     .populate("books.bookId")
-    .then((order) => {
-      return res.send(order);
+    .then((orders) => {
+      return res.send(orders);
     });
 };
 
